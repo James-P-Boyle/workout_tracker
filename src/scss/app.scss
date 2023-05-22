@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* 
+GOLDEN RATIO
+Size (px)	Height (px)
+42	64
+33	51
+26	41
+20	33
+16	27
+13	23
+*/
+
+// Vars
+@import "variables/animations";
+@import "variables/theme";
+
+// Main styles
+@import "main";
+
+// Modules
+
+// Components
+
+// Routes
+

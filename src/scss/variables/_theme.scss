@@ -1,0 +1,18 @@
+@mixin defaultScheme {
+    // Colors
+    --ci-blue: #439FDE;
+    --gray-muted: #B0B0B0;
+
+    @screen md {
+      --header-height: 70px;
+    }
+  
+  
+    // Fonts
+    // --font-family: "Encode Sans Condensed", sans-serif;
+  }
+  
+  :root {
+    @include defaultScheme;
+  }
+  

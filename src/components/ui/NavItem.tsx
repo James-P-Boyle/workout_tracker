@@ -4,14 +4,15 @@ interface NavItemProps {
   to: string,
   className?: string
   children: React.ReactNode
+  fontSize?: string
 }
 
 export default function NavItem({
   to,
   className,
-  children
+  children,
+  fontSize = "2xl"
   
-
 }: NavItemProps) {
 
   const activeClassName = "underline"
@@ -19,8 +20,9 @@ export default function NavItem({
   return (
     <NavLink 
       className={
-        ({ isActive }) => `${isActive ? activeClassName : ""} 
-          flex justify-center py-2 border flex-1 w-full text-2xl ${className}`
+        ({ isActive }) => 
+          `${isActive ? activeClassName : ""} text-${fontSize} ${className}
+          flex justify-center py-2 border flex-1 w-full`
       }
       to={to}
       end

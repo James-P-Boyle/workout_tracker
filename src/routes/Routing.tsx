@@ -6,6 +6,7 @@ import Login from "@/pages/login/Login"
 import Register from "@/pages/register/Register"
 import GuestLayout from "@/components/layouts/GuestLayout"
 import ProtectedRoute from "./ProtectedRoute"
+import Home from "@/pages/home/Home"
 
 export default function Routing() {
 
@@ -13,7 +14,7 @@ export default function Routing() {
         <>
             <Routes>
                 <Route path="/" element={<GuestLayout />}>
-                    <Route index element={<h1>Home</h1>}/>
+                    <Route index element={<Home />}/>
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login />}/>
                 </Route>

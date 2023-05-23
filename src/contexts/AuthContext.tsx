@@ -86,7 +86,7 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
         }
     }
 
-    const logout = (navigate: any) => {
+    const logout = () => {
         localStorage.removeItem("token")
         setUser(null)
         navigate("/login")

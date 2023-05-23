@@ -8,18 +8,17 @@ type GuestLayoutProps = {
  
 export default function GuestLayout({  }: GuestLayoutProps) {
 
-    return (
-        <div className="flex flex-col justify-center gap-4 h-screen">
-
-            <div className="flex flex-col justify-center items-center">
-                <HeroIcon />
-                <LineBreak addClass="animate-scaleIn"/>
-            </div>
-                   
-            <section className="flex items-center">
-                <Outlet context={{hello: "world"}}/>
-            </section>
+  return (
+    <div className="flex flex-col justify-center gap-4 h-screen">
+    
+      <HeroIcon />
             
-        </div>
-    )
+      <section className="flex items-center">
+
+        <Outlet context={{hello: "world"}}/>
+        
+      </section>
+    
+    </div>
+  )
 }

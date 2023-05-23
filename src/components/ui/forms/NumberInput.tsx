@@ -1,10 +1,16 @@
 import { useState } from "react"
+import Label from "./Label"
 
 interface NumberInputProps {
   incrementValue?: number
   inputName: string
   label: string
   unit?: string
+}
+
+interface NumberInputButtonProps {
+  children: React.ReactNode, 
+  handleClick: () => void
 }
 
 export default function NumberInput({ 
@@ -32,16 +38,16 @@ export default function NumberInput({
   return (
     <div className="w-full ">
 
-      <label htmlFor={inputName} className="text-lg capitalize">{label}</label>
+      <Label 
+        htmlFor={inputName}
+        label={label}
+      />
       
       <div className="flex px-2 py-1 border-2 border-gray-400 rounded-lg mb-2 w-full outline-black bg-transparent hover:border-black transition-colors relative">
         
-        <button
-          className="flex items-center justify-center font-black text-2xl"
-          onClick={handleDecrement}
-        >
+        <NumberInputButton handleClick={handleDecrement}>
           -
-        </button>
+        </NumberInputButton>
 
         <input
           type="text"
@@ -58,14 +64,28 @@ export default function NumberInput({
           </span>
         )}
 
-        <button
-          className="flex items-center justify-center font-black text-2xl"
-          onClick={handleIncrement}
-        >
+        <NumberInputButton handleClick={handleIncrement}>
           +
-        </button>
+        </NumberInputButton>
 
       </div>
     </div>
+  )
+}
+
+function NumberInputButton({
+  children, 
+  handleClick
+}: NumberInputButtonProps) {
+
+  return (
+
+    <button
+      className="flex items-center justify-center font-black text-2xl"
+      onClick={handleClick}
+    >
+      {children}
+    </button>
+
   )
 }

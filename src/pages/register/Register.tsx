@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { useAuth } from "@/contexts/AuthContext"
 import Container from "@/components/ui/Container"
-import Form from "@/components/ui/Form"
+import Form from "@/components/ui/forms/Form"
 import Button from "@/components/ui/Button"
-import Input from "@/components/ui/Input"
+import Input from "@/components/ui/forms/Input"
 
 const defaultFormData = {
   name: "",

@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useAuth } from "@/contexts/AuthContext"
 import { Navigate } from "react-router-dom"
-import Input from "@/components/ui/Input"
-import Form from "@/components/ui/Form"
+import Input from "@/components/ui/forms/Input"
+import Form from "@/components/ui/forms/Form"
 import Button from "@/components/ui/Button"
 import Container from "@/components/ui/Container"
 

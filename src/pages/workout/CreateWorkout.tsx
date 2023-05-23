@@ -1,5 +1,5 @@
 import Container from "@/components/ui/Container"
-import NumberInput from "@/components/ui/NumberInput"
+import NumberInput from "@/components/ui/forms/NumberInput"
 
 export default function CreateWorkout() {
 

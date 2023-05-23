@@ -12,7 +12,7 @@ const defaultFormData = {
 }
 
 export default function Register() {
-  const { register, user } = useAuth()
+  const { register } = useAuth()
   const [ formData, setFormData ] = useState(defaultFormData)
   const { name, email, password } = formData
 

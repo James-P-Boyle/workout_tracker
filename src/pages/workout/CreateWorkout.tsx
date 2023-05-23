@@ -1,3 +1,5 @@
+import Container from "@/components/ui/Container"
+import NumberInput from "@/components/ui/NumberInput"
 
 export default function CreateWorkout() {
 
@@ -16,7 +18,15 @@ export default function CreateWorkout() {
       }
 
     return (
-        <div className="flex flex-col items-center justify-center mx-auto max-w-lg rounded-lg">
+
+        <Container>
+
+            <NumberInput 
+                inputName="reps"
+                label="weight"
+                unit="kg"
+            />
+
             <form className="flex flex-col gap-2">
                 <div className="w-full max-w-sm ">
                     <input
@@ -75,6 +85,6 @@ export default function CreateWorkout() {
                 </button>
             </form>   
 
-        </div>
+        </Container>
     )
 }

@@ -21,14 +21,15 @@ export default function CreateWorkout() {
 
         <Container>
 
-            <NumberInput 
-                inputName="reps"
-                label="weight"
-                unit="kg"
-            />
-
             <form className="flex flex-col gap-2">
                 <div className="w-full max-w-sm ">
+
+                    <NumberInput 
+                        inputName="reps"
+                        label="weight"
+                        unit="kg"
+                    />
+
                     <input
                         className="p-2 border-2 border-gray-400 rounded-lg mb-2 w-full outline-black bg-transparent hover:border-black transition-colors"
                         name="exercise"

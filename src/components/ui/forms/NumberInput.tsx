@@ -81,6 +81,7 @@ function NumberInputButton({
   return (
 
     <button
+      type="button"
       className="flex items-center justify-center font-black text-2xl"
       onClick={handleClick}
     >

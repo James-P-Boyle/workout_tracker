@@ -1,15 +1,19 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Container from "@/components/ui/Container";
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import Container from "@/components/ui/Container"
 
 export default function NotFound() {
 
     const navigate = useNavigate()
 
     useEffect(() => {
-        setTimeout(() => {
-            navigate(-1)
-        }, 2000)
+        const timeoutId = setTimeout(() => {
+            navigate("/")
+          }, 2000)
+      
+          return () => {
+            clearTimeout(timeoutId)
+          }
     }, [])
 
     return (

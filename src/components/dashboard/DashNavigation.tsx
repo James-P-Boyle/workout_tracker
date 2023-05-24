@@ -2,8 +2,6 @@ import NavItem from "../ui/NavItem"
 
 export default function DashNavigation() {
 
-const activeClassName = "underline"
-
 return (
     <div className="flex flex-col gap-4 sm:flex-row lg:flex-col justify-evenly">
         
@@ -19,8 +17,8 @@ return (
             Create
         </NavItem>
         
-        <button className="flex justify-center py-2 border flex-1 text-2xl">Progress</button>
-        <button className="flex justify-center py-2 border flex-1 text-2xl bg-pink-200">Start</button>
+        <button className="flex justify-center flex-1 py-2 text-2xl border">Progress</button>
+        <button className="flex justify-center flex-1 py-2 text-2xl bg-pink-200 border">Start</button>
         
     </div>        
 )

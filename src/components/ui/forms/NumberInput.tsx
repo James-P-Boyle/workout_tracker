@@ -43,7 +43,7 @@ export default function NumberInput({
         label={label}
       />
       
-      <div className="flex px-2 py-1 border-2 border-gray-400 rounded-lg mb-2 w-full outline-black bg-transparent hover:border-black transition-colors relative">
+      <div className="relative flex w-full px-2 py-1 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black">
         
         <NumberInputButton handleClick={handleDecrement}>
           -
@@ -51,7 +51,7 @@ export default function NumberInput({
 
         <input
           type="text"
-          className="px-2 py-1 flex-1 text-center outline-none"
+          className="flex-1 px-2 py-1 text-center outline-none"
           value={value}
           onChange={handleChange}
           name={inputName}
@@ -59,7 +59,7 @@ export default function NumberInput({
         />
 
         {unit && (
-          <span className="absolute top-1/2 right-8 transform -translate-y-1/2 text-gray-400">
+          <span className="absolute text-gray-400 transform -translate-y-1/2 top-1/2 right-8">
                 kg
           </span>
         )}
@@ -82,7 +82,7 @@ function NumberInputButton({
 
     <button
       type="button"
-      className="flex items-center justify-center font-black text-2xl"
+      className="flex items-center justify-center px-2 text-2xl font-black border"
       onClick={handleClick}
     >
       {children}

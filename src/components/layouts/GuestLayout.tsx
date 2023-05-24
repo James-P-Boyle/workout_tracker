@@ -1,7 +1,4 @@
 import { Outlet } from "react-router-dom"
-
-import NavItem from "@/components/ui/NavItem"
-import { useAuth } from "@/contexts/AuthContext"
 import NavBar from "../NavBar"
 
 type GuestLayoutProps = {
@@ -10,15 +7,13 @@ type GuestLayoutProps = {
  
 export default function GuestLayout({  }: GuestLayoutProps) {
 
-  
-
   return (
 
-    <div className="flex flex-col gap-4 h-screen">
+    <div className="flex flex-col h-screen gap-4">
 
       <NavBar />
 
-      <section className="flex items-center border flex-1">
+      <section className="flex items-center flex-1 border">
 
         <Outlet context={{hello: "world"}}/>
 

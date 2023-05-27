@@ -17,9 +17,6 @@ return (
             Create
         </NavItem>
         
-        <button className="flex justify-center flex-1 py-2 text-2xl border">Progress</button>
-        <button className="flex justify-center flex-1 py-2 text-2xl bg-pink-200 border">Start</button>
-        
     </div>        
 )
 }

@@ -51,7 +51,7 @@ export default function NumberInput({
 
         <input
           type="text"
-          className="flex-1 px-2 py-1 text-center outline-none"
+          className="flex-1 px-2 py-1 text-center outline-none dark:bg-transparent"
           value={value}
           onChange={handleChange}
           name={inputName}
@@ -60,7 +60,7 @@ export default function NumberInput({
 
         {unit && (
           <span className="absolute text-gray-400 transform -translate-y-1/2 top-1/2 right-8">
-                kg
+            kg
           </span>
         )}
 
@@ -82,7 +82,7 @@ function NumberInputButton({
 
     <button
       type="button"
-      className="flex items-center justify-center px-2 text-2xl font-black border"
+      className="flex items-center justify-center px-2 text-2xl font-black"
       onClick={handleClick}
     >
       {children}

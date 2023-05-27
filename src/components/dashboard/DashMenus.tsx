@@ -17,6 +17,7 @@ export default function DashMenus() {
         >
           Settings
         </Button>
+
         <Button 
           className="p-4 border rounded-md" 
           onClick={logout}
@@ -33,3 +34,4 @@ export default function DashMenus() {
     </div>
   )
 }
+

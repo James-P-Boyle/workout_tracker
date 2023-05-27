@@ -9,17 +9,17 @@ export default function DashMenus() {
   const { logout } = useAuth()
 
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-row flex-wrap justify-between">
       
         <Button
-          className="p-4 border rounded-md"
+          className="text-sm"
           onClick={() => setShowSettings(!showSettings)}
         >
           Settings
         </Button>
 
         <Button 
-          className="p-4 border rounded-md" 
+          className="text-sm"
           onClick={logout}
         >
           Logout

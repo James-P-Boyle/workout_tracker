@@ -1,3 +1,4 @@
+import Button from "../ui/Button"
 import NavItem from "../ui/NavItem"
 
 export default function DashNavigation() {
@@ -16,7 +17,21 @@ return (
         >
             Create
         </NavItem>
-        
+      
+
+        <NavItem
+            to={"/"}
+        >
+            Progress
+        </NavItem>
+      
+
+        <Button
+            className="bg-purple-200 border-0 dark:bg-purple-950"
+        >
+            Start
+        </Button>
+      
     </div>        
 )
 }

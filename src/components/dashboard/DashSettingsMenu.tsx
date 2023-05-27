@@ -1,12 +1,12 @@
-import { useState } from "react";
-import Button from "../ui/Button";
-import DropdownMenu from "../ui/DropdownMenu";
+import { useState } from "react"
+import Button from "../ui/Button"
+import DropdownMenu from "../ui/DropdownMenu"
 import { useStyles } from "@/contexts/StyleContext"
 
 interface DashSettingsMenuProps {
-  onClose: () => void;
-  
+  onClose: () => void 
 }
+
 interface LayoutOptionsProps {
   isOpen: boolean
   
@@ -14,7 +14,7 @@ interface LayoutOptionsProps {
 
 export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
 
-  const { mode, toggleMode } = useStyles();
+  const { mode, toggleMode } = useStyles()
   const [ showLayoutOptions, setShowLayoutOptions ] = useState(false)
   
   return (
@@ -23,16 +23,15 @@ export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
       isOpen={true}
     > 
           
-      <div className="flex items-center justify-between">
+      <div className="">
 
-        <span className="text-xl font-bold">Settings</span>
-        
         <Button 
-          className="px-4 py-2 border rounded-md"
+          className=""
           onClick={onClose}
         >
           X
         </Button>
+        
       </div>
             
       <Button

@@ -22,7 +22,7 @@ export default function NavItem({
       className={
         ({ isActive }) => 
           `${isActive ? activeClassName : ""} text-${fontSize} ${className}
-          flex justify-center py-2 border flex-1 w-full rounded-md border-gray-400 dark:border-gray-700`
+          flex justify-center py-2 border flex-1 w-full rounded-md dark:border-gray-700 hover:border-black hover:shadow-xl transition-colors`
       }
       to={to}
       end

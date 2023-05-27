@@ -23,10 +23,10 @@ export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
       isOpen={true}
     > 
           
-      <div className="">
+      <div className="flex">
 
         <Button 
-          className=""
+          className="flex-1"
           onClick={onClose}
         >
           X
@@ -35,7 +35,10 @@ export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
       </div>
             
       <Button
-        onClick={() => toggleMode()}
+        onClick={() => {
+          onClose()
+          toggleMode()
+        }}
       >
         {mode === "dark" 
           ? "Light Mode" 

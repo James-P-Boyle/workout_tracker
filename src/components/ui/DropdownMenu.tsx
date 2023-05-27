@@ -7,7 +7,7 @@ interface DropdownMenuProps {
 }
 
 export default function DropdownMenu({ isOpen, className, children }: DropdownMenuProps) {
-  const menuClasses = `flex flex-col py-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg ${className ?? ""}`
+  const menuClasses = `flex flex-col py-2 bg-white dark:bg-gray-900 rounded-lg ${className ?? ""}`
 
   return (
     <div className={isOpen ? menuClasses : "hidden"}>

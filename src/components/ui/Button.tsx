@@ -17,7 +17,7 @@ export default function Button({
             type={type}
             className={`
                 ${className}
-                p-2 text-2xl rounded-lg font-bold border-2 border-gray-400 dark:border-gray-700 hover:border-black hover:shadow-xl transition-colors 
+                p-2 text-2xl rounded-lg font-bold border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-gray-700 hover:shadow-xl transition-colors 
                
             `}
             onClick={onClick}

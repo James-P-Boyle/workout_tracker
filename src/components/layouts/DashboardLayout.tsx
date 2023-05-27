@@ -1,3 +1,5 @@
+import { useStyles } from "@/contexts/StyleContext"
+
 interface DashboardLayoutProps {
   children: React.ReactNode
 }
@@ -5,7 +7,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
-    <div className="flex flex-col justify-between gap-4 h-full">
+    <div className={`relative flex flex-col justify-between h-full gap-4`}>
     
       {children}
     

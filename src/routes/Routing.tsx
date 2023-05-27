@@ -9,10 +9,12 @@ import ProtectedRoute from "./ProtectedRoute"
 import Home from "@/pages/home/Home"
 import NotFound from "@/pages/errors/NotFound"
 
+
 export default function Routing() {
 
+
     return (
-       
+
         <Routes>
             <Route path="/" element={<GuestLayout />}>
                 <Route index element={<Home />}/>
@@ -20,10 +22,7 @@ export default function Routing() {
                 <Route path="login" element={<Login />}/>
             </Route>
 
-        
-
             {/* PROTECTED ROUTES */}
-        
             <Route
                 path="dashboard"
                 element={
@@ -49,6 +48,7 @@ export default function Routing() {
             <Route path="*" element={<NotFound />} />
 
         </Routes>
+
 
        
     )

@@ -1,3 +1,4 @@
+import Button from "../ui/Button"
 import NavItem from "../ui/NavItem"
 
 export default function DashNavigation() {
@@ -16,10 +17,21 @@ return (
         >
             Create
         </NavItem>
-        
-        <button className="flex justify-center flex-1 py-2 text-2xl border">Progress</button>
-        <button className="flex justify-center flex-1 py-2 text-2xl bg-pink-200 border">Start</button>
-        
+      
+
+        <NavItem
+            to={"/"}
+        >
+            Progress
+        </NavItem>
+      
+
+        <Button
+            className="bg-purple-200 border-0 dark:bg-purple-950"
+        >
+            Start
+        </Button>
+      
     </div>        
 )
 }

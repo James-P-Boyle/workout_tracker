@@ -1,4 +1,5 @@
 import Container from "@/components/ui/Container"
+import Input from "@/components/ui/forms/Input"
 import NumberInput from "@/components/ui/forms/NumberInput"
 
 export default function CreateWorkout() {
@@ -30,56 +31,34 @@ export default function CreateWorkout() {
                         unit="kg"
                     />
 
-                    <input
-                        className="w-full p-2 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black"
+                    <Input 
                         name="exercise"
                         type="email"
                         placeholder="What excercise?"
-                        // onChange={onChange}
-                    />
-                
-                    <input
-                        className="w-full p-2 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black"
-                        type="text"
+                        onChange={()=> {}}
+                    />  
+
+                    <Input 
                         name="sets"
                         placeholder="Sets"
-                        // onChange={onChange}
-                    />
-                
-                    <input
-                        className="w-full p-2 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black"
-                        type="text"
+                        onChange={()=> {}}
+                    />  
+
+                    <Input 
                         name="reps"
                         placeholder="Reps"
-                        // onChange={onChange}
-                    />
-                
-                    <input
-                        className="w-full p-2 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black"
-                        type="text"
-                        name="weight"
-                        placeholder="Weight"
-                        // onChange={onChange}
-                    />
+                        onChange={()=> {}}
+                    />  
 
-                    <input
-                        className="w-full p-2 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black"
-                        type="text"
+                    <Input 
                         name="weight"
                         placeholder="Weight"
-                        // onChange={onChange}
-                    />
-
-                    <input
-                        className="w-full p-2 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black"
-                        type="text"
-                        name="weight"
-                        placeholder="Weight"
-                        // onChange={onChange}
-                    />
+                        onChange={()=> {}}
+                    />  
+   
                 </div>
                 <button 
-                    className="px-4 py-2 text-2xl font-bold transition-colors border-2 border-gray-400 rounded-lg hover:border-black hover:shadow-xl" 
+                    className="px-4 py-2 text-2xl font-bold transition-colors border-2 border-gray-400 rounded-lg dark:border-purple-900 hover:border-black dark:border-gray-700 hover:dark:border-gray-900 hover:shadow-xl" 
                     onClick={handleSubmit}
                     >
                     Create

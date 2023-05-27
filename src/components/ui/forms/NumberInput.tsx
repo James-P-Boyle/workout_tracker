@@ -43,7 +43,7 @@ export default function NumberInput({
         label={label}
       />
       
-      <div className="relative flex w-full px-2 py-1 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black">
+      <div className="relative flex w-full px-2 py-1 mb-2 transition-colors bg-transparent border-2 border-gray-400 rounded-lg outline-black hover:border-black dark:border-gray-700 hover:dark:border-gray-900">
         
         <NumberInputButton handleClick={handleDecrement}>
           -

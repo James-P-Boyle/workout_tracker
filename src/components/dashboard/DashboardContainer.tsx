@@ -1,5 +1,5 @@
 import HeroIcon from "@/components/ui/HeroIcon"
-import NavigationMenus from "./NavigationMenus"
+import DashMenus from "./DashMenus"
 import DashNavigation from "./DashNavigation"
 import DashboardLayout from "../layouts/DashboardLayout"
 
@@ -9,9 +9,9 @@ export default function DashboardContainer({ }) {
 
     <DashboardLayout>
 
-      <NavigationMenus />
+      <DashMenus />
         
-      <HeroIcon />
+      <HeroIcon/>
         
       <DashNavigation />
         

@@ -1,7 +1,7 @@
 import { Route, Routes} from "react-router-dom"
 import DashboardContainer from "@/components/dashboard/DashboardContainer"
 import MainLayout from "@/components/layouts/MainLayout"
-import CreateWorkout from "@/pages/workout/CreateWorkout"
+import Create from "@/pages/workout/Create"
 import Login from "@/pages/login/Login"
 import Register from "@/pages/register/Register"
 import GuestLayout from "@/components/layouts/GuestLayout"
@@ -36,7 +36,7 @@ export default function Routing() {
           <Route index element={<h1>Workouts Index</h1>}/>
 
           <Route path="create" >
-            <Route index element={<CreateWorkout />}/>
+            <Route index element={<Create />}/>
           </Route>
           
           <Route path=":id">

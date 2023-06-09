@@ -9,47 +9,47 @@ import ProtectedRoute from "./ProtectedRoute"
 import Home from "@/pages/home/Home"
 import NotFound from "@/pages/errors/NotFound"
 
-
 export default function Routing() {
 
+  return (
 
-    return (
+    <Routes>
+      <Route path="/" element={<GuestLayout />}>
+        <Route index element={<Home />}/>
+        <Route path="register" element={<Register/>}/>
+        <Route path="login" element={<Login />}/>
+      </Route>
 
-        <Routes>
-            <Route path="/" element={<GuestLayout />}>
-                <Route index element={<Home />}/>
-                <Route path="register" element={<Register/>}/>
-                <Route path="login" element={<Login />}/>
-            </Route>
+      {/* PROTECTED ROUTES */}
+      <Route
+        path="dashboard"
+        element={
+          <MainLayout>
+            <ProtectedRoute element={DashboardContainer} />
+          </MainLayout>
+        }
+      >
 
-            {/* PROTECTED ROUTES */}
-            <Route
-                path="dashboard"
-                element={
-                    <MainLayout>
-                        <ProtectedRoute element={DashboardContainer} />
-                    </MainLayout>
-                }
-            >
+        <Route index element={<h1>hey</h1>}/>
 
-                <Route index element={<h1>hey</h1>}/>
+        <Route path="workouts">
+          <Route index element={<h1>Workouts Index</h1>}/>
 
-                <Route path="workouts">
-                    <Route index element={<h1>Workouts Index</h1>}/>
-                    <Route path="create" element={<CreateWorkout />}/>
-                    <Route path=":id">
-                        <Route index element={<h1>show one</h1>}/>
-                        <Route path="edit" element={<h1>edit one</h1>}/>
-                    </Route>
-                </Route>
+          <Route path="create" >
+            <Route index element={<CreateWorkout />}/>
+          </Route>
+          
+          <Route path=":id">
+            <Route index element={<h1>show one</h1>}/>
+            <Route path="edit" element={<h1>edit one</h1>}/>
+          </Route>
+        </Route>
 
-            </Route>
+      </Route>
 
-            <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
 
-        </Routes>
+    </Routes>
 
-
-       
-    )
+  )
 }

@@ -6,96 +6,86 @@ interface AuthProviderProps {
   children: React.ReactNode
 }
 
-interface User {
-  userId: number
-  name: string
+export interface AuthContextType {
+  isAuthenticated: boolean
+  error?: string
+  isLoading?: boolean
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+  login: (email: string, password: string) => Promise<void>
+  register: (email: string, password: string) => Promise<void>
+  logout: () => void
 }
 
-export const AuthContext = createContext<any>(null)
+export const AuthContext = createContext<AuthContextType | null>(null)
 
 export default function AuthContextProvider({children}: AuthProviderProps) {
 
   const navigate = useNavigate()
 
-  const [user, setUser] = useState<User | null>(null)
-
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-    // Extract user information from the token
-    const decodedToken = decodeToken(token)
-    if (decodedToken) {
-      const { userId, name } = decodedToken
-      setUser({ userId, name })
-    }
-    }
-  }, [])
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   
   const login = async (email: string, password: string) => {
 
     try {
+
+      setIsLoading(true)
       const response = await axios.post(
-        "http://localhost:5000/api/users/login",
+        "http://localhost:8000/auth/login",
         {
           email,
           password,
         }
       )
 
-      const { token } = response.data
-
-      if (token) {
-        localStorage.setItem("token", token)
-        const decodedToken = decodeToken(token)
-        if (decodedToken) {
-          const { userId, name } = decodedToken
-          setUser({ userId, name })
-        }
-        
-        navigate("/dashboard")
+      if (response.data.id !== null) {
+        setIsAuthenticated(true)
+        setIsLoading(false)
+        navigate("dashboard")
+      } else {
+        setError("Login failed. Invalid credentials.")
       }
     } catch (error) {
       console.error(error)
+      setIsLoading(false)
+      setError("An error occurred during login.")
     }
   }
   
-  const register = async (name: string, email: string, password: string) => {
+  const register = async (email: string, password: string) => {
 
     try {
-      const response = await axios.post("http://localhost:5000/api/users/register", {
-        name,
+      setIsLoading(true)
+      const response = await axios.post("http://localhost:8000/users/register", {
         email,
         password,
       })
       
-      const { token } = response.data
-
-      console.log(response)
-
-      if (token) {
-        localStorage.setItem("token", token)
-        const decodedToken = decodeToken(token)
-        if (decodedToken) {
-          const { userId, name } = decodedToken
-          setUser({ userId, name })
-        }
-        
+      if (response.data.id !== null) {
+        setIsAuthenticated(true)
+        setIsLoading(false)
         navigate("dashboard")
+      } else {
+        setError("Login failed. Invalid credentials.")
       }
     } catch (error) {
       console.error(error)
+      setIsLoading(false)
+      setError("An error occurred during register.")
     }
   }
 
   const logout = () => {
-    localStorage.removeItem("token")
-    setUser(null)
+    setIsAuthenticated(false)
     navigate("/login")
   }
 
   const value = {
-    user,
-    setUser,
+    isAuthenticated,
+    setIsAuthenticated,
+    error,
+    isLoading,
     login,
     register,
     logout
@@ -110,17 +100,4 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
 
 export const useAuth = () => useContext(AuthContext)
 
-// Helper function to decode the token and extract user information
-function decodeToken(token: string) {
-  try {
-    // Assuming the token is a JWT (JSON Web Token)
-    const payloadBase64 = token.split(".")[1]
-    const payloadJson = atob(payloadBase64)
-    const payload = JSON.parse(payloadJson)
-    return payload
-  } catch (error) {
-    console.error("Failed to decode token:", error)
-    return null
-  }
-}
 

@@ -1,4 +1,4 @@
-import { useAuth } from "@/contexts/AuthContext"
+import { useAuth, AuthContextType } from "@/contexts/AuthContext"
 import { Navigate } from "react-router-dom"
 
 interface ProtectedRouteProps {
@@ -10,9 +10,9 @@ export default function ProtectedRoute({
    ...rest 
 }: ProtectedRouteProps) {
 
-  const { user } = useAuth()
+  const { isAuthenticated } = useAuth() as AuthContextType
 
-  if (!user) {
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />
   }
 

@@ -1,101 +1,131 @@
 import axios from "axios"
-import { useState, useContext, createContext, useEffect } from "react"
+import { useState, useContext, createContext } from "react"
 import { useNavigate } from "react-router"
 
 interface AuthProviderProps {
   children: React.ReactNode
 }
 
-interface User {
-  userId: number
-  name: string
+export interface AuthContextType {
+  isAuthenticated: boolean
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+  error?: string
+  isLoading?: boolean
+  userId: string
+  userName?: string
+  setUserName?: React.Dispatch<React.SetStateAction<string>>
+  login: (email: string, password: string) => Promise<void>
+  register: (email: string, password: string) => Promise<void>
+  logout: () => void
 }
 
-export const AuthContext = createContext<any>(null)
+export const AuthContext = createContext<AuthContextType | null>(null)
 
 export default function AuthContextProvider({children}: AuthProviderProps) {
 
+  // A use effect that makes a request to sessions
+  // to the check if the user is already authenticated
+  
   const navigate = useNavigate()
 
-  const [user, setUser] = useState<User | null>(null)
-
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-    // Extract user information from the token
-    const decodedToken = decodeToken(token)
-    if (decodedToken) {
-      const { userId, name } = decodedToken
-      setUser({ userId, name })
-    }
-    }
-  }, [])
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [error, setError] = useState<string>("")
+  const [userName, setUserName] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [userId, setUserId] = useState<string>("")
   
   const login = async (email: string, password: string) => {
-
     try {
+      setIsLoading(true)
       const response = await axios.post(
-        "http://localhost:5000/api/users/login",
+        "http://localhost:8000/auth/login",
         {
           email,
           password,
+        },
+        {
+          withCredentials: true,
         }
       )
+        console.log('login response ==>', response)
+      if (response.data.id) {
+        setIsAuthenticated(true)
+        setUserId(response.data.id)
+        setIsLoading(false)
 
-      const { token } = response.data
+/* --------------                         ---------------- */
+/* --------------THIS WHOLE PART IS A MESS---------------- */
+/* --------------                         ---------------- */
 
-      if (token) {
-        localStorage.setItem("token", token)
-        const decodedToken = decodeToken(token)
-        if (decodedToken) {
-          const { userId, name } = decodedToken
-          setUser({ userId, name })
+        if (response.headers && response.headers["set-cookie"]) {
+          document.cookie = response.headers["set-cookie"][0]
         }
-        
-        navigate("/dashboard")
+
+        navigate("dashboard")
+      } else {
+        setError("Login failed. Invalid credentials.")
       }
+
     } catch (error) {
-      console.error(error)
+      console.error('login error', error)
+      setIsLoading(false)
+      setError("An error occurred during login.")
     }
   }
   
-  const register = async (name: string, email: string, password: string) => {
+  const register = async (email: string, password: string) => {
 
     try {
-      const response = await axios.post("http://localhost:5000/api/users/register", {
-        name,
-        email,
-        password,
-      })
-      
-      const { token } = response.data
-
-      console.log(response)
-
-      if (token) {
-        localStorage.setItem("token", token)
-        const decodedToken = decodeToken(token)
-        if (decodedToken) {
-          const { userId, name } = decodedToken
-          setUser({ userId, name })
+      setIsLoading(true)
+      const response = await axios.post(
+        "http://localhost:8000/users/register",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true, 
         }
-        
-        navigate("dashboard")
+      )
+  
+      if (response.data.id) {
+        setIsAuthenticated(true)
+        setUserId(response.data.id)
+        setIsLoading(false)
+
+/* --------------                         ---------------- */
+/* --------------THIS WHOLE PART IS A MESS---------------- */
+/* --------------                         ---------------- */
+
+        if (response.headers && response.headers["set-cookie"]) {
+          document.cookie = response.headers["set-cookie"][0]
+        }
+
+        navigate("profile")
+      } else {
+        setError("Registration failed.")
       }
+
     } catch (error) {
-      console.error(error)
+      console.error('Register error', error)
+      setIsLoading(false)
+      setError("An error occurred during registration.")
     }
   }
 
   const logout = () => {
-    localStorage.removeItem("token")
-    setUser(null)
+    setIsAuthenticated(false)
     navigate("/login")
   }
 
   const value = {
-    user,
-    setUser,
+    isAuthenticated,
+    setIsAuthenticated,
+    error,
+    isLoading,
+    userId,
+    userName,
+    setUserName,
     login,
     register,
     logout
@@ -103,24 +133,11 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
 
   return (
     <AuthContext.Provider value={value}>
-        {children}
+      {children}
     </AuthContext.Provider>
   )
 }
 
 export const useAuth = () => useContext(AuthContext)
 
-// Helper function to decode the token and extract user information
-function decodeToken(token: string) {
-  try {
-    // Assuming the token is a JWT (JSON Web Token)
-    const payloadBase64 = token.split(".")[1]
-    const payloadJson = atob(payloadBase64)
-    const payload = JSON.parse(payloadJson)
-    return payload
-  } catch (error) {
-    console.error("Failed to decode token:", error)
-    return null
-  }
-}
 

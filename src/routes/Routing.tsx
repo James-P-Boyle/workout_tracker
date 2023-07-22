@@ -8,6 +8,7 @@ import GuestLayout from "@/components/layouts/GuestLayout"
 import ProtectedRoute from "./ProtectedRoute"
 import Home from "@/pages/home/Home"
 import NotFound from "@/pages/errors/NotFound"
+import ProfileRegistration from "@/pages/register/ProfileRegistration"
 
 export default function Routing() {
 
@@ -18,8 +19,11 @@ export default function Routing() {
         <Route index element={<Home />}/>
         <Route path="register" element={<Register/>}/>
         <Route path="login" element={<Login />}/>
+        <Route path="profile" element={<ProtectedRoute element={ProfileRegistration} />} />
       </Route>
 
+
+      <Route path="profile" element={<ProfileRegistration />}/>
       {/* PROTECTED ROUTES */}
       <Route
         path="dashboard"

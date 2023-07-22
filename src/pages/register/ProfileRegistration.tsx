@@ -20,10 +20,10 @@ const defaultFormData = {
 
 export default function Register() {
 
+  const navigate = useNavigate()
+
   const [ formData, setFormData ] = useState(defaultFormData)
   const { userName, firstName, lastName, age, weight, height, avatar } = formData
-
-  const navigate = useNavigate()
   const { setUserName, userId } = useAuth() as AuthContextType
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +36,6 @@ export default function Register() {
   const updateProfile = async () => {
     try {
       console.log(userId)
-
 
       const updatedFormData = { ...formData, userId };
       const response = await axios.patch(

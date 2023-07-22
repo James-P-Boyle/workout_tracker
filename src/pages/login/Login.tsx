@@ -41,9 +41,7 @@ export default function Login() {
         isAuthenticated ? (
           <Navigate to="/dashboard"/>
         ) : (
-
           <>
-          
             <Form handleSubmit={handleSubmit}>
               <>
                 <Input 
@@ -67,7 +65,6 @@ export default function Login() {
                 </Button>   
               </>
             </Form>
-
           </>
         )
       )}

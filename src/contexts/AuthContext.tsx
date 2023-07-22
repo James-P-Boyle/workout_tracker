@@ -12,6 +12,8 @@ export interface AuthContextType {
   error?: string
   isLoading?: boolean
   userId: string
+  userName?: string
+  setUserName?: React.Dispatch<React.SetStateAction<string>>
   login: (email: string, password: string) => Promise<void>
   register: (email: string, password: string) => Promise<void>
   logout: () => void
@@ -21,10 +23,14 @@ export const AuthContext = createContext<AuthContextType | null>(null)
 
 export default function AuthContextProvider({children}: AuthProviderProps) {
 
+  // A use effect that makes a request to sessions
+  // to the check if the user is already authenticated
+  
   const navigate = useNavigate()
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
+  const [userName, setUserName] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [userId, setUserId] = useState<string>("")
   
@@ -41,20 +47,27 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
           withCredentials: true,
         }
       )
-        console.log('RESPONSE', response)
+        console.log('login response ==>', response)
       if (response.data.id) {
         setIsAuthenticated(true)
         setUserId(response.data.id)
         setIsLoading(false)
+
+/* --------------                         ---------------- */
+/* --------------THIS WHOLE PART IS A MESS---------------- */
+/* --------------                         ---------------- */
+
         if (response.headers && response.headers["set-cookie"]) {
-          document.cookie = response.headers["set-cookie"][0] // Set the session cookie in the browser
+          document.cookie = response.headers["set-cookie"][0]
         }
+
         navigate("dashboard")
       } else {
         setError("Login failed. Invalid credentials.")
       }
 
     } catch (error) {
+      console.error('login error', error)
       setIsLoading(false)
       setError("An error occurred during login.")
     }
@@ -79,15 +92,22 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
         setIsAuthenticated(true)
         setUserId(response.data.id)
         setIsLoading(false)
+
+/* --------------                         ---------------- */
+/* --------------THIS WHOLE PART IS A MESS---------------- */
+/* --------------                         ---------------- */
+
         if (response.headers && response.headers["set-cookie"]) {
-          document.cookie = response.headers["set-cookie"][0] // Set the session cookie in the browser
+          document.cookie = response.headers["set-cookie"][0]
         }
+
         navigate("profile")
       } else {
         setError("Registration failed.")
       }
+
     } catch (error) {
-      console.error(error)
+      console.error('Register error', error)
       setIsLoading(false)
       setError("An error occurred during registration.")
     }
@@ -104,6 +124,8 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
     error,
     isLoading,
     userId,
+    userName,
+    setUserName,
     login,
     register,
     logout
@@ -111,7 +133,7 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
 
   return (
     <AuthContext.Provider value={value}>
-        {children}
+      {children}
     </AuthContext.Provider>
   )
 }

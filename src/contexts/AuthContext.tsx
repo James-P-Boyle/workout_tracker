@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState, useContext, createContext, useEffect } from "react"
+import { useState, useContext, createContext } from "react"
 import { useNavigate } from "react-router"
 
 interface AuthProviderProps {
@@ -8,9 +8,10 @@ interface AuthProviderProps {
 
 export interface AuthContextType {
   isAuthenticated: boolean
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
   error?: string
   isLoading?: boolean
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
+  userId: string
   login: (email: string, password: string) => Promise<void>
   register: (email: string, password: string) => Promise<void>
   logout: () => void
@@ -25,29 +26,35 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [userId, setUserId] = useState<string>("")
   
   const login = async (email: string, password: string) => {
-
     try {
-
       setIsLoading(true)
       const response = await axios.post(
         "http://localhost:8000/auth/login",
         {
           email,
           password,
+        },
+        {
+          withCredentials: true,
         }
       )
-
-      if (response.data.id !== null) {
+        console.log('RESPONSE', response)
+      if (response.data.id) {
         setIsAuthenticated(true)
+        setUserId(response.data.id)
         setIsLoading(false)
+        if (response.headers && response.headers["set-cookie"]) {
+          document.cookie = response.headers["set-cookie"][0] // Set the session cookie in the browser
+        }
         navigate("dashboard")
       } else {
         setError("Login failed. Invalid credentials.")
       }
+
     } catch (error) {
-      console.error(error)
       setIsLoading(false)
       setError("An error occurred during login.")
     }
@@ -57,22 +64,32 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
 
     try {
       setIsLoading(true)
-      const response = await axios.post("http://localhost:8000/users/register", {
-        email,
-        password,
-      })
-      
-      if (response.data.id !== null) {
+      const response = await axios.post(
+        "http://localhost:8000/users/register",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true, 
+        }
+      )
+  
+      if (response.data.id) {
         setIsAuthenticated(true)
+        setUserId(response.data.id)
         setIsLoading(false)
-        navigate("dashboard")
+        if (response.headers && response.headers["set-cookie"]) {
+          document.cookie = response.headers["set-cookie"][0] // Set the session cookie in the browser
+        }
+        navigate("profile")
       } else {
-        setError("Login failed. Invalid credentials.")
+        setError("Registration failed.")
       }
     } catch (error) {
       console.error(error)
       setIsLoading(false)
-      setError("An error occurred during register.")
+      setError("An error occurred during registration.")
     }
   }
 
@@ -86,6 +103,7 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
     setIsAuthenticated,
     error,
     isLoading,
+    userId,
     login,
     register,
     logout

@@ -41,29 +41,34 @@ export default function Login() {
         isAuthenticated ? (
           <Navigate to="/dashboard"/>
         ) : (
-          <Form handleSubmit={handleSubmit}>
-            <>
-              <Input 
-                name="email"
-                type="email"
-                value={email}
-                placeholder="Email"
-                onChange={onChange}
-              />
 
-              <Input 
-                name="password"
-                type="password"
-                value={password}
-                placeholder="Password"
-                onChange={onChange}
-              />
+          <>
+          
+            <Form handleSubmit={handleSubmit}>
+              <>
+                <Input 
+                  name="email"
+                  type="email"
+                  value={email}
+                  placeholder="Email"
+                  onChange={onChange}
+                />
 
-              <Button type="submit" className="w-full">
-                Login
-              </Button>   
-            </>
-          </Form>
+                <Input 
+                  name="password"
+                  type="password"
+                  value={password}
+                  placeholder="Password"
+                  onChange={onChange}
+                />
+
+                <Button type="submit" className="w-full">
+                  Login
+                </Button>   
+              </>
+            </Form>
+
+          </>
         )
       )}
 

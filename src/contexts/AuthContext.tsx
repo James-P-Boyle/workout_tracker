@@ -2,6 +2,8 @@ import axios from "axios"
 import { useState, useContext, createContext } from "react"
 import { useNavigate } from "react-router"
 
+axios.defaults.withCredentials = true;
+
 interface AuthProviderProps {
   children: React.ReactNode
 }
@@ -42,13 +44,12 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
         {
           email,
           password,
-        },
-        {
-          withCredentials: true,
         }
       )
-        console.log('login response ==>', response)
+        // console.log('login response ==>', response)
+        // console.log(`Check Cookie Is Present In Repsonse`, response.headers["set-cookie"])
       if (response.data.id) {
+        console.log(response.data.id)
         setIsAuthenticated(true)
         setUserId(response.data.id)
         setIsLoading(false)
@@ -82,9 +83,6 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
         {
           email,
           password,
-        },
-        {
-          withCredentials: true, 
         }
       )
   

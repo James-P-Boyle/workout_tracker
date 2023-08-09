@@ -4,10 +4,11 @@ import Container from "@/components/ui/Container"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import { WorkoutService } from "@/services/workout.service"
 
 export default function Create() {
 
+  let workout = new WorkoutService()
   const navigate = useNavigate()
 
   const [workoutData, setWorkoutData] = useState({
@@ -17,11 +18,7 @@ export default function Create() {
   })
 
   const getWorkouts = () => {
-    axios.get('http://localhost:8000/workouts').then((res) => {
-      console.log(res)
-    }).catch((error) => {
-      console.log(error)
-    })
+    workout.getWorkouts()
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

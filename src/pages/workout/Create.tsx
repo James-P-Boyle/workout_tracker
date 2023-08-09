@@ -4,9 +4,11 @@ import Container from "@/components/ui/Container"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
 import { useNavigate } from "react-router-dom"
+import { WorkoutService } from "@/services/workout.service"
 
 export default function Create() {
 
+  let workout = new WorkoutService()
   const navigate = useNavigate()
 
   const [workoutData, setWorkoutData] = useState({
@@ -14,6 +16,10 @@ export default function Create() {
     workout_type: '',
     workout_session_amount: '',
   })
+
+  const getWorkouts = () => {
+    workout.getWorkouts()
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -80,6 +86,13 @@ export default function Create() {
         </Button>
           
       </Form>   
+
+      <Button 
+          className="px-4 py-2 text-2xl font-bold transition-colors border-2 border-gray-400 rounded-lg dark:border-purple-900 hover:border-black hover:dark:border-gray-900 hover:shadow-xl" 
+          onClick={getWorkouts}
+        >
+          Get Workouts
+        </Button>
 
     </Container>
   )

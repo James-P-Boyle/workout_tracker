@@ -1,30 +1,29 @@
 import { useState } from "react"
-import axios from 'axios'
 import { useNavigate } from "react-router-dom"
-
 import Container from "@/components/ui/Container"
 import Form from "@/components/ui/forms/Form"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/forms/Input"
-import { useAuth, AuthContextType } from "@/contexts/AuthContext"
+import { UserService } from "@/services/user.service"
+
+
 
 const defaultFormData = {
   userName: "",
   firstName: "",
   lastName: "",
-  age: "",
-  weight: "",
-  height: "",
+  age: 0,
+  weight: 0,
+  height: 0,
   avatar: "https://cdn.muscleandstrength.com/sites/default/files/field/image/author/john-meadows.jpg"
 }
 
 export default function Register() {
 
-  const navigate = useNavigate()
-
   const [ formData, setFormData ] = useState(defaultFormData)
   const { userName, firstName, lastName, age, weight, height, avatar } = formData
-  const { setUserName, userId } = useAuth() as AuthContextType
+
+  const navigate = useNavigate()
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
@@ -33,33 +32,23 @@ export default function Register() {
     }))
   }
 
-  const updateProfile = async () => {
-    try {
-      console.log(userId)
-
-      const updatedFormData = { ...formData, userId };
-      const response = await axios.patch(
-        `http://localhost:8000/users/profile`, 
-        updatedFormData,  {
-          withCredentials: true, // Pass the session cookie with the request
-        } 
-      )
-  
-      console.log(response.data)
-  
-      if (response.data.id) {
-        setUserName && setUserName(userName)
-        navigate("dashboard")
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    updateProfile()
-    setFormData(defaultFormData)
+
+    try {
+      const user = new UserService()
+
+      const response = await user.updateProfile({
+        userName, firstName, lastName, age, weight, height, avatar 
+      } 
+   
+      )
+      console.log('Profile Register Response', response)
+      navigate('dashboard')
+      setFormData(defaultFormData)
+    } catch(error) {
+      console.log('Error on register,', error)
+    }
   }
 
   return (
@@ -91,21 +80,21 @@ export default function Register() {
         
           <Input 
             name="age"
-            value={age}
+        
             placeholder="Age ?"
             onChange={onChange}
           />
 
           <Input 
             name="weight"
-            value={weight}
+         
             placeholder="Weight in pounds ?"
             onChange={onChange}
           />
         
           <Input 
             name="height"
-            value={height}
+     
             placeholder="Height in cm ?"
             onChange={onChange}
           />

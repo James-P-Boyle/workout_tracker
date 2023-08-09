@@ -6,7 +6,6 @@ import DashSettingsMenu from "./DashSettingsMenu"
 export default function DashMenus() {
 
   const [ showSettings, setShowSettings ] = useState(false)
-  const { logout } = useAuth()
 
   return (
     <div className="flex flex-row flex-wrap justify-between">
@@ -20,9 +19,9 @@ export default function DashMenus() {
 
         <Button 
           className="text-sm"
-          onClick={logout}
+      
         >
-          Logout
+          Logout('doesnt work')
         </Button>
 
         {showSettings && (

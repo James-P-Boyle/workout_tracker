@@ -37,11 +37,11 @@ export default function Routing() {
         <Route index element={<h1>hey</h1>}/>
 
         <Route path="workouts">
-          <Route index element={<h1>Workouts Index</h1>}/>
+          <Route index element={<Create/>}/>
 
-          <Route path="create" >
+          {/* <Route path="create" >
             <Route index element={<Create />}/>
-          </Route>
+          </Route> */}
           
           <Route path=":id">
             <Route index element={<h1>show one</h1>}/>

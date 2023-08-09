@@ -1,3 +1,4 @@
+import { UserService } from "@/services/user.service"
 import axios from "axios"
 import { useState, useContext, createContext } from "react"
 import { useNavigate } from "react-router"
@@ -27,6 +28,7 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
   // to the check if the user is already authenticated
   
   const navigate = useNavigate()
+  const user = new UserService()
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [error, setError] = useState<string>("")
@@ -37,18 +39,11 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
   const login = async (email: string, password: string) => {
     try {
       setIsLoading(true)
-      const response = await axios.post(
-        "http://localhost:8000/auth/login",
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-        console.log('login response ==>', response)
-      if (response.data.id) {
+      const response = await user.login(email, password)
+        // console.log('login response ==>', response)
+        // console.log(`Check Cookie Is Present In Repsonse`, response.headers["set-cookie"])
+      if (response?.status === 201) {
+        console.log(response.data.id)
         setIsAuthenticated(true)
         setUserId(response.data.id)
         setIsLoading(false)
@@ -82,9 +77,6 @@ export default function AuthContextProvider({children}: AuthProviderProps) {
         {
           email,
           password,
-        },
-        {
-          withCredentials: true, 
         }
       )
   

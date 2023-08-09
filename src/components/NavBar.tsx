@@ -1,11 +1,9 @@
 import { useState } from "react"
-import { useAuth } from "@/contexts/AuthContext"
 import NavItem from "./ui/NavItem"
 import DropdownMenu from "./ui/DropdownMenu"
 
 export default function NavBar() {
 
-  const { user, logout } = useAuth()
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const toggleDropdown = () => {
@@ -20,20 +18,20 @@ export default function NavBar() {
       </svg>
 
       <div className="hidden gap-2 md:flex">
-        {user ? (
-          <>
-            <NavItem to={"dashboard"} fontSize="md" className="px-2">
-              Dashboard
-            </NavItem>
+      
+        <>
+          <NavItem to={"dashboard"} fontSize="md" className="px-2">
+            Dashboard
+          </NavItem>
 
-            <button
-              className="flex justify-center flex-1 w-full px-2 py-2 border"
-              onClick={logout}
-            >
-              Logout
-            </button>
-          </>
-        ) : (
+          <button
+            className="flex justify-center flex-1 w-full px-2 py-2 border"
+            // onClick={logout}
+          >
+            Logout
+          </button>
+        </>
+   
           <>
             <NavItem to={"/"} fontSize="md" className="px-2">
               Home
@@ -47,7 +45,7 @@ export default function NavBar() {
               Register
             </NavItem>
           </>
-        )}
+      
       </div>
 
       <button
@@ -61,35 +59,34 @@ export default function NavBar() {
 
       {dropdownOpen && (
         <DropdownMenu isOpen={dropdownOpen} className="absolute left-0 right-0 gap-2 top-16 md:hidden">
-          {user ? (
-            <>
-              <NavItem to={"dashboard"} fontSize="md" className="px-2">
-                Dashboard
-              </NavItem>
+      
+          <>
+            <NavItem to={"dashboard"} fontSize="md" className="px-2">
+              Dashboard
+            </NavItem>
 
-              <button
-                className="flex justify-center flex-1 w-full px-2 py-2 border"
-                onClick={logout}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <NavItem to={"/"} fontSize="md" className="px-2">
-                Home
-              </NavItem>
+            <button
+              className="flex justify-center flex-1 w-full px-2 py-2 border"
 
-              <NavItem to={"login"} fontSize="md" className="px-2">
-                Login
-              </NavItem>
+            >
+              Logout
+            </button>
+          </>
 
-              <NavItem to={"register"} fontSize="md" className="px-2">
-                Register
-              </NavItem>
-            </>
-          )}
+          <>
+            <NavItem to={"/"} fontSize="md" className="px-2">
+              Home
+            </NavItem>
 
+            <NavItem to={"login"} fontSize="md" className="px-2">
+              Login
+            </NavItem>
+
+            <NavItem to={"register"} fontSize="md" className="px-2">
+              Register
+            </NavItem>
+          </>
+      
         </DropdownMenu>
       )}
     </nav>

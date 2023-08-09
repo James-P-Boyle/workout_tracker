@@ -2,7 +2,7 @@ import { Profile } from "@/interfaces/Profile";
 import axios from "axios"
 axios.defaults.withCredentials = true;
 
-let API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "http://localhost:8000";
 
 export class UserService {
     login = async (email: string, password: string) => {

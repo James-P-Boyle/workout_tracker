@@ -35,4 +35,13 @@ export class UserService {
         }
 
     }
+
+    logout = async () => {
+        try {
+          const response = await axios.get(API_BASE_URL + "/auth/logout");
+          console.log("User has been logged out", response);
+        } catch (error) {
+          console.log("Error while logging out:", error);
+        }
+    }
 }

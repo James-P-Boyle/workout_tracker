@@ -8,37 +8,45 @@ import GuestLayout from "@/components/layouts/GuestLayout"
 import Home from "@/pages/home/Home"
 import NotFound from "@/pages/errors/NotFound"
 import ProfileRegistration from "@/pages/register/ProfileRegistration"
+import Workouts from "@/pages/workout/Workouts"
+import AddExercises from "@/pages/workout/AddExcercises"
 
 export default function Routing() {
 
   return (
     <Routes>
+
       <Route path="/" element={<GuestLayout />}>
+
         <Route index element={<Home />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="profile" element={<ProfileRegistration />} />
-      </Route>
 
-      {/* <Route
-        path="dashboard"
-        element={
-          <MainLayout>
-            <Route element={<DashboardContainer />} />
-          </MainLayout>
-        }
-      >
+      </Route>
+      
+      <Route path="dashboard" element={<MainLayout />} >
+
         <Route index element={<h1>hey</h1>} />
 
         <Route path="workouts">
-          <Route index element={<Create />} />
+          <Route index element={<Workouts />} />
+          <Route path="create" element={<Create />} />
           <Route path=":id" element={<h1>show one</h1>}>
             <Route path="edit" element={<h1>edit one</h1>} />
           </Route>
         </Route>
-      </Route> */}
 
+        <Route path="exercises">
+          <Route index element={<h1>Show all exercises</h1>} />
+          <Route path="add" element={<AddExercises />} />
+        </Route>
+       
+
+      </Route>
+              
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
+

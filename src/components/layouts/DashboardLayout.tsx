@@ -1,5 +1,3 @@
-import { useStyles } from "@/contexts/StyleContext"
-
 interface DashboardLayoutProps {
   children: React.ReactNode
 }

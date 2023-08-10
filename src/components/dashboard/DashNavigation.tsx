@@ -13,21 +13,13 @@ return (
         </NavItem>
 
         <NavItem
-            to={"workouts/create"}
-        >
-            Create
-        </NavItem>
-      
-
-        <NavItem
             to={"/"}
         >
             Progress
         </NavItem>
       
-
         <Button
-            className="bg-purple-200 border-0 dark:bg-purple-950"
+            className="flex-1 bg-purple-200 border-0 dark:bg-purple-950"
         >
             Start
         </Button>

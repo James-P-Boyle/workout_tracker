@@ -27,20 +27,23 @@ export default function Login() {
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
+    event.preventDefault();
+  
     try {
-      const user = new UserService()
-
-      const response = await user.login(email, password)
-      console.log('Login Response', response)
-      navigate('/dashboard')
-      setFormData(defaultFormData)
-    } catch(error) {
-      console.log('Error on login,', error)
+      const user = new UserService();
+      const response = await user.login(email, password);
+      console.log('Login Response', response);
+  
+      if (response && response.status === 201) {
+        console.log('Login successful');
+        navigate('/dashboard');
+      }
+  
+      setFormData(defaultFormData);
+    } catch (error) {
+      console.log('Error on login:', error);
     }
-
-  }
+  };
 
 
   return (

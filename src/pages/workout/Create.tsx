@@ -5,7 +5,6 @@ import Container from "@/components/ui/Container"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
 
-
 export default function Create() {
 
   const navigate = useNavigate()

@@ -92,7 +92,7 @@ export default function Register({onClose}: RegisterProps) {
         
           <Input 
             name="age"
-        
+            value={age}
             placeholder="Age ?"
             onChange={onChange}
           />

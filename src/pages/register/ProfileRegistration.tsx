@@ -6,22 +6,24 @@ import Button from "@/components/ui/Button"
 import Input from "@/components/ui/forms/Input"
 import { UserService } from "@/services/user.service"
 
-
+interface RegisterProps {
+  onClose?: () => void 
+}
 
 const defaultFormData = {
-  userName: "",
+  username: "",
   firstName: "",
   lastName: "",
-  age: 0,
-  weight: 0,
-  height: 0,
+  age: "",
+  weight: "",
+  height: "", 
   avatar: "https://cdn.muscleandstrength.com/sites/default/files/field/image/author/john-meadows.jpg"
 }
 
-export default function Register() {
+export default function Register({onClose}: RegisterProps) {
 
   const [ formData, setFormData ] = useState(defaultFormData)
-  const { userName, firstName, lastName, age, weight, height, avatar } = formData
+  const { username, firstName, lastName, age, weight, height, avatar } = formData
 
   const navigate = useNavigate()
 
@@ -38,13 +40,23 @@ export default function Register() {
     try {
       const user = new UserService()
 
+      const ageAsNumber = parseFloat(defaultFormData.age)
+      const weightAsNumber = parseFloat(weight)
+      const heightAsNumber = parseFloat(height)
+
       const response = await user.updateProfile({
-        userName, firstName, lastName, age, weight, height, avatar 
-      } 
-   
-      )
+        username,
+        firstName,
+        lastName,
+        age: ageAsNumber,
+        weight: weightAsNumber,
+        height: heightAsNumber,
+        avatar,
+      })
+      
       console.log('Profile Register Response', response)
-      navigate('dashboard')
+      onClose && onClose()
+      navigate('/dashboard')
       setFormData(defaultFormData)
     } catch(error) {
       console.log('Error on register,', error)
@@ -58,8 +70,8 @@ export default function Register() {
         <>       
 
           <Input 
-            name="userName"
-            value={userName}
+            name="username"
+            value={username}
             placeholder="UserName ?"
             onChange={onChange}
           />
@@ -100,7 +112,7 @@ export default function Register() {
           />
 
           <Button type="submit" className="w-full">
-            Create Profile
+            Update Profile
           </Button>
         </>
       </Form>

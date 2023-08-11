@@ -1,5 +1,4 @@
 import { Route, Routes} from "react-router-dom"
-import DashboardContainer from "@/components/dashboard/DashboardContainer"
 import MainLayout from "@/components/layouts/MainLayout"
 import Create from "@/pages/workout/Create"
 import Login from "@/pages/login/Login"
@@ -8,8 +7,9 @@ import GuestLayout from "@/components/layouts/GuestLayout"
 import Home from "@/pages/home/Home"
 import NotFound from "@/pages/errors/NotFound"
 import ProfileRegistration from "@/pages/register/ProfileRegistration"
-import Workouts from "@/pages/workout/Workouts"
+import WorkoutMain from "@/pages/workout/WorkoutMain"
 import AddExercises from "@/pages/workout/AddExcercises"
+import ProgressMain from "@/pages/progress/ProgressMain"
 
 export default function Routing() {
 
@@ -30,11 +30,15 @@ export default function Routing() {
         <Route index element={<h1>hey</h1>} />
 
         <Route path="workouts">
-          <Route index element={<Workouts />} />
+          <Route index element={<WorkoutMain />} />
           <Route path="create" element={<Create />} />
           <Route path=":id" element={<h1>show one</h1>}>
             <Route path="edit" element={<h1>edit one</h1>} />
           </Route>
+        </Route>
+
+        <Route path="progress">
+          <Route index element={<ProgressMain />} />
         </Route>
 
         <Route path="exercises">
@@ -42,7 +46,6 @@ export default function Routing() {
           <Route path="add" element={<AddExercises />} />
         </Route>
        
-
       </Route>
               
       <Route path="*" element={<NotFound />} />

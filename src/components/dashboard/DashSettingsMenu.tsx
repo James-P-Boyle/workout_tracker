@@ -2,6 +2,7 @@ import { useState } from "react"
 import Button from "../ui/Button"
 import DropdownMenu from "../ui/DropdownMenu"
 import { useStyles } from "@/contexts/StyleContext"
+import ProfileOptions from "./ProfileOptions"
 
 interface DashSettingsMenuProps {
   onClose: () => void 
@@ -16,6 +17,7 @@ export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
 
   const { mode, toggleMode } = useStyles()
   const [ showLayoutOptions, setShowLayoutOptions ] = useState(false)
+  const [ showProfileOptions, setShowProfileOptions ] = useState(false)
   
   return (
     <DropdownMenu
@@ -50,24 +52,30 @@ export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
         className="" 
         onClick={() => setShowLayoutOptions(!showLayoutOptions)} 
       >
-        {showLayoutOptions
-          ? "X" 
-          : "Layout Options"
-        }
+        {showLayoutOptions ? "X" : "Layout Options"}
+      </Button>
+
+      <Button
+        className="" 
+        onClick={() => setShowProfileOptions(!showProfileOptions)} 
+      >
+        {showProfileOptions ? "X" : "Profile" }
       </Button>
       
-      <LayoutOptions isOpen={showLayoutOptions}/>
+      {showProfileOptions &&  <ProfileOptions onClose={onClose}/>}
+
+      {showLayoutOptions && <LayoutOptions />}
+    
         
     </DropdownMenu>
   )
 }
 
-function LayoutOptions({isOpen}: LayoutOptionsProps ) {
+function LayoutOptions() {
 
   return (
     <DropdownMenu 
       className="px-4 py-2 my-2 space-y-2"
-      isOpen={isOpen}
     >
       <Button>1</Button>
       <Button>2</Button>

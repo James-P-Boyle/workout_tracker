@@ -1,12 +1,12 @@
 import React from "react"
 
 interface DropdownMenuProps {
-  isOpen: boolean
+  isOpen?: boolean
   className?: string
   children: React.ReactNode
 }
 
-export default function DropdownMenu({ isOpen, className, children }: DropdownMenuProps) {
+export default function DropdownMenu({ isOpen = true, className, children }: DropdownMenuProps) {
   const menuClasses = `flex flex-col py-2 bg-white dark:bg-gray-900 rounded-lg ${className ?? ""}`
 
   return (

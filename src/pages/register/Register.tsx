@@ -28,11 +28,11 @@ export default function Register() {
 
     try {
       const user = new UserService()
-      /* !!! any (lazy) */
-      const response: any = await user.register(email, password)
+
+      const response = await user.register(email, password)
 
       if (response.status === 201) {
-        navigate('dashboard')
+        navigate('/dashboard')
       }
       console.log('Register Response', response)
 

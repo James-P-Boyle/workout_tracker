@@ -1,5 +1,5 @@
 import { Profile } from "@/interfaces/Profile";
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 axios.defaults.withCredentials = true;
 
 const API_BASE_URL = "http://localhost:8000";
@@ -17,16 +17,19 @@ export class UserService {
         return axios.get(API_BASE_URL + "/users")
     }
 
-    register = async (email: string, password: string) => {
+    register = async (email: string, password: string): Promise<AxiosResponse> => {
         try {
-            const response = await axios.post(API_BASE_URL + "/users/register", {email, password});
-            console.log(`New User Has Been Registered`, JSON.stringify(response, null, 2)) 
+            const response = await axios.post(API_BASE_URL + "/users/register", { email, password });
+            console.log(`New User Has Been Registered`, JSON.stringify(response, null, 2))
+            return response // Return the response object
         } catch (error) {
-            console.log(`Error While Registering In =>`, error)
+            console.log(`Error While Registering In =>`, error);
+            throw error
         }
     }
 
     updateProfile = async (profile: Partial<Profile>) => {
+        console.log('Update Profile => ', profile)
         try {
             const response = await axios.patch(API_BASE_URL + "/users/profile", {profile});
             console.log(`User Profile Has Been Updated =>`, response)

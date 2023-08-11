@@ -5,5 +5,5 @@ export interface Profile {
     weight?: number;
     height?: number;
     avatar?: string;
-    userName?: string;
+    username?: string;
 }

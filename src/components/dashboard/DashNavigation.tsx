@@ -13,7 +13,7 @@ return (
         </NavItem>
 
         <NavItem
-            to={"/"}
+            to={"progress"}
         >
             Progress
         </NavItem>

@@ -1,4 +1,4 @@
-interface ButtonProps {
+export interface ButtonProps {
     type?: "button" | "submit"
     className?: string
     onClick?: () => void

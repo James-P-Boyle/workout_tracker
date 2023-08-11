@@ -4,16 +4,16 @@ export default function ProgressMain() {
 
   return (
    
-    <section className="grid justify-center w-full h-full grid-cols-[2fr_1fr] gap-4 p-4">
+    <section className="grid justify-center w-full h-full grid-cols-[2fr_1fr] gap-4 p-4 dark:bg-gray-900">
       {/* PROGRESS ALERT COMPONENT */}
 
-      <div className="p-2 border border-gray-700 rounded-lg">
+      <div className="p-2 border-gray-700 rounded-lg dark:border">
         <h1>My Progress Component</h1>
         <p>Can show widgets and charts</p>
       </div>
 
       {/* ALERT FEED */}
-      <div className="flex flex-col gap-4 p-4 border border-gray-700 rounded-lg">
+      <div className="flex flex-col gap-4 p-4 border-gray-700 rounded-lg dark:border">
 
         <h2>Alert Component</h2>
         <p>Make feed component, turn into accordian(dropdown)</p>

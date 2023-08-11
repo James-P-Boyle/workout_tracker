@@ -3,71 +3,45 @@ import Create from "./Create"
 import MyWorkouts from "./MyWorkouts"
 import Exercises from "./Exercises"
 import Button from "@/components/ui/Button"
+import WorkoutMainLayout from "./WorkoutMainLayout"
 
 export default function WorkoutMain() {
+  const [activeTab, setActiveTab] = useState('myWorkouts')
 
-  const [showCreate, setShowCreate] = useState(false)
-  const [showMyWorkouts, setShowMyWorkouts] = useState(false)
-  const [showExercises, setShowExercises] = useState(false)
-
-  // REFACTOR
-  const handleCreateClick = () => {
-    setShowCreate(true)
-    setShowMyWorkouts(false)
-    setShowExercises(false)
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab)
   }
 
-  const handleMyWorkoutsClick = () => {
-    setShowCreate(false)
-    setShowMyWorkouts(true)
-    setShowExercises(false)
-  }
+  const tabButtons = (
+    <>
+      <Button
+        className={`${activeTab === 'myWorkouts' && 'underline text-green-600'} w-full`}
+        onClick={() => handleTabClick('myWorkouts')}
+      >
+        My Workouts
+      </Button>
 
-  const handleExercisesClick = () => {
-    setShowCreate(false)
-    setShowMyWorkouts(false)
-    setShowExercises(true)
-  }
+      <Button
+        className={`${activeTab === 'create' && 'underline text-green-600'} w-full`}
+        onClick={() => handleTabClick('create')}
+      >
+        Create
+      </Button>
+
+      <Button
+        className={`${activeTab === 'exercises' && 'underline text-green-600'} w-full`}
+        onClick={() => handleTabClick('exercises')}
+      >
+        Exercises
+      </Button>
+    </>
+  )
 
   return (
-    <section className="flex flex-col w-full h-full gap-4 p-4 justify-evenly bg-pink-500/40">
-  
-
-      <div className="flex h-20 gap-2">
-
-        <Button 
-          className={`${showMyWorkouts && 'underline text-green-600'} w-full`}
-          onClick={handleMyWorkoutsClick}
-        >
-          My Workouts
-        </Button>
-
-        <Button 
-          className={`${showCreate && 'underline text-green-600'} w-full`}
-          onClick={handleCreateClick}
-        >
-          Create
-        </Button>
-
-        <Button 
-          className={`${showExercises && 'underline text-green-600'} w-full`}
-          onClick={handleExercisesClick}
-        >
-          Exercises
-        </Button>
-            
-      </div>
-    
-      <div className="h-full">
-
-        {showCreate && <Create />}
-        
-        {showMyWorkouts && <MyWorkouts />}
-
-        {showExercises && <Exercises />}
-
-      </div>
-    
-    </section>
+    <WorkoutMainLayout tabButtons={tabButtons}>
+      {activeTab === 'create' && <Create />}
+      {activeTab === 'myWorkouts' && <MyWorkouts />}
+      {activeTab === 'exercises' && <Exercises />}
+    </WorkoutMainLayout>
   )
 }

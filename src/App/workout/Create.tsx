@@ -12,7 +12,6 @@ export default function Create() {
   const [workoutData, setWorkoutData] = useState({
     workout_name: '',
     workout_type: '',
-    workout_session_amount: '',
   })
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,12 +29,11 @@ export default function Create() {
       setWorkoutData({
         workout_name: '',
         workout_type: '',
-        workout_session_amount: '',
       })
 
       localStorage.setItem('workoutData', JSON.stringify(workoutData))
 
-      navigate('dashboard/excercises/add')
+      navigate('/dashboard/excercises/add')
         
     } catch (error) {
       console.log("error: ", error)
@@ -62,13 +60,6 @@ export default function Create() {
           name="workout_type"
           placeholder="What type of workout? Strenght, cardio etc."
           value={workoutData.workout_type}
-          onChange={handleChange}
-        />  
-
-        <Input 
-          name="workout_session_amount"
-          placeholder="How many sessions per week?"
-          value={workoutData.workout_session_amount}
           onChange={handleChange}
         />  
         

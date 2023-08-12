@@ -1,4 +1,4 @@
-import { ExerciseData } from "@/pages/workout/AddExcercises"
+import { ExerciseData } from "@/App/workout/AddExcercises"
 
 interface SelectProps {
   label: string

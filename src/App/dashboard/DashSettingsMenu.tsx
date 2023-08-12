@@ -1,16 +1,11 @@
 import { useState } from "react"
-import Button from "../ui/Button"
-import DropdownMenu from "../ui/DropdownMenu"
+import Button from "@/components/ui/Button"
+import DropdownMenu from "@/components/ui/DropdownMenu"
 import { useStyles } from "@/contexts/StyleContext"
 import ProfileOptions from "./ProfileOptions"
 
 interface DashSettingsMenuProps {
   onClose: () => void 
-}
-
-interface LayoutOptionsProps {
-  isOpen: boolean
-  
 }
 
 export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {

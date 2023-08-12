@@ -1,4 +1,4 @@
-import AddExercises from "./AddExcercises";
+import AddExercises from "./AddExcercises"
 
 export default function Exercises() {
   

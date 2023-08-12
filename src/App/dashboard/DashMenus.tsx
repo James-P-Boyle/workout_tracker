@@ -1,7 +1,7 @@
 import { useState } from "react"
-import Button from "../ui/Button"
+import Button from "@/components/ui/Button"
 import DashSettingsMenu from "./DashSettingsMenu"
-import LogoutButton from "../LogoutButton"
+import LogoutButton from "@/components/LogoutButton"
 
 export default function DashMenus() {
 

@@ -44,7 +44,7 @@ export default function Register({onClose}: RegisterProps) {
       const weightAsNumber = parseFloat(weight)
       const heightAsNumber = parseFloat(height)
 
-      const response = await user.updateProfile({
+      await user.updateProfile({
         username,
         firstName,
         lastName,
@@ -54,7 +54,6 @@ export default function Register({onClose}: RegisterProps) {
         avatar,
       })
       
-      console.log('Profile Register Response', response)
       onClose && onClose()
       navigate('/dashboard')
       setFormData(defaultFormData)

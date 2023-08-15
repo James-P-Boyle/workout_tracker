@@ -29,10 +29,10 @@ export class UserService {
     }
 
     updateProfile = async (profile: Partial<Profile>) => {
-        console.log('Update Profile => ', profile)
+        console.log('Partial object inside updateProfile service => ', profile)
         try {
-            const response = await axios.patch(API_BASE_URL + "/users/profile", {profile});
-            console.log(`User Profile Has Been Updated =>`, response)
+            const response = await axios.patch(API_BASE_URL + "/users/profile", profile);
+            console.log(`User Profile Has Been Updated log inside service =>`, response)
         } catch (error) {
             console.log(error)
         }

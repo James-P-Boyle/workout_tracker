@@ -5,6 +5,7 @@ import HeroIcon from "@/components/ui/HeroIcon"
 import Button from "@/components/ui/Button"
 import NavItem from "@/components/ui/NavItem"
 import { Outlet } from "react-router-dom"
+import { WorkoutMainProvider } from "./workout/context/WorkoutMainContext"
 
 type AppContainerProps = {
     children?: React.ReactNode
@@ -44,7 +45,9 @@ export default function ({}: AppContainerProps) {
               
       <section className="flex items-center h-screen dark:bg-gray-800 dark:text-white">
         {/* Pass context to all subroutes */}
-        <Outlet />
+        <WorkoutMainProvider>
+          <Outlet />
+        </WorkoutMainProvider>
 
       </section>
     </div>

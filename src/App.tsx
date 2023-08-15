@@ -8,6 +8,8 @@ function App() {
   // Get user status, and username
   // Pass to Routing
 
+  
+
   return (
     <div className={`${mode === "dark" ? "dark" : ""}`}>
       <Routing />

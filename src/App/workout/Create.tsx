@@ -1,17 +1,18 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
 import Button from "@/components/ui/Button"
 import Container from "@/components/ui/Container"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
+import { WorkoutService } from "@/services/workout.service"
+import { useWorkoutMain } from "./context/WorkoutMainContext"
 
 export default function Create() {
 
-  const navigate = useNavigate()
+  const workout = new WorkoutService()
+  const { dispatch } = useWorkoutMain()
 
   const [workoutData, setWorkoutData] = useState({
-    workout_name: '',
-    workout_type: '',
+    workoutName: '',
   })
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,19 +27,17 @@ export default function Create() {
     event.preventDefault()
 
     try {
+      workout.createWorkout(workoutData)
       setWorkoutData({
-        workout_name: '',
-        workout_type: '',
+        workoutName: '',
       })
-
-      localStorage.setItem('workoutData', JSON.stringify(workoutData))
-
-      navigate('/dashboard/excercises/add')
-        
+      dispatch({ 
+        type: "SET_ACTIVE_TAB", 
+        payload: "myWorkouts" 
+      })
     } catch (error) {
       console.log("error: ", error)
     }
-
   }
   
   return (
@@ -50,16 +49,9 @@ export default function Create() {
         <h1>Create your Workout</h1>
 
         <Input 
-          name="workout_name"
+          name="workoutName"
           placeholder="Name your workout"
-          value={workoutData.workout_name}
-          onChange={handleChange}
-        />  
-
-        <Input 
-          name="workout_type"
-          placeholder="What type of workout? Strenght, cardio etc."
-          value={workoutData.workout_type}
+          value={workoutData.workoutName}
           onChange={handleChange}
         />  
         
@@ -74,3 +66,4 @@ export default function Create() {
     </Container>
   )
 }
+

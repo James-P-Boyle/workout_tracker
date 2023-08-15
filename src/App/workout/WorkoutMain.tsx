@@ -1,17 +1,18 @@
-import { useState } from "react"
 import Create from "./Create"
 import MyWorkouts from "./MyWorkouts"
 import Exercises from "../workout/Exercises"
 import Button from "@/components/ui/Button"
+import { WorkoutMainProvider, useWorkoutMain } from "./context/WorkoutMainContext"
 
 export default function WorkoutMain() {
 
-  //HANDLE ALL LOGIC HERE AND PASS DOWN
-  const [activeTab, setActiveTab] = useState('myWorkouts')
+  const { state, dispatch } = useWorkoutMain()
 
   const handleTabClick = (tab: string) => {
-    setActiveTab(tab)
+    dispatch({ type: "SET_ACTIVE_TAB", payload: tab })
   }
+
+  const { activeTab } = state
 
   return (
     <section className="grid w-full h-full p-4">
@@ -43,11 +44,11 @@ export default function WorkoutMain() {
 
         </div>
         <div className="flex items-center justify-center flex-1">
-
+        
           {activeTab === 'create' && <Create />}
           {activeTab === 'myWorkouts' && <MyWorkouts />}
           {activeTab === 'exercises' && <Exercises />}
-          
+       
         </div>
         
       </div>

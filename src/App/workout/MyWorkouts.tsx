@@ -39,7 +39,7 @@ export default function MyWorkouts() {
   return (
 
     <Container>
-      {loading ? ( "Loading...") : workouts.length > 0 ? (
+      {loading ? ( "Loading...") : workouts?.length > 0 ? (
 
         workouts.map((workout) => (
           <div key={workout.id}>

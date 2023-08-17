@@ -2,7 +2,7 @@ import Create from "./Create"
 import MyWorkouts from "./MyWorkouts"
 import Exercises from "../workout/Exercises"
 import Button from "@/components/ui/Button"
-import { WorkoutMainProvider, useWorkoutMain } from "./context/WorkoutMainContext"
+import { useWorkoutMain } from "./context/WorkoutMainContext"
 
 export default function WorkoutMain() {
 

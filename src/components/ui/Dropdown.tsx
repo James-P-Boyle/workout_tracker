@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, Fragment } from "react"
 import { Transition } from '@headlessui/react'
 import { Link, LinkProps } from "react-router-dom"
+import Button from "./Button"
 
 interface DropdownProps {
   children: React.ReactNode
@@ -35,7 +36,10 @@ const Trigger = ({ children }: DropdownProps) => {
 
   return (
     <>
-      <div onClick={toggleOpen}>
+      <div 
+        className="text-sm hover:cursor-pointer"
+        onClick={toggleOpen}
+      >
         {children}
       </div>
       {/* Close when user clicks anywhere else, covers full window */}
@@ -50,7 +54,7 @@ const Trigger = ({ children }: DropdownProps) => {
 }
 
 const Content = ({
-  contentClasses = ' bg-white dark:bg-inherit',
+  contentClasses = ' bg-white',
   children
 }: {
   contentClasses?: string
@@ -72,7 +76,7 @@ const Content = ({
             leaveTo="transform opacity-0 scale-95"
         >
           <div
-            className={`absolute w-60 z-50 border-green-500 border p-2 space-y-2 rounded-md shadow-lg left-0`}
+            className={`absolute bg-white w-full z-50 border p-2 space-y-2 rounded-md shadow-lg left-0`}
             onClick={() => setOpen && setOpen(false)}
           >
             <div className={`rounded-md space-y-2 ` + contentClasses}>

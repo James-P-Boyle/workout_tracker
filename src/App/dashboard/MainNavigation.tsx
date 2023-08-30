@@ -15,6 +15,12 @@ export default function MainNavigation() {
       <div className="flex flex-col gap-4 sm:flex-row lg:flex-col justify-evenly">
     
         <NavItem
+          to="admin"
+        >
+          Admin
+        </NavItem>
+
+        <NavItem
           to="workout"
         >
           Workouts

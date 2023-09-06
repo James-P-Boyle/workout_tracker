@@ -1,8 +1,8 @@
-import DashboardLayout from "@/components/layouts/DashboardLayout";
-import DashMenus from "./DashMenus";
-import HeroIcon from "@/components/ui/HeroIcon";
-import NavItem from "@/components/ui/NavItem";
-import Button from "@/components/ui/Button";
+import DashboardLayout from "@/components/layouts/DashboardLayout"
+import DashMenus from "./DashMenus"
+import HeroIcon from "@/components/ui/HeroIcon"
+import NavItem from "@/components/ui/NavItem"
+import Button from "@/components/ui/Button"
 
 export default function MainNavigation() {
 
@@ -24,12 +24,6 @@ export default function MainNavigation() {
           to="workout"
         >
           Workouts
-        </NavItem>
-
-        <NavItem
-          to="progress"
-        >
-          Progress
         </NavItem>
       
         <Button

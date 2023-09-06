@@ -1,26 +1,27 @@
 import { Exercise, WorkoutExerciseData } from "@/types"
 
 interface AddExcercisesProps {
-  setExerciseIds: React.Dispatch<React.SetStateAction<WorkoutExerciseData[]>>
+  setAddedExercises: React.Dispatch<React.SetStateAction<WorkoutExerciseData[]>>
   exercises: Exercise[]
   workoutId: string
 }
 
 export default function AddExercises({
-  setExerciseIds,
+  setAddedExercises,
   exercises,
   workoutId
 }: AddExcercisesProps) {
 
   //Add this logic to parent
-  const handleExerciseAdded = (exerciseId: string | undefined) => {
+  const handleExerciseAdded = (exercise: Exercise) => {
 
-    setExerciseIds((prevIds) => [
-      ...prevIds,
+    setAddedExercises((prev) => [
+      ...prev,
       {
         workoutId: workoutId,
-        exerciseId: exerciseId || '',
-        order: prevIds.length + 1
+        exerciseId: exercise.id || '',
+        exerciseName: exercise.exerciseName,
+        order: prev.length + 1
       }
     ])
   }
@@ -33,8 +34,8 @@ export default function AddExercises({
           className=""
           key={exercise.id + '' + index} 
           onClick={() => {
-            console.log("Clicked exerciseId:", exercise.id);
-            handleExerciseAdded(exercise.id);
+            console.log("Clicked exerciseId:", exercise);
+            handleExerciseAdded(exercise);
           }}
         >{exercise.exerciseName}</button>
       ))}

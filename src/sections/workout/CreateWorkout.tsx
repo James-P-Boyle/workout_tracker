@@ -1,32 +1,28 @@
 import { useState } from "react"
+import { WorkoutService } from "@/services/workout.service"
+import { useFetchExercises } from "@/hooks/useFetchExercises"
+import { Workout, WorkoutExerciseData } from "@/types"
+import AddExercises from "./AddExcercises"
 import Button from "@/components/ui/Button"
 import Container from "@/components/ui/Container"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
-import { WorkoutService } from "@/services/workout.service"
-import { useWorkoutMain } from "./context/WorkoutMainContext"
-import AddExercises from "./AddExcercises"
-import { useFetchExercises } from "@/hooks/useFetchExercises"
-import { Workout, WorkoutExerciseData } from "@/types"
 
 export default function Create() {
 
   const workout = new WorkoutService()
-  const { dispatch } = useWorkoutMain()
   const { exercises } = useFetchExercises()
   //Remove extra state
   const [workoutName, setWorkoutName] = useState('')
   const [workoutData, setWorkoutData] = useState<Workout | null>(null)
 
-  const [exerciseIds, setExerciseIds] = useState<WorkoutExerciseData[]>([])
+  const [addedExercises, setAddedExercises] = useState<WorkoutExerciseData[]>([])
 
-  console.log('exercise ids', exerciseIds)
-  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWorkoutName(event.target.value)
   }
 
-  const handleCreateWorkout = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleNameWorkout = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
       const { data } = await workout.createWorkout(workoutName)
@@ -40,10 +36,11 @@ export default function Create() {
   
   const handleWorkoutExercises = async () => {
 
-    const workoutExercisesData = exerciseIds.map((exerciseId) => ({
+    const workoutExercisesData = addedExercises.map((exercise) => ({
       workoutId: workoutData?.id, 
-      exerciseId: exerciseId.exerciseId,
-      order: exerciseId.order,
+      exerciseId: exercise.exerciseId,
+      exerciseName: exercise.exerciseName,
+      order: exercise.order,
     }))
 
     console.log('this is the data im sending',workoutExercisesData)
@@ -67,44 +64,42 @@ export default function Create() {
             <div className="">
       
               <AddExercises 
-                setExerciseIds={setExerciseIds}
+                setAddedExercises={setAddedExercises}
                 exercises={exercises}
                 workoutId={workoutData.id}
               />
   
             </div>
     
-            <div className="flex flex-col h-full">
-        
-              <div className="flex flex-col justify-between flex-1">
-                <div>
-
-                  {exerciseIds && exerciseIds.map((exercise) => {
-                    return (
-                      <div>
-                        <span>ExerciseId = {exercise.exerciseId} </span>
-                        <span>Order = {exercise.order}</span>
-                      </div>
-                    )}
+            <div className="flex flex-col flex-1">
+              <div>
+                {addedExercises && addedExercises.map((exercise) => {
+                  return (
+                    <div>
+                      <span>{exercise.exerciseName} </span>
+                      <span className="text-green-500">{exercise.order}</span>
+                    </div>
                   )}
-                </div>
-            
-                {exerciseIds && (
-                  <Button
-                    type="submit"
-                    onClick={() => handleWorkoutExercises()}
-                  >
-                    Create Workout
-                  </Button>
                 )}
               </div>
+          
+              {addedExercises && (
+                <Button
+                  type="submit"
+                  onClick={() => handleWorkoutExercises()}
+                >
+                  Save Workout
+                </Button>
+              )}
             </div>
           </div>
+    
         </>
 
       ) : (
+        
         <Container>
-          <Form handleSubmit={handleCreateWorkout}>
+          <Form handleSubmit={handleNameWorkout}>
             <h1>Create your Workout</h1>
             <Input 
               name="workoutName"

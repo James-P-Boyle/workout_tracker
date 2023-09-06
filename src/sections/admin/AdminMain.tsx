@@ -5,10 +5,13 @@ import { ActionType, BodySplitType, EquipmentType, Exercise } from "@/types"
 import Dropdown from "@/components/ui/Dropdown"
 import Button from "@/components/ui/Button"
 import AddExercise from "./AddExercise"
+import { useFetchExercises } from "@/hooks/useFetchExercises"
 
 export default function AdminMain() {
-
+  
+  const navigate = useNavigate()
   const workoutService = new WorkoutService()
+  const { exercises } = useFetchExercises()
 
   const [exerciseData, setExerciseData] = useState<Exercise>({
     bodySplit: BodySplitType.UPPER,
@@ -19,43 +22,22 @@ export default function AdminMain() {
   })
   const [loading, setLoading] = useState(true)
   const [triggerFetch, setTriggerFetch] = useState(false)
-  const [exercises, setExercises] = useState<Exercise[]>()
 
-  const navigate = useNavigate()
 
   const handleExerciseAdded = async () => {
     setTriggerFetch(true)
   }
 
-  useEffect(() => {
-    const fetchExercises = async () => {
-      try {
-        setLoading(true)
-        const response = await workoutService.getExercises()
-        setExercises(response?.data)
-        console.log('res from getting exercisees',response?.data)
-      } catch (error) {
-        console.log("Error fetching workouts:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchExercises() 
-    setTriggerFetch(false)
-  }, [triggerFetch])
-
   return (
     <div className="flex flex-col justify-between h-full border">
    
-      <div>
-        <Button
-          onClick={() => navigate(-1)}
-        >
-          Go Back
-        </Button>
-        <h1>Admin area</h1>
-      </div>
+     
+      <Button
+        onClick={() => navigate(-1)}
+      >
+        Go Back
+      </Button>
+
      
       <div className="grid sm:grid-cols-[1fr_2fr] flex-1">
 

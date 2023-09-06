@@ -14,9 +14,11 @@ export default function MainLayout() {
       <section className="flex flex-col items-center min-h-screen dark:bg-gray-800 dark:text-white">
         <div className="">
           <Button>
+            <Link to="/dashboard">Progress</Link>
+          </Button>
+          <Button>
             <Link to="workout/create">Create Workout</Link>
           </Button>
-      
         </div>
         <div>
           <Outlet />

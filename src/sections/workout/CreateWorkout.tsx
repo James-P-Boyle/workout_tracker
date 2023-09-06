@@ -94,7 +94,7 @@ export default function Create() {
                 )}
               </div>
           
-              {addedExercises && (
+              {addedExercises.length > 0 && (
                 <Button
                   type="submit"
                   onClick={() => handleWorkoutExercises()}

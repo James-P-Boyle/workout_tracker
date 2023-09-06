@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react"
-import Button from "@/components/ui/Button"
 import { WorkoutService } from "@/services/workout.service"
-import { useWorkoutMain } from "./context/WorkoutMainContext" 
 import { Workout } from "@/types"
 import { Link } from "react-router-dom"
 
 export default function MyWorkouts() {
   const workout = new WorkoutService()
-  const { dispatch } = useWorkoutMain()
 
   const [workouts, setWorkouts] = useState<Workout[]>([])
   const [loading, setLoading] = useState(true)
-
-  const handleCreateClick = () => {
-    dispatch({ type: "SET_ACTIVE_TAB", payload: "create" })
-  }
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -32,26 +25,21 @@ export default function MyWorkouts() {
 
     fetchWorkouts()
   }, [])
-// I will make this code look prettier & more readable, but not now :)
+
   return (
 
-    <div className="grid w-full grid-cols-2 gap-2 py-4">
-      {workouts ? (
-        workouts.map((workout) => (
-          <WorkoutCard 
-            key={`${workout.id}`}
-            workout={workout}
-          />
-         
-        ))
-      ) : (
-        <Button onClick={handleCreateClick}>Create Workout</Button>
-      )}
+    <div className="grid w-full grid-cols-2 gap-2 py-4">  
+      {workout && workouts.map((workout) => (
+        <WorkoutCard 
+          key={`${workout.id}`}
+          workout={workout}
+        />
+      ))}
     </div>
   )
 }
 
-                    // will fix, 
+                   // will fix, 
 function WorkoutCard({ workout }: any) {
 
   return (

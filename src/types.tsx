@@ -55,6 +55,7 @@ export type Workout = {
 export interface WorkoutExerciseData {
   workoutId: string
   exerciseId: string
+  exerciseName?: string
   order: number
 }
 

@@ -1,9 +1,8 @@
-import { ExerciseData } from "@/App/workout/AddExcercises"
 
 interface SelectProps {
   label: string
   id: string
-  name: keyof ExerciseData
+  name: string
   value: string
   options: Array<{ value: string, label: string }>
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void

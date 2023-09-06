@@ -45,6 +45,7 @@ export default function ShowWorkout() {
 
           <div className="flex flex-col">
             <h3 className="font-bold">Exercises</h3>
+
             {workout.workoutExercises.map((exercise) => (
               <div
                 className="flex gap-2"
@@ -53,8 +54,8 @@ export default function ShowWorkout() {
                 <span>{exercise.exerciseName}</span>
                 <span>{exercise.action}</span>
               </div>
-      
             ))}
+            
           </div>
    
         </div>

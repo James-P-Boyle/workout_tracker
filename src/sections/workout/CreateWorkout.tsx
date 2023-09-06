@@ -2,7 +2,6 @@ import { useState } from "react"
 import { WorkoutService } from "@/services/workout.service"
 import { useFetchExercises } from "@/hooks/useFetchExercises"
 import { Workout, WorkoutExerciseData } from "@/types"
-import AddExercises from "./AddExcercises"
 import Button from "@/components/ui/Button"
 import Container from "@/components/ui/Container"
 import Form from "@/components/ui/forms/Form"
@@ -60,17 +59,29 @@ export default function Create() {
       {workoutData ? (
         <>
           <div className="flex">
-          
-            <div className="">
-      
-              <AddExercises 
-                setAddedExercises={setAddedExercises}
-                exercises={exercises}
-                workoutId={workoutData.id}
-              />
-  
+        
+            <div className="grid gap-0.5">
+              {exercises.map((exercise, index) => (
+                <button
+                  className=""
+                  key={exercise.id + '' + index} 
+                  onClick={() => {
+                    /* Refactor */
+                    console.log("Clicked exerciseId:", exercise);
+                    setAddedExercises((prev) => [
+                      ...prev,
+                      {
+                        workoutId: workoutData.id,
+                        exerciseId: exercise.id || '',
+                        exerciseName: exercise.exerciseName,
+                        order: prev.length + 1
+                      }
+                    ])
+                  }}
+                >{exercise.exerciseName}</button>
+              ))}
             </div>
-    
+  
             <div className="flex flex-col flex-1">
               <div>
                 {addedExercises && addedExercises.map((exercise) => {

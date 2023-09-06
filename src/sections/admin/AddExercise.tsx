@@ -1,4 +1,4 @@
-import { ExerciseData } from "@/types"
+import { Exercise } from "@/types"
 import Button from "@/components/ui/Button"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
@@ -9,8 +9,8 @@ import { ActionType, BodySplitType, EquipmentType } from "@/types"
 import { useState } from "react"
 
 interface AddExerciseProps {
-  exerciseData: ExerciseData
-  setExerciseData: (value: React.SetStateAction<ExerciseData>) => void
+  exerciseData: Exercise
+  setExerciseData: (value: React.SetStateAction<Exercise>) => void
   onExerciseAdded: () => Promise<void>
 }
 
@@ -26,7 +26,7 @@ export default function AddExercise({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target
-    setExerciseData && setExerciseData((prevState: ExerciseData) => ({
+    setExerciseData && setExerciseData((prevState: Exercise) => ({
       ...prevState,
       [name]: value,
     }))
@@ -53,7 +53,6 @@ export default function AddExercise({
     } catch (error) {
       console.log('Something went wrong', error)
     }
-
    
   }
 

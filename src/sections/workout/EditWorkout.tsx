@@ -1,8 +1,8 @@
-import Button from "@/components/ui/Button"
-import { WorkoutService } from "@/services/workout.service"
-import { FullWorkout } from "@/types"
 import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { WorkoutService } from "@/services/workout.service"
+import { FullWorkout } from "@/types"
+import Button from "@/components/ui/Button"
 
 export default function Editorkout() {
 

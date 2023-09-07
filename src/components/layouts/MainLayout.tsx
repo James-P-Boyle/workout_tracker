@@ -1,4 +1,4 @@
-import MainNavigation from "@/sections/dashboard/MainNavigation"
+import Dashboard from "@/sections/dashboard/DashBoard"
 import { RefObject, useRef } from "react"
 import { Outlet } from "react-router-dom"
 
@@ -12,22 +12,18 @@ export default function MainLayout() {
       <section 
         className="p-4 text-gray-900 bg-white md:h-auto dark:bg-gray-900 dark:text-white"
       >
-        <MainNavigation 
+        <Dashboard 
           outletRef={outletRef}
         />
       </section>
               
       <section 
-        id="mainOutlet"
+        ref={outletRef}
         className="flex flex-col items-center min-h-screen dark:bg-gray-800 dark:text-white"
       >
 
-        <div
-          ref={outletRef}
-          className="w-full p-4 overflow-scroll"
-        >
-          <Outlet />
-        </div>
+        <Outlet />
+  
  
       </section>
   </div>

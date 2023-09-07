@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Button from "@/components/ui/Button"
 import DropdownMenu from "@/components/ui/DropdownMenu"
 import { useStyles } from "@/contexts/StyleContext"
@@ -11,7 +10,6 @@ interface DashSettingsMenuProps {
 export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
 
   const { mode, toggleMode } = useStyles()
-  const [ showLayoutOptions, setShowLayoutOptions ] = useState(false)
   const navigate = useNavigate()
   
   return (
@@ -38,13 +36,6 @@ export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
         }}
       >
         {mode === "dark" ? "Light Mode" : "Dark Mode"}
-      </Button>
-
-      <Button
-        className="" 
-        onClick={() => setShowLayoutOptions(!showLayoutOptions)} 
-      >
-        {showLayoutOptions ? "X" : "Layout Options"}
       </Button>
 
       <Button

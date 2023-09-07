@@ -1,17 +1,21 @@
 import { useState } from "react"
 import { WorkoutService } from "@/services/workout.service"
 import { useFetchExercises } from "@/hooks/useFetchExercises"
-import { Workout, WorkoutExerciseData } from "@/types"
+import { Exercise, Workout, WorkoutExerciseData } from "@/types"
 import Button from "@/components/ui/Button"
-import Container from "@/components/ui/Container"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
 
-export default function Create() {
+interface AddExercisesToWorkoutProps {
+  workoutId: string
+  setAddedExercises: React.Dispatch<React.SetStateAction<WorkoutExerciseData[]>>
+  addedExercises: WorkoutExerciseData[]
+}
+
+export default function createWorkout() {
 
   const workout = new WorkoutService()
-  const { exercises } = useFetchExercises()
-  //Remove extra state
+  //Remove extra state!!! derive from workout(rename)
   const [workoutName, setWorkoutName] = useState('')
   const [workoutData, setWorkoutData] = useState<Workout | null>(null)
 
@@ -42,7 +46,6 @@ export default function Create() {
       order: exercise.order,
     }))
 
-    console.log('this is the data im sending',workoutExercisesData)
     try {
       const {data} = await workout.createWorkoutExercises(workoutExercisesData)
       console.log('res from posting workout/exercise', data.id)
@@ -54,64 +57,25 @@ export default function Create() {
   }
   
   return (
-
     <>
       {workoutData ? (
         <>
-          <div className="flex">
-        
-            <div className="grid gap-0.5">
-              {exercises.map((exercise, index) => (
-                <button
-                  className=""
-                  key={exercise.id + '' + index} 
-                  onClick={() => {
-                    /* Refactor */
-                    console.log("Clicked exerciseId:", exercise);
-                    setAddedExercises((prev) => [
-                      ...prev,
-                      {
-                        workoutId: workoutData.id,
-                        exerciseId: exercise.id || '',
-                        exerciseName: exercise.exerciseName,
-                        order: prev.length + 1
-                      }
-                    ])
-                  }}
-                >{exercise.exerciseName}</button>
-              ))}
-            </div>
-  
-            <div className="flex flex-col flex-1">
-              <div>
-                {addedExercises && addedExercises.map((exercise) => {
-                  return (
-                    <div>
-                      <span>{exercise.exerciseName} </span>
-                      <span className="text-green-500">{exercise.order}</span>
-                    </div>
-                  )}
-                )}
-              </div>
+          <Button
+            type="submit"
+            onClick={() => handleWorkoutExercises()}
+          >
+            {addedExercises.length > 0 ? 'Save Workout' : 'Add some exercises'}
+          </Button>
           
-              {addedExercises.length > 0 && (
-                <Button
-                  type="submit"
-                  onClick={() => handleWorkoutExercises()}
-                >
-                  Save Workout
-                </Button>
-              )}
-            </div>
-          </div>
-    
+          <AddExercisesToWorkout 
+            workoutId={workoutData.id}
+            setAddedExercises={setAddedExercises}
+            addedExercises={addedExercises}
+          />
         </>
-
       ) : (
-        
-        <Container>
+        <div className="grid justify-center border">
           <Form handleSubmit={handleNameWorkout}>
-            <h1>Create your Workout</h1>
             <Input 
               name="workoutName"
               placeholder="Name your workout"
@@ -120,13 +84,75 @@ export default function Create() {
             />  
             <Button
               type="submit"
+              className="w-full"
             >
               Create
             </Button>
           </Form> 
-        </Container>
+        </div>
       )}
     </>
   )
 }
 
+function AddExercisesToWorkout({
+  workoutId,
+  setAddedExercises,
+  addedExercises
+}: AddExercisesToWorkoutProps) {
+
+  const { exercises } = useFetchExercises()
+
+  function handleExerciseClick(exercise: Exercise) {
+
+    setAddedExercises((prev) => [
+      ...prev,
+      {
+        workoutId: workoutId,
+        exerciseId: exercise.id || '',
+        exerciseName: exercise.exerciseName,
+        order: prev.length + 1
+      }
+    ])
+  }
+
+  return (
+    <>
+      <div className="grid grid-cols-2">
+    
+        <div className="grid gap-0.5">
+          {exercises.map((exercise, index) => (
+            <button
+              className=""
+              key={exercise.id + '' + index} 
+              onClick={() => handleExerciseClick(exercise)}
+            >
+              {exercise.exerciseName}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex flex-col flex-1">
+          <div>
+            {addedExercises && addedExercises.map((exercise) => {
+              return (
+                <div>
+                  <span>
+                    {exercise.exerciseName}
+                  </span>
+                  <span 
+                    className="text-green-500"
+                  >
+                    {exercise.order}
+                  </span>
+                </div>
+              )}
+            )}
+          </div>
+        </div>
+        
+      </div>
+
+    </>
+  )
+}

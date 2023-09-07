@@ -20,7 +20,7 @@ export default function NavBar() {
       <div className="hidden gap-2 md:flex">
       
         <>
-          <NavItem to={"dashboard"} fontSize="md" className="px-2">
+          <NavItem to="dashboard/progress" fontSize="md" className="px-2">
             Dashboard
           </NavItem>
 
@@ -32,19 +32,19 @@ export default function NavBar() {
           </button>
         </>
    
-          <>
-            <NavItem to={"/"} fontSize="md" className="px-2">
-              Home
-            </NavItem>
+        <>
+          <NavItem to={"/"} fontSize="md" className="px-2">
+            Home
+          </NavItem>
 
-            <NavItem to={"login"} fontSize="md" className="px-2">
-              Login
-            </NavItem>
+          <NavItem to={"login"} fontSize="md" className="px-2">
+            Login
+          </NavItem>
 
-            <NavItem to={"register"} fontSize="md" className="px-2">
-              Register
-            </NavItem>
-          </>
+          <NavItem to={"register"} fontSize="md" className="px-2">
+            Register
+          </NavItem>
+        </>
       
       </div>
 
@@ -55,19 +55,16 @@ export default function NavBar() {
         {dropdownOpen ? "x" : "menu"}
       </button>
 
-      {/* Dropdown Menu */}
-
       {dropdownOpen && (
         <DropdownMenu isOpen={dropdownOpen} className="absolute left-0 right-0 gap-2 top-16 md:hidden">
       
           <>
-            <NavItem to={"dashboard"} fontSize="md" className="px-2">
+            <NavItem to={"dashboard/progress"} fontSize="md" className="px-2">
               Dashboard
             </NavItem>
 
             <button
               className="flex justify-center flex-1 w-full px-2 py-2 border"
-
             >
               Logout
             </button>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { WorkoutService } from "@/services/workout.service"
 import { Workout } from "@/types"
 import { Link } from "react-router-dom"
+import Button from "@/components/ui/Button"
 
 export default function MyWorkouts() {
   const workout = new WorkoutService()
@@ -28,8 +29,11 @@ export default function MyWorkouts() {
 
   return (
 
-    <div className="grid w-full grid-cols-2 gap-2 py-4">  
-      {workout && workouts.map((workout) => (
+    <div className="grid w-full grid-cols-2 gap-2">  
+      <Button className="col-span-2 mb-4">
+        <Link to="create">Create Workout</Link>
+      </Button>
+      {workouts && workouts.map((workout) => (
         <WorkoutCard 
           key={`${workout.id}`}
           workout={workout}
@@ -43,10 +47,10 @@ export default function MyWorkouts() {
 function WorkoutCard({ workout }: any) {
 
   return (
-    <div className="flex flex-col p-1 transition-transform rounded-lg bg-gray-100/70 hover:scale-105">
+    <div className="flex flex-col p-2 rounded-lg bg-gray-100/50 dark:bg-gray-700">
       <Link
         key={workout.id} 
-        className="font-bold text-green-700 hover:text-green-800"
+        className="font-bold dark:text-purple-700 dark:hover:text-purple-800"
         to={`/dashboard/workout/${workout.id}`}
       >
         <span className="text-xl font-bold">
@@ -54,11 +58,11 @@ function WorkoutCard({ workout }: any) {
         </span>
       </Link>
 
-      <div className="flex gap-2">
-        <span className="text-red-500">
+      <div className="flex gap-2 text-sm">
+        <span>
           Delete
         </span>
-        <span className="text-green-700">
+        <span>
           Edit
         </span>
       </div>

@@ -1,8 +1,7 @@
-import { useState } from "react"
 import Button from "@/components/ui/Button"
 import DropdownMenu from "@/components/ui/DropdownMenu"
 import { useStyles } from "@/contexts/StyleContext"
-import ProfileOptions from "./ProfileOptions"
+import { useNavigate } from "react-router-dom"
 
 interface DashSettingsMenuProps {
   onClose: () => void 
@@ -11,8 +10,7 @@ interface DashSettingsMenuProps {
 export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
 
   const { mode, toggleMode } = useStyles()
-  const [ showLayoutOptions, setShowLayoutOptions ] = useState(false)
-  const [ showProfileOptions, setShowProfileOptions ] = useState(false)
+  const navigate = useNavigate()
   
   return (
     <DropdownMenu
@@ -37,44 +35,17 @@ export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
           toggleMode()
         }}
       >
-        {mode === "dark" 
-          ? "Light Mode" 
-          : "Dark Mode"
-        }
+        {mode === "dark" ? "Light Mode" : "Dark Mode"}
       </Button>
 
       <Button
         className="" 
-        onClick={() => setShowLayoutOptions(!showLayoutOptions)} 
+        onClick={() => navigate('/profile')} 
       >
-        {showLayoutOptions ? "X" : "Layout Options"}
+        Profile
       </Button>
-
-      <Button
-        className="" 
-        onClick={() => setShowProfileOptions(!showProfileOptions)} 
-      >
-        {showProfileOptions ? "X" : "Profile" }
-      </Button>
-      
-      {showProfileOptions &&  <ProfileOptions onClose={onClose}/>}
-
-      {showLayoutOptions && <LayoutOptions />}
-    
+          
         
-    </DropdownMenu>
-  )
-}
-
-function LayoutOptions() {
-
-  return (
-    <DropdownMenu 
-      className="px-4 py-2 my-2 space-y-2"
-    >
-      <Button>1</Button>
-      <Button>2</Button>
-      <Button>3</Button>
     </DropdownMenu>
   )
 }

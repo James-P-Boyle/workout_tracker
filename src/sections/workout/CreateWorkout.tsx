@@ -15,7 +15,7 @@ interface AddExercisesToWorkoutProps {
 export default function createWorkout() {
 
   const workout = new WorkoutService()
-  //Remove extra state
+  //Remove extra state!!! derive from workout(rename)
   const [workoutName, setWorkoutName] = useState('')
   const [workoutData, setWorkoutData] = useState<Workout | null>(null)
 
@@ -57,9 +57,23 @@ export default function createWorkout() {
   }
   
   return (
-
     <>
-      {!workoutData ? (
+      {workoutData ? (
+        <>
+          <Button
+            type="submit"
+            onClick={() => handleWorkoutExercises()}
+          >
+            {addedExercises.length > 0 ? 'Save Workout' : 'Add some exercises'}
+          </Button>
+          
+          <AddExercisesToWorkout 
+            workoutId={workoutData.id}
+            setAddedExercises={setAddedExercises}
+            addedExercises={addedExercises}
+          />
+        </>
+      ) : (
         <div className="grid justify-center border">
           <Form handleSubmit={handleNameWorkout}>
             <Input 
@@ -76,21 +90,6 @@ export default function createWorkout() {
             </Button>
           </Form> 
         </div>
-      ) : (
-        <>
-          <AddExercisesToWorkout 
-            workoutId={workoutData.id}
-            setAddedExercises={setAddedExercises}
-            addedExercises={addedExercises}
-          />
-
-          <Button
-            type="submit"
-            onClick={() => handleWorkoutExercises()}
-          >
-            {addedExercises.length > 0 ? 'Save Workout' : 'Add some exercises'}
-          </Button>
-        </>
       )}
     </>
   )
@@ -119,7 +118,7 @@ function AddExercisesToWorkout({
 
   return (
     <>
-      <div className="flex">
+      <div className="grid grid-cols-2">
     
         <div className="grid gap-0.5">
           {exercises.map((exercise, index) => (
@@ -138,8 +137,14 @@ function AddExercisesToWorkout({
             {addedExercises && addedExercises.map((exercise) => {
               return (
                 <div>
-                  <span>{exercise.exerciseName}</span>
-                  <span className="text-green-500">{exercise.order}</span>
+                  <span>
+                    {exercise.exerciseName}
+                  </span>
+                  <span 
+                    className="text-green-500"
+                  >
+                    {exercise.order}
+                  </span>
                 </div>
               )}
             )}

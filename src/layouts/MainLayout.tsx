@@ -1,4 +1,4 @@
-import Dashboard from "@/sections/dashboard/DashBoard"
+import Dashboard from "@/sections/dashboard/Dashboard"
 import { RefObject, useRef } from "react"
 import { Outlet } from "react-router-dom"
 
@@ -19,7 +19,7 @@ export default function MainLayout() {
               
       <section 
         ref={outletRef}
-        className="flex flex-col items-center min-h-screen dark:bg-gray-800 dark:text-white"
+        className="flex flex-col items-center min-h-screen p-4 dark:bg-gray-800 dark:text-white"
       >
 
         <Outlet />

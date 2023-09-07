@@ -1,4 +1,4 @@
-import DashboardLayout from "@/components/layouts/DashboardLayout"
+import DashboardLayout from "@/layouts/DashboardLayout"
 import HeroIcon from "@/components/ui/HeroIcon"
 import Button from "@/components/ui/Button"
 import useScroll from "@/hooks/useScroll"
@@ -30,12 +30,6 @@ export default function MainNavigation({
       links={
         <>
           <Button
-            onClick={() => handleLinkClick('admin')}
-          >
-            Admin
-          </Button>
-
-          <Button
             onClick={() => handleLinkClick('progress')}
           >
             Progress
@@ -47,12 +41,6 @@ export default function MainNavigation({
             Workouts
           </Button>
         
-          <Button
-            className="flex-1 bg-purple-200 border-0 dark:bg-purple-950"
-            onClick={() => scrollToRef(outletRef)}
-          >
-            Start
-          </Button>
         </>
       }
     >

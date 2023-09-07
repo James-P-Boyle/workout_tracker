@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton"
 import Button from "@/components/ui/Button"
 import { WorkoutService } from "@/services/workout.service"
 import { FullWorkout } from "@/types"
@@ -30,21 +31,16 @@ export default function ShowWorkout() {
   }, [])
 
   return (
-    <div className="mx-auto">
-      <Button
-        onClick={() => navigate(-1)}
-      >
-        Go Back
-      </Button>
+    <div className="grid w-full gap-2">
+
+      <BackButton />
 
       {workout ? (
-        <div className="border">
-          <h2 className="font-bold">Workout Details</h2>
-          <p>ID: {workout.id}</p>
-          <p>Name: {workout.workoutName}</p>
+        <div className="p-2">
+          <h1 className="font-black">{workout.workoutName}</h1>
 
           <div className="flex flex-col">
-            <h3 className="font-bold">Exercises</h3>
+            <h2 className="font-bold">Exercises</h2>
 
             {workout.workoutExercises.map((exercise) => (
               <div

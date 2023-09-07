@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { WorkoutService } from '@/services/workout.service'
-import { ExerciseData } from '@/App/AppContainer'
+import { Exercise } from '@/types'
 
 export function useFetchExercises() {
   const exerciseService = new WorkoutService()
-  const [exercises, setExercises] = useState<ExerciseData[]>([])
+  const [exercises, setExercises] = useState<Exercise[]>([])
   const [loading, setLoading] = useState(true)
   const [triggerFetch, setTriggerFetch] = useState(false)
 

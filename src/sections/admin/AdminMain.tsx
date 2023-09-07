@@ -39,7 +39,7 @@ export default function AdminMain() {
       </Button>
 
      
-      <div className="grid sm:grid-cols-[1fr_2fr] flex-1">
+      <div className="grid sm:grid-cols-[1fr_2fr] flex-1 py-2">
 
         <div className="">
           <AddExercise 

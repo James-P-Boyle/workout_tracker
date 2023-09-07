@@ -1,5 +1,5 @@
 
-import { ExerciseData } from "@/types"
+import { Exercise } from "@/types"
 import axios, { AxiosResponse } from "axios"
 axios.defaults.withCredentials = true
 
@@ -63,15 +63,14 @@ export class WorkoutService {
       return response
     } catch (error) {
       console.log('error getting requests, exerciseService', error)
+      throw error
     }
    
-
   }
 
-  addExercise = async (exercise: ExerciseData): Promise<AxiosResponse> => {
+  addExercise = async (exercise: Exercise): Promise<AxiosResponse> => {
     try {
       const response = await axios.post(API_BASE_URL + '/exercises/exercise', exercise)
-      console.log(`Exercise Created`, JSON.stringify(response))
       return response
     } catch (error) {
       console.log(`Error While creating Exercise =>`, error)
@@ -80,10 +79,4 @@ export class WorkoutService {
   }     
 }
 
-/* 
-   @UseGuards(AuthenticatedGuard)
-    @Post('workout-exercises')
-    async createWorkoutExercises(@Body() createWorkoutExerciseDto: CreateWorkoutExerciseDto[]){
-        return this.workoutExerciseService.createWorkoutExercises(createWorkoutExerciseDto)
-    }
-*/
+

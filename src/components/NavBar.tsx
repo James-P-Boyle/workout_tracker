@@ -20,7 +20,7 @@ export default function NavBar() {
       <div className="hidden gap-2 md:flex">
       
         <>
-          <NavItem to={"dashboard"} fontSize="md" className="px-2">
+          <NavItem to="dashboard/progress" fontSize="md" className="px-2">
             Dashboard
           </NavItem>
 

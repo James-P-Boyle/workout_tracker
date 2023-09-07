@@ -20,7 +20,7 @@ function App() {
   return (
     <div className={`${mode === "dark" ? "dark" : ""}`}>
       <Routes>
-        {/* Static Routes */}
+
         <Route path="/" element={<GuestLayout />}>
           <Route index element={<Home />} />
           <Route path="register" element={<Register />} />
@@ -29,7 +29,7 @@ function App() {
 
         <Route path="dashboard" element={<MainLayout />}>
 
-          <Route index element={<ProgressMain />} />
+          <Route path="progress" element={<ProgressMain />} />
 
           <Route path="workout" element={<MyWorkouts />} />
           <Route path="workout/create" element={<CreateWorkout />} />

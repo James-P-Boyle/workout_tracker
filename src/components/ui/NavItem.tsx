@@ -5,6 +5,7 @@ interface NavItemProps {
   className?: string
   children: React.ReactNode
   fontSize?: string
+  onClick?: () => void
 }
 
 export default function NavItem({

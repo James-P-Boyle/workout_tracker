@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { WorkoutService } from "@/services/workout.service"
 import { Workout } from "@/types"
 import { Link } from "react-router-dom"
+import Button from "@/components/ui/Button"
 
 export default function MyWorkouts() {
   const workout = new WorkoutService()
@@ -28,7 +29,10 @@ export default function MyWorkouts() {
 
   return (
 
-    <div className="grid w-full grid-cols-2 gap-2 py-4">  
+    <div className="grid w-full grid-cols-2 gap-2">  
+      <Button className="col-span-2">
+        <Link to="create">Create Workout</Link>
+      </Button>
       {workout && workouts.map((workout) => (
         <WorkoutCard 
           key={`${workout.id}`}

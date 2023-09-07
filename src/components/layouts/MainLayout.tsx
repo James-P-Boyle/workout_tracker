@@ -1,26 +1,31 @@
 import MainNavigation from "@/sections/dashboard/MainNavigation"
-import { Link, Outlet } from "react-router-dom"
-import Button from "../ui/Button"
+import { RefObject, useRef } from "react"
+import { Outlet } from "react-router-dom"
 
 export default function MainLayout() {
 
+  const outletRef: RefObject<HTMLDivElement> = useRef(null)
+
   return (
-    <div className="grid lg:grid-cols-[25%_1fr] h-screen sm:h-auto">
+    <div className="grid md:grid-cols-[25%_1fr] gap-2">
       
-      <section id="dashboardContainer" className="h-screen p-4 text-gray-900 bg-white border sm:h-auto dark:bg-gray-900 dark:text-white">
-        <MainNavigation />
+      <section 
+        className="p-4 text-gray-900 bg-white md:h-auto dark:bg-gray-900 dark:text-white"
+      >
+        <MainNavigation 
+          outletRef={outletRef}
+        />
       </section>
               
-      <section className="flex flex-col items-center min-h-screen dark:bg-gray-800 dark:text-white">
-        <div className="">
-          <Button>
-            <Link to="/dashboard">Progress</Link>
-          </Button>
-          <Button>
-            <Link to="workout/create">Create Workout</Link>
-          </Button>
-        </div>
-        <div>
+      <section 
+        id="mainOutlet"
+        className="flex flex-col items-center min-h-screen dark:bg-gray-800 dark:text-white"
+      >
+
+        <div
+          ref={outletRef}
+          className="w-full p-4 overflow-scroll"
+        >
           <Outlet />
         </div>
  

@@ -6,7 +6,7 @@ interface ContainerProps {
 
 export default function Container({ children, className = "", maxWidth = "max-w-lg" }: ContainerProps) {
   return (
-    <div className={`flex flex-col items-center justify-center mx-auto ${maxWidth} rounded-lg ${className}`}>
+    <div className={`flex flex-col items-center justify-center mx-auto min-h-screen ${maxWidth} rounded-lg ${className}`}>
       {children}
     </div>
   )

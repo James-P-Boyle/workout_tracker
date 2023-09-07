@@ -12,6 +12,7 @@ import AdminMain from "@/sections/admin/AdminMain"
 import NotFound from "@/pages/errors/NotFound"
 import CreateWorkout from "@/sections/workout/CreateWorkout"
 import MainLayout from "@/components/layouts/MainLayout"
+import Profile from "./sections/profile/Profile"
 
 function App() {
 
@@ -39,6 +40,8 @@ function App() {
           <Route path="admin"  element={<AdminMain/>} />
 
         </Route>
+
+        <Route path="profile" element={<Profile />} />
 
         <Route path="*" element={<NotFound />} />
 

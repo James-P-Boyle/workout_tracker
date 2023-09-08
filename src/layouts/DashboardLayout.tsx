@@ -6,7 +6,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children, links }: DashboardLayoutProps) {
 
   return (
-    <div className={`relative flex flex-col justify-between gap-2`}>
+    <div className={`relative flex flex-col gap-10`}>
     
       {children}
 

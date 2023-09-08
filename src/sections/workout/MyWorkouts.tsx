@@ -47,13 +47,13 @@ export default function MyWorkouts() {
 function WorkoutCard({ workout }: any) {
 
   return (
-    <div className="flex flex-col p-2">
+    <div className="flex flex-col p-2 transition-all border border-transparent rounded-lg hover:border-black dark:hover:border-gray-800">
       <Link
         key={workout.id} 
         className="font-bold"
         to={`/dashboard/workout/${workout.id}`}
       >
-        <span className="text-xl font-bold">
+        <span className="text-lg font-bold break-words md:text-xl">
           {workout.workoutName}
         </span>
       </Link>

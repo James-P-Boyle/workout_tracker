@@ -34,6 +34,11 @@ export default function ShowWorkout() {
     <div className="grid w-full gap-2">
 
       <BackButton />
+      
+      <div className="flex gap-2">
+        <Button>Edit</Button>
+        <Button>Delete</Button>
+      </div>
 
       {workout ? (
         <div className="p-2">

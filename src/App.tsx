@@ -19,23 +19,21 @@ function App() {
   
   return (
     /* Remove styles from app */
-    <div className={`${mode === "dark" ? "dark bg-gray-800" : ""}`}>
+    <div className={`${mode === "dark" ? "dark bg-[#141414] text-white" : ""}`}>
       <Routes>
 
         <Route path="/" element={<GuestLayout />}>
 
           <Route index element={<Home />} />
-
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+
         </Route>
 
         <Route path="dashboard" element={<MainLayout />}>
 
           <Route index element={<div>Some widgets and info</div>} />
-
           <Route path="progress" element={<ProgressMain />} />
-
           <Route path="workout" element={<MyWorkouts />} />
           <Route path="workout/create" element={<CreateWorkout />} />
           <Route path="workout/:id" element={<ShowWorkout />} />

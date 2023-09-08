@@ -23,7 +23,7 @@ export default function Select({ label, id, name, value, options, onChange }: Se
         name={name}
         value={value}
         onChange={onChange}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+        className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

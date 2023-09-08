@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Form from "@/components/ui/forms/Form";
@@ -60,12 +61,11 @@ export default function Profile() {
 
   return (
     <Container>
-      <Button
-        onClick={() => navigate(-1)}
-        className="my-2"
-      >
-        Go Back
-      </Button>
+      {/* Div to prevent flex grow button */}
+      <div className="my-2">
+        <BackButton />
+      </div>
+
 
       <Form handleSubmit={handleSubmit}>
         <>       

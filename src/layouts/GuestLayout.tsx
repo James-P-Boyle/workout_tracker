@@ -9,7 +9,7 @@ export default function GuestLayout({  }: GuestLayoutProps) {
 
   return (
 
-    <div className="flex flex-col h-screen gap-4 text-gray-800 bg-white dark:bg-gray-800 dark:text-white">
+    <div className="flex flex-col h-screen gap-2">
 
       <NavBar />
 

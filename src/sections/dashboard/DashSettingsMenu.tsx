@@ -14,7 +14,7 @@ export default function DashSettingsMenu({ onClose }: DashSettingsMenuProps) {
   
   return (
     <DropdownMenu
-      className="absolute gap-4 p-4 -inset-4"
+      className="absolute left-0 right-0 gap-2 p-4 border"
       isOpen={true}
     > 
           

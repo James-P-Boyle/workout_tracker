@@ -45,7 +45,7 @@ export default function MainNavigation({
       }
     >
 
-      <div className="flex flex-row flex-wrap justify-between">
+      <div className="flex flex-row flex-wrap justify-between gap-2">
             
         <Button
           className="text-sm"

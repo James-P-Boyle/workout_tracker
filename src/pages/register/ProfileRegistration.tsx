@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button"
 import Input from "@/components/ui/forms/Input"
 import { UserService } from "@/services/user.service"
 
-interface RegisterProps {
+interface ProfileRegistrationProps {
   onClose?: () => void 
 }
 
@@ -20,7 +20,7 @@ const defaultFormData = {
   avatar: "https://cdn.muscleandstrength.com/sites/default/files/field/image/author/john-meadows.jpg"
 }
 
-export default function Register({onClose}: RegisterProps) {
+export default function ProfileRegistration({onClose}: ProfileRegistrationProps) {
 
   const [ formData, setFormData ] = useState(defaultFormData)
   const { username, firstName, lastName, age, weight, height, avatar } = formData

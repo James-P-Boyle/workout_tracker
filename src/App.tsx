@@ -1,7 +1,7 @@
 import { useStyles } from "@/contexts/StyleContext"
 import { Route, Routes } from "react-router-dom"
 import Home from "@/pages/home/Home"
-import Register from "@/pages/register/ProfileRegistration"
+import Register from "@/pages/register/Register"
 import Login from "@/pages/login/Login"
 import NotFound from "@/pages/errors/NotFound"
 import CreateWorkout from "@/sections/workout/CreateWorkout"

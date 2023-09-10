@@ -1,7 +1,8 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { Exercise, Workout, WorkoutExerciseData } from "@/types"
 import { WorkoutService } from "@/services/workout.service"
 import { useFetchExercises } from "@/hooks/useFetchExercises"
-import { Exercise, Workout, WorkoutExerciseData } from "@/types"
 import Button from "@/components/ui/Button"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
@@ -16,6 +17,7 @@ interface AddExercisesToWorkoutProps {
 export default function createWorkout() {
 
   const workout = new WorkoutService()
+  const navigate = useNavigate()
   //Remove extra state!!! derive from workout(rename)
   const [workoutName, setWorkoutName] = useState('')
   const [workoutData, setWorkoutData] = useState<Workout | null>(null)
@@ -50,6 +52,7 @@ export default function createWorkout() {
     try {
       const {data} = await workout.createWorkoutExercises(workoutExerciseData)
       console.log('res from posting workout/exercise', data.id)
+      navigate(`/dashboard/workout/${workoutData?.id}`)
       return data
     } catch (error) {
       console.log("error posting workout/exercise: ", error)
@@ -125,7 +128,7 @@ function AddExercisesToWorkout({
         <Button
           onClick={() => handleWorkoutExercises()}
         >
-          {addedExercises.length ? 'Next...' : 'First add some exercises...'}
+          {addedExercises.length ? 'Next...' : 'Create......'}
         </Button>
     
         <div className="flex flex-col flex-1 h-full p-2 border rounded-lg dark:border-gray-800">

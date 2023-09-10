@@ -41,12 +41,16 @@ export class WorkoutService {
       console.log(`Error While creating workout =>`, error)
       throw error
     }
-  }    
-  
+  }
+
   createWorkoutExercises = async (exercises: WorkoutExerciseData[]): Promise<AxiosResponse> => {
     try {
       const response = await axios.post(
-        API_BASE_URL + '/workout-exercises/workout-exercise', {exercises}
+        API_BASE_URL + '/workout-exercises/workout-exercises', exercises, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
       )
       console.log(`Create Workout Exercises success response`, JSON.stringify(response))
       return response
@@ -65,7 +69,6 @@ export class WorkoutService {
       console.log('error getting requests, exerciseService', error)
       throw error
     }
-   
   }
 
   addExercise = async (exercise: Exercise): Promise<AxiosResponse> => {
@@ -76,7 +79,7 @@ export class WorkoutService {
       console.log(`Error While creating Exercise =>`, error)
       throw error
     }
-  }     
+  }
 }
 
 

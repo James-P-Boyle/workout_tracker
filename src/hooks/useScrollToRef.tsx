@@ -1,6 +1,6 @@
 import { RefObject } from "react"
 
-function useScroll() {
+function useScrollToRef() {
   const scrollToRef = (
     ref: RefObject<HTMLElement>,
     options: ScrollIntoViewOptions | ScrollToOptions = { behavior: 'smooth', top: 10 }
@@ -13,4 +13,4 @@ function useScroll() {
   return { scrollToRef }
 }
 
-export default useScroll
+export default useScrollToRef

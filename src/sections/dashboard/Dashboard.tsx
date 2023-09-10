@@ -1,7 +1,7 @@
 import DashboardLayout from "@/layouts/DashboardLayout"
 import HeroIcon from "@/components/ui/HeroIcon"
 import Button from "@/components/ui/Button"
-import useScroll from "@/hooks/useScroll"
+import useScrollToRef from "@/hooks/useScrollToRef"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import LogoutButton from "@/components/LogoutButton"
@@ -15,7 +15,7 @@ export default function MainNavigation({
   outletRef 
 }: MainNavigationProps) {
 
-  const { scrollToRef } = useScroll()
+  const { scrollToRef } = useScrollToRef()
   const navigate = useNavigate()
   const [ showSettings, setShowSettings ] = useState(false)
 

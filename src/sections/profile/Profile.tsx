@@ -3,7 +3,6 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Form from "@/components/ui/forms/Form";
 import Input from "@/components/ui/forms/Input";
-import ProfileRegistration from "@/pages/register/ProfileRegistration";
 import { UserService } from "@/services/user.service";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

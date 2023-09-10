@@ -1,8 +1,8 @@
-import Button from "@/components/ui/Button"
+import { useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import { WorkoutService } from "@/services/workout.service"
 import { FullWorkout } from "@/types"
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import Button from "@/components/ui/Button"
 
 export default function Editorkout() {
 
@@ -11,23 +11,6 @@ export default function Editorkout() {
   const {id} = useParams()
   const [loading, setLoading] = useState(false)                    
   const [workout, setWorkout] = useState<FullWorkout | null>(null)
-
-  // useEffect(() => {
-  //   const fetchWorkout = async () => {
-  //     try {
-  //       setLoading(true)
-  //       const response = await workoutService.getWorkout(id!)
-  //       setWorkout(response?.data[0])
-  //       console.log(response?.data[0])
-  //     } catch (error) {
-  //       console.log("Error fetching workout:", error)
-  //     } finally {
-  //       setLoading(false)
-  //     }
-  //   }
-
-  //   fetchWorkout()
-  // }, [])
 
   return (
     <div className="mx-auto">
@@ -46,7 +29,7 @@ export default function Editorkout() {
           <div className="flex flex-col">
             <h3 className="font-bold">Exercises</h3>
 
-            {workout.workoutExercises.map(({exercise}) => (
+            {workout.workoutExercises.map((exercise) => (
               <div
                 className="flex gap-2"
                 key={exercise.id}

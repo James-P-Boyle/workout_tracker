@@ -1,14 +1,12 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import Container from "@/components/ui/Container"
-import Form from "@/components/ui/forms/Form"
-import Button from "@/components/ui/Button"
-import Input from "@/components/ui/forms/Input"
-import { UserService } from "@/services/user.service"
-
-interface ProfileRegistrationProps {
-  onClose?: () => void 
-}
+import BackButton from "@/components/BackButton";
+import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
+import Form from "@/components/ui/forms/Form";
+import Input from "@/components/ui/forms/Input";
+import ProfileRegistration from "@/pages/register/ProfileRegistration";
+import { UserService } from "@/services/user.service";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormData = {
   username: "",
@@ -20,7 +18,7 @@ const defaultFormData = {
   avatar: "https://cdn.muscleandstrength.com/sites/default/files/field/image/author/john-meadows.jpg"
 }
 
-export default function ProfileRegistration({onClose}: ProfileRegistrationProps) {
+export default function Profile() {
 
   const [ formData, setFormData ] = useState(defaultFormData)
   const { username, firstName, lastName, age, weight, height, avatar } = formData
@@ -54,7 +52,6 @@ export default function ProfileRegistration({onClose}: ProfileRegistrationProps)
         avatar,
       })
       
-      onClose && onClose()
       navigate('/dashboard')
       setFormData(defaultFormData)
     } catch(error) {
@@ -64,10 +61,14 @@ export default function ProfileRegistration({onClose}: ProfileRegistrationProps)
 
   return (
     <Container>
+      {/* Div to prevent flex grow button */}
+      <div className="my-2">
+        <BackButton />
+      </div>
+
 
       <Form handleSubmit={handleSubmit}>
         <>       
-
           <Input 
             name="username"
             value={username}

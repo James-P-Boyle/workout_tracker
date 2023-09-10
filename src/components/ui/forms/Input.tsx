@@ -1,5 +1,5 @@
 interface InputProps {
-  name: string
+  name?: string
   id?: string
   type?: string
   value?: string | number
@@ -20,7 +20,7 @@ export default function Input({
 
     return (
         <input
-            className={`p-2 border-2 border-gray-400 text-gray-800 rounded-lg w-full outline-black bg-transparentoutline-black hover:border-black dark:border-gray-700 hover:dark:border-gray-900 transition-colors ${className}`}
+            className={`p-2 border text-gray-800 rounded-lg w-full outline-black bg-transparent hover:border-black dark:border-gray-700 hover:dark:border-gray-600 dark:text-white transition-colors ${className}`}
             name={name}
             type={type}
             value={value}

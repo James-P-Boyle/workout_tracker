@@ -52,7 +52,7 @@ export default function NavBar() {
       </div>
 
       <button
-        className="flex justify-center px-2 py-2 border md:hidden"
+        className="flex justify-center px-2 py-2 transition-all border border-gray-200 rounded-lg dark:border-gray-700 hover:border-black hover:dark:border-gray-600 md:hidden"
         onClick={toggleDropdown}
       >
         {dropdownOpen ? "x" : "menu"}

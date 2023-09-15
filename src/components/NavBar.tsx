@@ -1,27 +1,16 @@
 import { useState } from "react"
 import NavItem from "./ui/NavItem"
 import DropdownMenu from "./ui/DropdownMenu"
-// import { UserService } from "@/services/user.service"
+import useAuth from "@/hooks/useAuth"
+import LogoutButton from "./LogoutButton"
+
 
 export default function NavBar() {
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  // const [isAuth, setIsAuth] = useState(false)
-  // const user = new UserService
+  const { isAuth } = useAuth()
 
-  // useEffect(() => {
-  //   const authenticate = async () => {
-  //     try {
-  //       const response = await user.auth()
-  //       console.log('is auth ?', response)
-  //       setIsAuth(response?.data)
-  //     } catch (error) {
-  //       console.log("Error fetching workouts:", error)
-  //     }
-  //   }
 
-  //   authenticate()
-  // }, [])
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen)
@@ -35,58 +24,16 @@ export default function NavBar() {
       </svg>
 
       <div className="hidden gap-2 md:flex">
-      
-        <>
-          <NavItem to="dashboard/progress" fontSize="md" className="px-2">
-            Dashboard
-          </NavItem>
 
-          <button
-            className="flex justify-center flex-1 w-full px-2 py-2 border"
-            // onClick={logout}
-          >
-            Logout
-          </button>
-        </>
-   
-        <>
-          <NavItem to={"/"} fontSize="md" className="px-2">
-            Home
-          </NavItem>
-
-          <NavItem to={"login"} fontSize="md" className="px-2">
-            Login
-          </NavItem>
-
-          <NavItem to={"register"} fontSize="md" className="px-2">
-            Register
-          </NavItem>
-        </>
-      
-      </div>
-
-      <button
-        className="flex justify-center px-2 py-2 border md:hidden"
-        onClick={toggleDropdown}
-      >
-        {dropdownOpen ? "x" : "menu"}
-      </button>
-
-      {dropdownOpen && (
-        <DropdownMenu isOpen={dropdownOpen} className="absolute left-0 right-0 gap-2 top-16 md:hidden">
-      
+        {isAuth ? (
           <>
-            <NavItem to={"dashboard/progress"} fontSize="md" className="px-2">
+            <NavItem to="dashboard/progress" fontSize="md" className="px-2">
               Dashboard
             </NavItem>
 
-            <button
-              className="flex justify-center flex-1 w-full px-2 py-2 border"
-            >
-              Logout
-            </button>
+            <LogoutButton />
           </>
-
+        ) : (
           <>
             <NavItem to={"/"} fontSize="md" className="px-2">
               Home
@@ -100,7 +47,49 @@ export default function NavBar() {
               Register
             </NavItem>
           </>
+        )}
       
+      </div>
+
+      <button
+        className="flex justify-center px-2 py-2 transition-all border border-gray-200 rounded-lg dark:border-gray-700 hover:border-black hover:dark:border-gray-600 md:hidden"
+        onClick={toggleDropdown}
+      >
+        {dropdownOpen ? "x" : "menu"}
+      </button>
+
+      {dropdownOpen && (
+        <DropdownMenu 
+          isOpen={dropdownOpen} 
+          className="absolute left-0 right-0 gap-2 top-16 md:hidden"  
+        >
+          {isAuth ? (
+            <>
+              <NavItem to={"dashboard/progress"} fontSize="md" className="px-2">
+                Dashboard
+              </NavItem>
+
+              <button
+                className="flex justify-center flex-1 w-full px-2 py-2 border"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <NavItem to={"/"} fontSize="md" className="px-2">
+                Home
+              </NavItem>
+
+              <NavItem to={"login"} fontSize="md" className="px-2">
+                Login
+              </NavItem>
+
+              <NavItem to={"register"} fontSize="md" className="px-2">
+                Register
+              </NavItem>
+            </>
+          )}
         </DropdownMenu>
       )}
     </nav>

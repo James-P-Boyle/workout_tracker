@@ -50,4 +50,14 @@ export class UserService {
           console.log("Error while logging out:", error)
         }
     }
+
+    auth = async () => {
+        try {
+          const response = await axios.get(API_BASE_URL + "/auth/status")
+          console.log("User is auth, auth check", response)
+          return response
+        } catch (error) {
+          console.log("Error while logging out:", error)
+        }
+    }
 }

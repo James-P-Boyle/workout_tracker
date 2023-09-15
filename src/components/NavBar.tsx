@@ -6,22 +6,6 @@ import DropdownMenu from "./ui/DropdownMenu"
 export default function NavBar() {
 
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  // const [isAuth, setIsAuth] = useState(false)
-  // const user = new UserService
-
-  // useEffect(() => {
-  //   const authenticate = async () => {
-  //     try {
-  //       const response = await user.auth()
-  //       console.log('is auth ?', response)
-  //       setIsAuth(response?.data)
-  //     } catch (error) {
-  //       console.log("Error fetching workouts:", error)
-  //     }
-  //   }
-
-  //   authenticate()
-  // }, [])
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen)

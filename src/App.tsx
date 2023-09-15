@@ -1,5 +1,5 @@
 import { useStyles } from "@/contexts/StyleContext"
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import Home from "@/pages/home/Home"
 import Register from "@/pages/register/Register"
 import Login from "@/pages/login/Login"
@@ -12,10 +12,12 @@ import EditWorkout from "@/sections/workout/EditWorkout"
 import ProgressMain from "@/sections/progress/ProgressMain"
 import MainLayout from "@/layouts/MainLayout"
 import GuestLayout from "@/layouts/GuestLayout"
+import useAuth from "./hooks/useAuth"
 
 function App() {
 
-  const {mode} = useStyles()
+  const { mode } = useStyles()
+  const { isAuth } = useAuth()
   
   return (
     /* Remove styles from app */
@@ -30,19 +32,22 @@ function App() {
 
         </Route>
 
-        <Route path="dashboard" element={<MainLayout />}>
-
-          <Route index element={<div>Some widgets and info</div>} />
-          <Route path="progress" element={<ProgressMain />} />
-          <Route path="workout" element={<MyWorkouts />} />
-          <Route path="workout/create" element={<CreateWorkout />} />
-          <Route path="workout/:id" element={<ShowWorkout />} />
-          <Route path="workout/edit/:id" element={<EditWorkout />} />
-
-        </Route>
-
-        <Route path="profile" element={<Profile />} />
-
+        {isAuth ? (
+          <>
+            <Route path="dashboard" element={<MainLayout />}>
+              <Route index element={<div>Some widgets and info</div>} />
+              <Route path="progress" element={<ProgressMain />} />
+              <Route path="workout" element={<MyWorkouts />} />
+              <Route path="workout/create" element={<CreateWorkout />} />
+              <Route path="workout/:id" element={<ShowWorkout />} />
+              <Route path="workout/edit/:id" element={<EditWorkout />} />
+            </Route>
+            <Route path="profile" element={<Profile />} />
+          </>
+        ) : (
+          <Route path="dashboard" element={<Navigate to="/login" />} />
+        )}
+        
         <Route path="*" element={<NotFound />} />
 
       </Routes>

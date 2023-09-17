@@ -32,10 +32,8 @@ export default function Login() {
     try {
       const user = new UserService();
       const response = await user.login(email, password);
-      console.log('Login Response', response);
   
       if (response && response.status === 201) {
-        console.log('Login successful');
         navigate('/dashboard');
       }
   

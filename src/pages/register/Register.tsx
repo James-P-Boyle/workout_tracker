@@ -34,7 +34,6 @@ export default function Register() {
       if (response.status === 201) {
         navigate('/dashboard')
       }
-      console.log('Register Response', response)
 
       setFormData(defaultFormData)
     } catch(error) {

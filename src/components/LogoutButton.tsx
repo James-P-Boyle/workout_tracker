@@ -10,7 +10,6 @@ export default function LogoutButton() {
     try {
       const user = new UserService()
       const response = await user.logout()
-      console.log('Logout Response', response)
 
       navigate('/')
     } catch (error) {

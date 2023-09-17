@@ -13,7 +13,6 @@ type WorkoutExerciseData = {
 
 export class WorkoutService {
   getWorkouts = () => axios.get(API_BASE_URL + '/workouts').then((response) => {
-    console.log(response)
     return response
   }).catch((error) => {
     console.log(error)
@@ -22,7 +21,6 @@ export class WorkoutService {
   getWorkout = async (id: string): Promise<AxiosResponse> => {
     try {
       const response = await axios.get(API_BASE_URL + `/workouts/id/${id}`)
-      console.log('Get Workout Exercises by ID success response', JSON.stringify(response))
       return response
     } catch (error) {
       console.log('Error while getting workout exercises by ID:', error)
@@ -35,7 +33,6 @@ export class WorkoutService {
       const response = await axios.post(API_BASE_URL + '/workouts/workout', {
         'workoutName': workoutName
       })
-      console.log(`Create Workout success response`, JSON.stringify(response))
       return response
     } catch (error) {
       console.log(`Error While creating workout =>`, error)
@@ -63,7 +60,6 @@ export class WorkoutService {
   getExercises = async () => {
     try {
       const response = await axios.get(API_BASE_URL + '/exercises')
-      console.log('getting exercise res, exerciseService', response)
       return response
     } catch (error) {
       console.log('error getting requests, exerciseService', error)

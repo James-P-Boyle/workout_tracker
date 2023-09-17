@@ -24,7 +24,6 @@ export default function ShowWorkout() {
         setLoading(true)
         const response = await workoutService.getWorkout(id!)
         setWorkout(response?.data[0])
-        console.log(response?.data[0])
       } catch (error) {
         console.log("Error fetching workout:", error)
       } finally {

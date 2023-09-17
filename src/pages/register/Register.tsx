@@ -62,7 +62,10 @@ export default function Register() {
             onChange={onChange}
           />
 
-          <Button type="submit" className="w-full">
+          <Button 
+            type="submit"
+            className="border-yellow-500 hover:border-yellow-600"
+           >
             Register
           </Button>
         </>

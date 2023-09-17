@@ -20,7 +20,7 @@ export default function Home({}: HomeProps) {
 
       <div className="flex flex-col items-center max-w-xl gap-4 p-2 text-center sm:p-4">
         
-        <span className="font-semibold text-yellow-500 md:text-lg xl:text-xl">
+        <span className="font-semibold text-yellow-500 text-lg md:text-xl xl:text-2xl">
           The Workout Tracker
         </span>
 

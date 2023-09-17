@@ -67,7 +67,10 @@ export default function Login() {
           onChange={onChange}
         />
 
-        <Button type="submit" className="w-full">
+        <Button 
+          type="submit" 
+          className="border-yellow-500 hover:border-yellow-600"
+        >
           Login
         </Button>   
       </Form>

@@ -17,7 +17,8 @@ export default function NavItem({
   
 }: NavItemProps) {
 
-  const activeClassName = "border-yellow-500 hover:border-yellow-600"
+  /* Set up tailwind merge */
+  const activeClassName = "border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600"
 
   return (
     <NavLink 

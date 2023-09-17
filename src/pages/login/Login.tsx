@@ -32,10 +32,8 @@ export default function Login() {
     try {
       const user = new UserService();
       const response = await user.login(email, password);
-      console.log('Login Response', response);
   
       if (response && response.status === 201) {
-        console.log('Login successful');
         navigate('/dashboard');
       }
   
@@ -67,7 +65,10 @@ export default function Login() {
           onChange={onChange}
         />
 
-        <Button type="submit" className="w-full">
+        <Button 
+          type="submit" 
+          className="border-yellow-500 hover:border-yellow-600"
+        >
           Login
         </Button>   
       </Form>

@@ -33,7 +33,6 @@ export default function createWorkout() {
     try {
       const { data } = await workout.createWorkout(workoutName)
       setWorkoutData(data)
-      console.log('res from creating', data.id)
       return data
     } catch (error) {
       console.log("error creating workout: ", error)
@@ -51,7 +50,6 @@ export default function createWorkout() {
 
     try {
       const {data} = await workout.createWorkoutExercises(workoutExerciseData)
-      console.log('res from posting workout/exercise', data.id)
       navigate(`/dashboard/workout/${workoutData?.id}`)
       return data
     } catch (error) {

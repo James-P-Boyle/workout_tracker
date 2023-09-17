@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import NavItem from "./ui/NavItem"
 import DropdownMenu from "./ui/DropdownMenu"
 import useAuth from "@/hooks/useAuth"
@@ -10,11 +10,23 @@ export default function NavBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { isAuth } = useAuth()
 
-
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen)
+  const closeDropdown = () => {
+    setDropdownOpen(false)
   }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      closeDropdown()
+    }
+
+    if (dropdownOpen) {
+      window.addEventListener("scroll", handleScroll)
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [dropdownOpen])
 
   return (
     <nav className="relative flex justify-between p-4 dark:text-white">
@@ -35,15 +47,27 @@ export default function NavBar() {
           </>
         ) : (
           <>
-            <NavItem to={"/"} fontSize="md" className="px-2">
+            <NavItem
+              to={"/"} 
+              fontSize="md" 
+              className="px-2"
+            >
               Home
             </NavItem>
 
-            <NavItem to={"login"} fontSize="md" className="px-2">
+            <NavItem 
+              to={"login"} 
+              fontSize="md" 
+              className="px-2"
+            >
               Login
             </NavItem>
 
-            <NavItem to={"register"} fontSize="md" className="px-2">
+            <NavItem 
+              to={"register"} 
+              fontSize="md" 
+              className="px-2"
+            >
               Register
             </NavItem>
           </>
@@ -52,8 +76,8 @@ export default function NavBar() {
       </div>
 
       <button
-        className="flex justify-center px-2 py-2 transition-all border border-gray-200 rounded-lg dark:border-gray-700 hover:border-black hover:dark:border-gray-600 md:hidden"
-        onClick={toggleDropdown}
+        className="flex justify-center px-2 w-12 py-2 transition-all border border-gray-200 rounded-lg dark:border-gray-700 hover:border-black hover:dark:border-gray-600 md:hidden"
+        onClick={() => setDropdownOpen(!dropdownOpen)}
       >
         {dropdownOpen ? "x" : "menu"}
       </button>
@@ -61,11 +85,16 @@ export default function NavBar() {
       {dropdownOpen && (
         <DropdownMenu 
           isOpen={dropdownOpen} 
-          className="absolute left-0 right-0 gap-2 top-16 md:hidden"  
+          className="absolute left-0 right-0 gap-2 top-16 md:hidden px-2 sm:px-4"  
         >
           {isAuth ? (
             <>
-              <NavItem to={"dashboard/progress"} fontSize="md" className="px-2">
+              <NavItem 
+                to={"dashboard/progress"} 
+                fontSize="md" 
+                className="px-2"
+                onClick={() => setDropdownOpen(false)}
+              >
                 Dashboard
               </NavItem>
 
@@ -77,15 +106,30 @@ export default function NavBar() {
             </>
           ) : (
             <>
-              <NavItem to={"/"} fontSize="md" className="px-2">
+              <NavItem 
+                to={"/"} 
+                fontSize="md" 
+                className="px-2"
+                onClick={() => setDropdownOpen(false)}
+              >
                 Home
               </NavItem>
 
-              <NavItem to={"login"} fontSize="md" className="px-2">
+              <NavItem 
+                to={"login"} 
+                fontSize="md" 
+                className="px-2"
+                onClick={() => setDropdownOpen(false)}
+              >
                 Login
               </NavItem>
 
-              <NavItem to={"register"} fontSize="md" className="px-2">
+              <NavItem 
+                to={"register"} 
+                fontSize="md" 
+                className="px-2"
+                onClick={() => setDropdownOpen(false)}
+              >
                 Register
               </NavItem>
             </>

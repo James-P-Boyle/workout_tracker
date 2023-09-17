@@ -30,12 +30,14 @@ export default function MainNavigation({
       links={
         <>
           <Button
+            className="w-full"
             onClick={() => handleLinkClick('progress')}
           >
             Progress
           </Button>
 
           <Button
+            className="w-full"
             onClick={() => handleLinkClick('workout')}
           >
             Workouts

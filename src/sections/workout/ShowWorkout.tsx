@@ -24,7 +24,6 @@ export default function ShowWorkout() {
         setLoading(true)
         const response = await workoutService.getWorkout(id!)
         setWorkout(response?.data[0])
-        console.log(response?.data[0])
       } catch (error) {
         console.log("Error fetching workout:", error)
       } finally {
@@ -45,7 +44,8 @@ export default function ShowWorkout() {
         <Button className="w-full">Delete</Button>
   
         <Button className="w-full">Progress</Button>
-        <Button className="w-full">Start</Button>
+        {/* Will refactpr button */}
+        <Button className="w-full dark:border-yellow-500 hover:dark:border-yellow-600 border-yellow-500 hover:border-yellow-600">Start</Button>
       </div>
 
       {workout ? (

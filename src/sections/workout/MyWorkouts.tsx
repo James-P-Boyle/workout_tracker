@@ -16,7 +16,6 @@ export default function MyWorkouts() {
         setLoading(true)
         const response = await workout.getWorkouts()
         setWorkouts(response?.data)
-        console.log(response?.data)
       } catch (error) {
         console.log("Error fetching workouts:", error)
       } finally {
@@ -47,7 +46,7 @@ export default function MyWorkouts() {
 function WorkoutCard({ workout }: any) {
 
   return (
-    <div className="flex flex-col p-2 transition-all border border-transparent rounded-lg hover:border-black dark:hover:border-gray-800">
+    <div className="flex flex-col p-2 transition-all border border-gray-200 rounded-lg dark:hover:border-yellow-500 hover:border-yellow-500 dark:border-gray-800">
       <Link
         key={workout.id} 
         className="font-bold"

@@ -1,7 +1,6 @@
 @keyframes scale-in {
     0% {
         scale: 0;
-      
     }
     80% {
         scale: 1.1
@@ -11,3 +10,16 @@
     }
 }
 
+.slide-in {
+    transform: translateX(-100%);
+    animation: slideIn 0.5s ease-in-out forwards;
+  
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+}

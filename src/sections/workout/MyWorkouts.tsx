@@ -3,6 +3,7 @@ import { WorkoutService } from "@/services/workout.service"
 import { Workout } from "@/types"
 import { Link } from "react-router-dom"
 import Button from "@/components/ui/Button"
+import Popup from "@/components/Popup"
 
 export default function MyWorkouts() {
   const workout = new WorkoutService()
@@ -26,9 +27,20 @@ export default function MyWorkouts() {
     fetchWorkouts()
   }, [])
 
+  // const [showPopup, setShowPopup] = useState(false)
   return (
 
-    <div className="grid w-full grid-cols-2 gap-2">  
+    <div className="grid w-full grid-cols-2 gap-2"> 
+      {/* {showPopup ? (
+        <Button onClick={() => setShowPopup(false)}>
+          Show pop up
+        </Button>
+      ) : (
+        <Popup onClose={() => setShowPopup(true)}>
+          <h1>Hello, Popup Content!</h1>
+        </Popup> 
+      )} */}
+ 
       <Button className="col-span-2 mb-4">
         <Link to="create">Create Workout</Link>
       </Button>

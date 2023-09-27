@@ -20,7 +20,7 @@ export class WorkoutService {
 
   getWorkout = async (id: string): Promise<AxiosResponse> => {
     try {
-      const response = await axios.get(API_BASE_URL + `/workouts/id/${id}`)
+      const response = await axios.get(API_BASE_URL + `/workouts/${id}`)
       return response
     } catch (error) {
       console.log('Error while getting workout exercises by ID:', error)

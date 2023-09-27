@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import NavItem from "./ui/NavItem"
 import DropdownMenu from "./ui/DropdownMenu"
-import useAuth from "@/hooks/useAuth"
+import { useAuth } from "@/contexts/AuthContext"
 import LogoutButton from "./LogoutButton"
 
 
@@ -76,7 +76,7 @@ export default function NavBar() {
       </div>
 
       <button
-        className="flex justify-center px-2 w-12 py-2 transition-all border border-gray-200 rounded-lg dark:border-gray-700 hover:border-black hover:dark:border-gray-600 md:hidden"
+        className="flex justify-center w-12 px-2 py-2 transition-all border border-gray-200 rounded-lg dark:border-gray-700 hover:border-black hover:dark:border-gray-600 md:hidden"
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
         {dropdownOpen ? "x" : "menu"}
@@ -85,7 +85,7 @@ export default function NavBar() {
       {dropdownOpen && (
         <DropdownMenu 
           isOpen={dropdownOpen} 
-          className="absolute left-0 right-0 gap-2 top-16 md:hidden px-2 sm:px-4"  
+          className="absolute left-0 right-0 gap-2 px-2 top-16 md:hidden sm:px-4"  
         >
           {isAuth ? (
             <>

@@ -12,7 +12,7 @@
 
 .slide-in {
     transform: translateX(-100%);
-    animation: slideIn 0.5s ease-in-out forwards;
+    animation: slideIn 0.25s ease-in-out forwards;
   
     @keyframes slideIn {
       from {

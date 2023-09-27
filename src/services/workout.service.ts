@@ -76,6 +76,16 @@ export class WorkoutService {
       throw error
     }
   }
+
+  addCustomExercise = async (exercise: Exercise): Promise<AxiosResponse> => {
+    try {
+      const response = await axios.post(API_BASE_URL + '/custom-exercises/custom-exercise', exercise)
+      return response
+    } catch (error) {
+      console.log(`Error While creating Exercise =>`, error)
+      throw error
+    }
+  }
 }
 
 

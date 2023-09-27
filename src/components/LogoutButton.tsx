@@ -1,16 +1,16 @@
-import { UserService } from "@/services/user.service"
 import Button from "./ui/Button"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "@/contexts/AuthContext"
 
 export default function LogoutButton() {
 
   const navigate = useNavigate()
+  const { logout } = useAuth()
+
   const handleLogout = async () => {
 
     try {
-      const user = new UserService()
-      const response = await user.logout()
-
+      logout()
       navigate('/')
     } catch (error) {
       console.log('Error on logout:', error)

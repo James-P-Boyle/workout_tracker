@@ -20,7 +20,7 @@ export class WorkoutService {
 
   getWorkout = async (id: string): Promise<AxiosResponse> => {
     try {
-      const response = await axios.get(API_BASE_URL + `/workouts/id/${id}`)
+      const response = await axios.get(API_BASE_URL + `/workouts/${id}`)
       return response
     } catch (error) {
       console.log('Error while getting workout exercises by ID:', error)
@@ -70,6 +70,16 @@ export class WorkoutService {
   addExercise = async (exercise: Exercise): Promise<AxiosResponse> => {
     try {
       const response = await axios.post(API_BASE_URL + '/exercises/exercise', exercise)
+      return response
+    } catch (error) {
+      console.log(`Error While creating Exercise =>`, error)
+      throw error
+    }
+  }
+
+  addCustomExercise = async (exercise: Exercise): Promise<AxiosResponse> => {
+    try {
+      const response = await axios.post(API_BASE_URL + '/custom-exercises/custom-exercise', exercise)
       return response
     } catch (error) {
       console.log(`Error While creating Exercise =>`, error)

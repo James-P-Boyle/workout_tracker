@@ -12,7 +12,7 @@ import EditWorkout from "@/sections/workout/EditWorkout"
 import ProgressMain from "@/sections/progress/ProgressMain"
 import MainLayout from "@/layouts/MainLayout"
 import GuestLayout from "@/layouts/GuestLayout"
-import useAuth from "./hooks/useAuth"
+import { useAuth } from "@/contexts/AuthContext"
 
 function App() {
 

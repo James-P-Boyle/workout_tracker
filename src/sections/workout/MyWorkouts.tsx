@@ -3,6 +3,7 @@ import { WorkoutService } from "@/services/workout.service"
 import { Workout } from "@/types"
 import { Link } from "react-router-dom"
 import Button from "@/components/ui/Button"
+import Popup from "@/components/Popup"
 
 export default function MyWorkouts() {
   const workout = new WorkoutService()

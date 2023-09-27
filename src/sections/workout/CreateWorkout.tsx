@@ -6,6 +6,7 @@ import { useFetchExercises } from "@/hooks/useFetchExercises"
 import Button from "@/components/ui/Button"
 import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
+import Popup from "@/components/Popup"
 
 interface AddExercisesToWorkoutProps {
   workoutId: string
@@ -114,15 +115,22 @@ function AddExercisesToWorkout({
   return (
 
     <div className="grid grid-cols-2 gap-2">
-      
+
+      <div>
       <ExerciseFilter 
         exercises={exercises}
         handleExerciseClick={handleExerciseClick}
       />
 
+      <AddCustomExercise
+      
+      />
+
+      </div>
+      
+   
       <div className="flex flex-col gap-2">
 
-   
         <Button
           onClick={() => handleWorkoutExercises()}
         >
@@ -276,5 +284,116 @@ function ExerciseFilter({
         ))}
       </div>
     </div>
+  )
+}
+
+function AddCustomExercise() {
+
+  const workout = new WorkoutService()
+
+  const [ showForm, setShowForm ] = useState(false)
+  // TYPE!!
+  const [formData, setFormData] = useState<any>({
+    bodySplit: '',
+    action: '',
+    equipment: '',
+    exerciseName: '',
+    instruction: '',
+  })
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+  
+    try {
+
+      const response = await workout.addCustomExercise(formData)
+      setShowForm(false)
+    } catch (error) {
+      console.log('Error creating new exercise:', error)
+    }
+  }
+
+  return (
+
+    showForm ? (
+      <Popup 
+        onClose={() => setShowForm(false)}
+      >
+        <Form 
+          handleSubmit={handleSubmit}
+        >
+          
+          <select
+            name="bodySplit"
+            value={formData.bodySplit}
+            onChange={onChange}
+          >
+            <option value="">Select Body Split</option>
+            <option value="upper">Upper</option>
+            <option value="lower">Lower</option>
+          </select>
+
+          {/* Select for "action" */}
+          <select
+            name="action"
+            value={formData.action}
+            onChange={onChange}
+          >
+            <option value="">Select Action</option>
+            <option value="push">Push</option>
+            <option value="pull">Pull</option>
+          </select>
+
+          <Input
+            name="equipment"
+            type="text"
+            value={formData.equipment}
+            placeholder="Equipment"
+            onChange={onChange}
+          />
+
+          <Input
+            name="exerciseName"
+            type="text"
+            value={formData.exerciseName}
+            placeholder="Exercise Name"
+            onChange={onChange}
+          />
+          
+          <Input
+            name="instruction"
+            type="text"
+            value={formData.instruction}
+            placeholder="Instruction"
+            onChange={onChange}
+          />
+     
+          <Button 
+            type="submit" 
+            className="border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600"
+          >
+            Add Exercise
+          </Button>   
+        </Form>
+      </Popup>
+
+    ) : (
+      <Button
+        onClick={() => setShowForm(true)}
+        className="border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600"
+        >
+          Add Exercise
+      </Button>
+    )
+  
+
   )
 }

@@ -5,6 +5,7 @@ import Button from "@/components/ui/Button"
 import Container from "@/components/ui/Container"
 import { UserService } from "@/services/user.service"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "@/contexts/AuthContext"
 
 
 const defaultFormData = {
@@ -16,6 +17,7 @@ export default function Login() {
 
   const [ formData, setFormData ] = useState(defaultFormData)
   const { email, password } = formData
+  const { login } = useAuth()
 
   const navigate = useNavigate()
 
@@ -27,21 +29,16 @@ export default function Login() {
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
   
     try {
-      const user = new UserService();
-      const response = await user.login(email, password);
-  
-      if (response && response.status === 201) {
-        navigate('/dashboard');
-      }
-  
-      setFormData(defaultFormData);
+      await login(email, password)
+      navigate('/dashboard')
+      setFormData(defaultFormData)
     } catch (error) {
-      console.log('Error on login:', error);
+      console.log('Error on login:', error)
     }
-  };
+  }
 
 
   return (

@@ -15,6 +15,10 @@ interface AddExercisesToWorkoutProps {
   handleWorkoutExercises: () => void
 }
 
+interface AddCustomExercisesProps {
+  onSubmit: () => void
+}
+
 export default function createWorkout() {
 
   const workout = new WorkoutService()
@@ -97,7 +101,7 @@ function AddExercisesToWorkout({
   handleWorkoutExercises
 }: AddExercisesToWorkoutProps) {
 
-  const { exercises } = useFetchExercises()
+  const { exercises, fetchExercises } = useFetchExercises()
 
   function handleExerciseClick(exercise: Exercise) {
 
@@ -122,8 +126,9 @@ function AddExercisesToWorkout({
         handleExerciseClick={handleExerciseClick}
       />
 
-      <AddCustomExercise
-      
+      <AddCustomExercise 
+        onSubmit={() => fetchExercises()}
+        
       />
 
       </div>
@@ -287,7 +292,9 @@ function ExerciseFilter({
   )
 }
 
-function AddCustomExercise() {
+function AddCustomExercise({
+  onSubmit
+}: AddCustomExercisesProps) {
 
   const workout = new WorkoutService()
 
@@ -315,6 +322,7 @@ function AddCustomExercise() {
     try {
 
       const response = await workout.addCustomExercise(formData)
+      onSubmit()
       setShowForm(false)
     } catch (error) {
       console.log('Error creating new exercise:', error)

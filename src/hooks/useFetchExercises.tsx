@@ -6,7 +6,6 @@ export function useFetchExercises() {
   const exerciseService = new WorkoutService()
   const [exercises, setExercises] = useState<Exercise[]>([])
   const [loading, setLoading] = useState(true)
-  const [triggerFetch, setTriggerFetch] = useState(false)
 
   const fetchExercises = async () => {
     try {
@@ -17,13 +16,12 @@ export function useFetchExercises() {
       console.log('Error fetching exercises:', error)
     } finally {
       setLoading(false)
-      setTriggerFetch
     }
   }
 
   useEffect(() => {
     fetchExercises()
-  }, [triggerFetch])
+  }, [])
 
-  return { exercises, loading, fetchExercises, setTriggerFetch }
+  return { exercises, loading, fetchExercises }
 }

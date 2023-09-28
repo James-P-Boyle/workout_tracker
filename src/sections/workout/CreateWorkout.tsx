@@ -118,7 +118,7 @@ function AddExercisesToWorkout({
 
   return (
 
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid w-full grid-cols-2 gap-2">
 
       <div>
       <ExerciseFilter 
@@ -152,11 +152,6 @@ function AddExercisesToWorkout({
                   className="block overflow-hidden"
                 >
                   {exercise.exerciseName}
-                </span>
-                <span 
-                  className="text-green-500"
-                >
-                  {exercise.order}
                 </span>
               </div>
             )}
@@ -211,7 +206,7 @@ function ExerciseFilter({
       
       {!showFilters ? (
         <Button
-        className="w-full"
+          className="w-full"
           onClick={() => setShowFilters(!showFilters)}
         >
           Show Filters
@@ -338,22 +333,22 @@ function AddCustomExercise({
         <Form 
           handleSubmit={handleSubmit}
         >
-          
           <select
             name="bodySplit"
             value={formData.bodySplit}
             onChange={onChange}
+            className="w-full p-2 text-gray-400 transition-colors bg-transparent border rounded-lg outline-black hover:border-black dark:border-gray-700 hover:dark:border-gray-600"
           >
             <option value="">Select Body Split</option>
             <option value="upper">Upper</option>
             <option value="lower">Lower</option>
           </select>
 
-          {/* Select for "action" */}
           <select
             name="action"
             value={formData.action}
             onChange={onChange}
+            className="w-full p-2 text-gray-400 transition-colors bg-transparent border rounded-lg outline-black hover:border-black dark:border-gray-700 hover:dark:border-gray-600"
           >
             <option value="">Select Action</option>
             <option value="push">Push</option>
@@ -388,7 +383,7 @@ function AddCustomExercise({
             type="submit" 
             className="border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600"
           >
-            Add Exercise
+            Add
           </Button>   
         </Form>
       </Popup>
@@ -396,9 +391,9 @@ function AddCustomExercise({
     ) : (
       <Button
         onClick={() => setShowForm(true)}
-        className="border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600"
-        >
-          Add Exercise
+        className="w-full mt-2 border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600"
+      >
+        Add Custom Exercise
       </Button>
     )
   

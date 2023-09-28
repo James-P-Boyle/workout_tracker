@@ -40,6 +40,28 @@ export class WorkoutService {
     }
   }
 
+  deleteWorkout = async (workoutId: string): Promise<AxiosResponse> => {
+    try {
+      const response = await axios.delete(API_BASE_URL + '/workouts/workout/' + workoutId)
+      return response
+    } catch (error) {
+      console.log(`Error While creating workout =>`, error)
+      throw error
+    }
+  }
+
+  renameWorkout = async (workoutId: string, newName: string): Promise<AxiosResponse> => {
+    try {
+      const response = await axios.patch(API_BASE_URL + '/workouts/workout/' + workoutId, {
+        'workoutName': newName
+      })
+      return response
+    } catch (error) {
+      console.log(`Error While renaming workout =>`, error)
+      throw error
+    }
+  }
+
   createWorkoutExercises = async (exercises: WorkoutExerciseData[]): Promise<AxiosResponse> => {
     try {
       const response = await axios.post(

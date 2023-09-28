@@ -17,6 +17,7 @@ export default function MyWorkouts() {
         setLoading(true)
         const response = await workout.getWorkouts()
         setWorkouts(response?.data)
+        setLoading(false)
       } catch (error) {
         console.log("Error fetching workouts:", error)
       } finally {
@@ -33,17 +34,25 @@ export default function MyWorkouts() {
       <Button className="col-span-2 mb-4">
         <Link to="create">Create Workout</Link>
       </Button>
-      {workouts && workouts.map((workout) => (
-        <WorkoutCard 
-          key={`${workout.id}`}
-          workout={workout}
-        />
-      ))}
+
+      {loading ? (
+        <h1>loading icon</h1>
+      ) : (
+        workouts.map((workout) => (
+          <WorkoutCard 
+            key={`${workout.id}`}
+            workout={workout}
+          />
+        ))
+      )}
+
+      
+
     </div>
   )
 }
 
-                   // will fix, 
+// TYPE!
 function WorkoutCard({ workout }: any) {
 
   return (

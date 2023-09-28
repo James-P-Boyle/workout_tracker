@@ -20,7 +20,7 @@ export default function Home({}: HomeProps) {
 
       <div className="flex flex-col items-center max-w-xl gap-4 p-2 text-center sm:p-4">
         
-        <span className="font-semibold text-yellow-500 text-lg md:text-xl xl:text-2xl">
+        <span className="text-lg font-semibold text-yellow-500 md:text-xl xl:text-2xl">
           The Workout Tracker
         </span>
 
@@ -69,7 +69,7 @@ export default function Home({}: HomeProps) {
 function FindOutMore() {
 
   return (
-    <>
+    <div className="slide-in">
       <h1 className="text-4xl font-black sm:text-5xl md:text-6xl">Free, simple & effective</h1>
 
       <p className="leading-relaxed text-gray-500 xl:text-lg">
@@ -78,6 +78,6 @@ function FindOutMore() {
       <p className="leading-relaxed text-gray-500 xl:text-lg">
         Simple, intuitive, and free Workout Tracker App, your all-in-one solution for achieving and surpassing your fitness goals.
       </p>
-    </>
+    </div>
   )
 }

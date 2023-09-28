@@ -1,6 +1,6 @@
 import BackButton from "@/components/BackButton"
 import Button from "@/components/ui/Button"
-import Dropdown from "@/components/ui/Dropdown"
+import Input from "@/components/ui/forms/Input"
 import { WorkoutService } from "@/services/workout.service"
 import { Exercise, FullWorkout } from "@/types"
 import { useEffect, useState } from "react"
@@ -14,25 +14,44 @@ export default function ShowWorkout() {
 
   const workoutService = new WorkoutService()
   const navigate = useNavigate()
-  const {id} = useParams()
-  const [loading, setLoading] = useState(false)                    
-  const [workout, setWorkout] = useState<FullWorkout | null>(null)
+  const { id } = useParams()                  
+  const [ workout, setWorkout ] = useState<FullWorkout | null>(null)
+  const [ showRenameForm, setShowRenameForm ] = useState(false)
+  const [ newWorkoutName, setNewWorkoutName ] = useState(workout?.workoutName)
+
+  const handleDelete = async () => {
+    try {
+      await workoutService.deleteWorkout(id!)
+      navigate('/dashboard/workout')
+    } catch (error) {
+      console.log('Error deleting workout', error)
+    }
+  }
+
+  const handleNameChange = async (newName: string) => {
+
+    try {
+      await workoutService.renameWorkout(id!, newName)
+      setShowRenameForm(false)
+
+    } catch (error) {
+      console.log('Error deleting workout', error)
+    }
+
+  }
 
   useEffect(() => {
     const fetchWorkout = async () => {
       try {
-        setLoading(true)
         const response = await workoutService.getWorkout(id!)
         setWorkout(response?.data[0])
       } catch (error) {
         console.log("Error fetching workout:", error)
-      } finally {
-        setLoading(false)
-      }
+      } 
     }
 
     fetchWorkout()
-  }, [])
+  }, [handleNameChange])
 
   return (
     <div className="grid w-full gap-2">
@@ -41,16 +60,50 @@ export default function ShowWorkout() {
       
       <div className="flex gap-2">
         <Button className="w-full">Edit</Button>
-        <Button className="w-full">Delete</Button>
+        <Button 
+          className="w-full"
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
   
         <Button className="w-full">Progress</Button>
         {/* Will refactpr button */}
-        <Button className="w-full dark:border-yellow-500 hover:dark:border-yellow-600 border-yellow-500 hover:border-yellow-600">Start</Button>
+        <Button className="w-full border-yellow-500 dark:border-yellow-500 hover:dark:border-yellow-600 hover:border-yellow-600">Start</Button>
       </div>
 
       {workout ? (
         <div className="grid gap-2 p-2">
-          <h1 className="font-black">{workout.workoutName}</h1>
+
+          <div>
+            {!showRenameForm ? (
+              <h1 
+                onClick={() => setShowRenameForm(true)}
+                className="font-black hover:cursor-pointer hover:underline"
+                title="Click to update workout name"
+              >
+                {workout.workoutName}
+              </h1>
+            ) : (
+              <div className="flex gap-2">
+                <Input
+                  type="text"
+                  value={newWorkoutName}
+                  onChange={(e) => {
+                    setNewWorkoutName(e.target.value)
+                  }}
+                />
+                <Button
+                  onClick={() => handleNameChange(newWorkoutName!)}
+                >
+                  Save
+                </Button>
+              </div>
+  
+            )}
+       
+          </div>
+
           <h2 className="font-bold">Exercises</h2>
 
           <div className="grid gap-2">

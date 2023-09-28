@@ -1,6 +1,6 @@
 import BackButton from "@/components/BackButton"
 import Button from "@/components/ui/Button"
-import Dropdown from "@/components/ui/Dropdown"
+import Input from "@/components/ui/forms/Input"
 import { WorkoutService } from "@/services/workout.service"
 import { Exercise, FullWorkout } from "@/types"
 import { useEffect, useState } from "react"
@@ -15,7 +15,9 @@ export default function ShowWorkout() {
   const workoutService = new WorkoutService()
   const navigate = useNavigate()
   const { id } = useParams()                  
-  const [workout, setWorkout] = useState<FullWorkout | null>(null)
+  const [ workout, setWorkout ] = useState<FullWorkout | null>(null)
+  const [ showRenameForm, setShowRenameForm ] = useState(false)
+  const [ newWorkoutName, setNewWorkoutName ] = useState(workout?.workoutName)
 
   const handleDelete = async () => {
     try {
@@ -24,6 +26,18 @@ export default function ShowWorkout() {
     } catch (error) {
       console.log('Error deleting workout', error)
     }
+  }
+
+  const handleNameChange = async (newName: string) => {
+
+    try {
+      await workoutService.renameWorkout(id!, newName)
+      setShowRenameForm(false)
+
+    } catch (error) {
+      console.log('Error deleting workout', error)
+    }
+
   }
 
   useEffect(() => {
@@ -37,7 +51,7 @@ export default function ShowWorkout() {
     }
 
     fetchWorkout()
-  }, [])
+  }, [handleNameChange])
 
   return (
     <div className="grid w-full gap-2">
@@ -60,7 +74,36 @@ export default function ShowWorkout() {
 
       {workout ? (
         <div className="grid gap-2 p-2">
-          <h1 className="font-black">{workout.workoutName}</h1>
+
+          <div>
+            {!showRenameForm ? (
+              <h1 
+                onClick={() => setShowRenameForm(true)}
+                className="font-black hover:cursor-pointer hover:underline"
+                title="Click to update workout name"
+              >
+                {workout.workoutName}
+              </h1>
+            ) : (
+              <div className="flex gap-2">
+                <Input
+                  type="text"
+                  value={newWorkoutName}
+                  onChange={(e) => {
+                    setNewWorkoutName(e.target.value)
+                  }}
+                />
+                <Button
+                  onClick={() => handleNameChange(newWorkoutName!)}
+                >
+                  Save
+                </Button>
+              </div>
+  
+            )}
+       
+          </div>
+
           <h2 className="font-bold">Exercises</h2>
 
           <div className="grid gap-2">

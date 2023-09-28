@@ -4,7 +4,7 @@ interface InputProps {
   type?: string
   value?: string | number
   placeholder?: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   className?: string // Optional property
 }
 

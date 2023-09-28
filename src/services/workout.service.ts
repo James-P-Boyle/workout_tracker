@@ -40,6 +40,16 @@ export class WorkoutService {
     }
   }
 
+  deleteWorkout = async (workoutId: string): Promise<AxiosResponse> => {
+    try {
+      const response = await axios.delete(API_BASE_URL + '/workouts/workout/' + workoutId)
+      return response
+    } catch (error) {
+      console.log(`Error While creating workout =>`, error)
+      throw error
+    }
+  }
+
   createWorkoutExercises = async (exercises: WorkoutExerciseData[]): Promise<AxiosResponse> => {
     try {
       const response = await axios.post(

@@ -14,21 +14,26 @@ export default function ShowWorkout() {
 
   const workoutService = new WorkoutService()
   const navigate = useNavigate()
-  const {id} = useParams()
-  const [loading, setLoading] = useState(false)                    
+  const { id } = useParams()                  
   const [workout, setWorkout] = useState<FullWorkout | null>(null)
+
+  const handleDelete = async () => {
+    try {
+      await workoutService.deleteWorkout(id!)
+      navigate('/dashboard/workout')
+    } catch (error) {
+      console.log('Error deleting workout', error)
+    }
+  }
 
   useEffect(() => {
     const fetchWorkout = async () => {
       try {
-        setLoading(true)
         const response = await workoutService.getWorkout(id!)
         setWorkout(response?.data[0])
       } catch (error) {
         console.log("Error fetching workout:", error)
-      } finally {
-        setLoading(false)
-      }
+      } 
     }
 
     fetchWorkout()
@@ -41,11 +46,16 @@ export default function ShowWorkout() {
       
       <div className="flex gap-2">
         <Button className="w-full">Edit</Button>
-        <Button className="w-full">Delete</Button>
+        <Button 
+          className="w-full"
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
   
         <Button className="w-full">Progress</Button>
         {/* Will refactpr button */}
-        <Button className="w-full dark:border-yellow-500 hover:dark:border-yellow-600 border-yellow-500 hover:border-yellow-600">Start</Button>
+        <Button className="w-full border-yellow-500 dark:border-yellow-500 hover:dark:border-yellow-600 hover:border-yellow-600">Start</Button>
       </div>
 
       {workout ? (

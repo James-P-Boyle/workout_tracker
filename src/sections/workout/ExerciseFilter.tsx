@@ -1,21 +1,24 @@
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/forms/Input"
 import { Exercise } from "@/types"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface ExerciseFilterProps {
   exercises: Exercise[]
   handleExerciseClick: (exercise: Exercise) => void
+  handleExerciseRemoval: (exerciseId: string) => void
 }
 
 export default function ExerciseFilter({
    exercises,
-   handleExerciseClick
+   handleExerciseClick,
+   handleExerciseRemoval
 }:  ExerciseFilterProps) {
   
   const [searchQuery, setSearchQuery] = useState('')
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState<string[]>([])
+  const [filteredExercises, setFilteredExercises] = useState<Exercise[]>([])
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value)
@@ -31,14 +34,17 @@ export default function ExerciseFilter({
     }
   }
 
-  //Refactor this mess
-  const filteredExercises = exercises.filter((exercise) => {
-    const matchName = exercise.exerciseName.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchFilter =
-      filters.length === 0 || filters.includes(exercise.action) || filters.includes(exercise.bodySplit.toLowerCase())
+  useEffect(() => {
+    const filtered = exercises.filter((exercise) => {
+      const matchName = exercise.exerciseName.toLowerCase().includes(searchQuery.toLowerCase())
+      const matchFilter =
+        filters.length === 0 || filters.includes(exercise.action) || filters.includes(exercise.bodySplit.toLowerCase())
 
-    return matchName && matchFilter
-  })
+      return matchName && matchFilter
+    })
+
+    setFilteredExercises(filtered)
+  }, [exercises, searchQuery, filters])
 
   return (
     <div className="flex flex-col gap-2">
@@ -116,7 +122,10 @@ export default function ExerciseFilter({
           <button
             className="overflow-hidden text-left"
             key={exercise.id}
-            onClick={() => handleExerciseClick(exercise)}
+            onClick={() => {
+              handleExerciseRemoval(exercise.id!)
+              handleExerciseClick(exercise)
+            }}
           >
             {exercise.exerciseName}
           </button>

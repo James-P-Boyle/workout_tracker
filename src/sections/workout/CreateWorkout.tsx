@@ -96,7 +96,7 @@ function AddExercisesToWorkout({
   handleWorkoutExercises
 }: AddExercisesToWorkoutProps) {
 
-  const { exercises, fetchExercises } = useFetchExercises()
+  const { exercises, fetchExercises, setExercises } = useFetchExercises()
 
   function handleExerciseClick(exercise: Exercise) {
 
@@ -110,6 +110,12 @@ function AddExercisesToWorkout({
     ])
   }
 
+  function handleExerciseRemove(exerciseId: string) {
+    setExercises((prevExercises) =>
+      prevExercises.filter((exercise) => exercise.id !== exerciseId)
+    )
+  }
+  
   return (
 
     <div className="grid w-full grid-cols-2 gap-2">
@@ -118,6 +124,7 @@ function AddExercisesToWorkout({
         <ExerciseFilter 
           exercises={exercises}
           handleExerciseClick={handleExerciseClick}
+          handleExerciseRemoval={handleExerciseRemove}
         />
 
         <AddCustomExercise 

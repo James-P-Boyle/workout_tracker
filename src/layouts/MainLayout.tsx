@@ -1,26 +1,19 @@
-import Dashboard from "@/sections/dashboard/Dashboard"
-import { RefObject, useRef } from "react"
-import { Outlet } from "react-router-dom"
+import { useStyles } from "@/contexts/StyleContext"
 
-export default function MainLayout() {
+interface MainLayoutProps {
+  children: React.ReactNode
+}
+ 
+export default function MainLayout({children}: MainLayoutProps) {
 
-  const outletRef: RefObject<HTMLDivElement> = useRef(null)
+  const { mode } = useStyles()
 
   return (
-    <div className="grid md:grid-cols-[25%_1fr] gap-2">
-      
-      <section 
-        className="p-4 md:h-auto"
-      >
-        <Dashboard outletRef={outletRef} />
-      </section>
-              
-      <section 
-        ref={outletRef}
-        className="flex flex-col items-center min-h-screen p-4"
-      >
-        <Outlet />
-      </section>
-  </div>
+
+    <div className={`${mode === "dark" ? "dark bg-[#141414] text-white" : ""}`}>
+    
+      {children}  
+    
+    </div>
   )
 }

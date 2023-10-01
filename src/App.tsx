@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import { useStyles } from "@/contexts/StyleContext"
 import { useAuth } from "@/contexts/AuthContext"
 
 import Home from "@/pages/home/Home"
@@ -16,15 +15,14 @@ import EditWorkout from "@/sections/workout/EditWorkout"
 import ProgressMain from "@/sections/progress/ProgressMain"
 import MainLayout from "@/layouts/MainLayout"
 import GuestLayout from "@/layouts/GuestLayout"
+import DashboardLayout from "@/layouts/DashboardLayout"
 
 function App() {
 
-  const { mode } = useStyles()
   const { isAuth } = useAuth()
   
   return (
-    /* Remove styles from app */
-    <div className={`${mode === "dark" ? "dark bg-[#141414] text-white" : ""}`}>
+    <MainLayout>
       <Routes>
 
         <Route path="/" element={<GuestLayout />}>
@@ -37,7 +35,7 @@ function App() {
         </Route>
         {/* Need auth check */}
         <>
-          <Route path="dashboard" element={<MainLayout />}>
+          <Route path="dashboard" element={<DashboardLayout />}>
             <Route index element={<div>Some widgets and info</div>} />
             <Route path="progress" element={<ProgressMain />} />
             <Route path="workout" element={<MyWorkouts />} />
@@ -48,11 +46,10 @@ function App() {
           <Route path="profile" element={<Profile />} />
         </>
         
-        
         <Route path="*" element={<NotFound />} />
 
       </Routes>
-    </div>
+    </MainLayout>
   )
 }
 

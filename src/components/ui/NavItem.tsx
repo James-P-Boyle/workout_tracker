@@ -4,7 +4,6 @@ interface NavItemProps {
   to: string,
   className?: string
   children: React.ReactNode
-  fontSize?: string
   onClick?: () => void
 }
 
@@ -12,7 +11,6 @@ export default function NavItem({
   to,
   className,
   children,
-  fontSize = "2xl",
   onClick
   
 }: NavItemProps) {
@@ -24,7 +22,7 @@ export default function NavItem({
     <NavLink 
       className={
         ({ isActive }) => 
-          `${isActive ? activeClassName : ""} text-${fontSize} ${className}
+          `${isActive ? activeClassName : ""} ${className}
           flex justify-center py-2 border flex-1 w-full rounded-md dark:border-gray-800 hover:border-black dark:hover:border-gray-700 hover:shadow-lg transition-all`
       }
       to={to}

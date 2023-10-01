@@ -381,7 +381,7 @@ function AddCustomExercise({
      
           <Button 
             type="submit" 
-            className="border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600"
+            cta 
           >
             Add
           </Button>   
@@ -391,7 +391,8 @@ function AddCustomExercise({
     ) : (
       <Button
         onClick={() => setShowForm(true)}
-        className="w-full mt-2 border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600"
+        cta
+        className="w-full mt-2"
       >
         Add Custom Exercise
       </Button>

@@ -69,7 +69,12 @@ export default function ShowWorkout() {
   
         <Button className="w-full">Progress</Button>
         {/* Will refactpr button */}
-        <Button className="w-full border-yellow-500 dark:border-yellow-500 hover:dark:border-yellow-600 hover:border-yellow-600">Start</Button>
+        <Button  
+          cta
+          className="w-full"
+        >
+          Start
+        </Button>
       </div>
 
       {workout ? (

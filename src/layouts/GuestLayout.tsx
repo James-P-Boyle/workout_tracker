@@ -1,15 +1,11 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "../components/NavBar"
 
-type GuestLayoutProps = {
-  
-}
- 
-export default function GuestLayout({  }: GuestLayoutProps) {
+export default function GuestLayout() {
 
   return (
 
-    <div className="flex flex-col h-screen gap-2">
+    <div className="flex flex-col min-h-screen gap-2">
 
       <NavBar />
 

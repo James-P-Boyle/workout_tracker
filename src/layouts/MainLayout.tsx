@@ -12,19 +12,14 @@ export default function MainLayout() {
       <section 
         className="p-4 md:h-auto"
       >
-        <Dashboard 
-          outletRef={outletRef}
-        />
+        <Dashboard outletRef={outletRef} />
       </section>
               
       <section 
         ref={outletRef}
         className="flex flex-col items-center min-h-screen p-4"
       >
-
         <Outlet />
-  
- 
       </section>
   </div>
   )

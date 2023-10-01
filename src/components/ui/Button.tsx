@@ -3,22 +3,34 @@ export interface ButtonProps {
     className?: string
     onClick?: () => void
     children: React.ReactNode
+    cta?: boolean 
+    danger?: boolean
 }
 
 export default function Button({ 
     type = "button", 
     className = "", 
     onClick, 
-    children 
+    children,
+    cta = false,
+    danger = false
 }: ButtonProps) {
+    const baseClass = `
+        px-2 py-1 rounded-lg font-bold border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-gray-700 hover:shadow-lg dark:text-white transition-colors
+    `
+
+    const ctaClass = cta ? `
+        border-yellow-500 hover:border-yellow-600 dark:border-yellow-500 dark:hover:border-yellow-600
+    ` : ''
+
+    const dangerClass = danger ? `
+        border-red-500 hover:border-red-600 dark:border-red-500 dark:hover:border-red-600
+    ` : ''
 
     return (
         <button
             type={type}
-            className={`
-                ${className}
-                px-2 py-1 rounded-lg font-bold border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-gray-700 hover:shadow-lg dark:text-white transition-colors 
-            `}
+            className={`${baseClass} ${className} ${ctaClass} ${dangerClass}`}
             onClick={onClick}
         >
             {children}

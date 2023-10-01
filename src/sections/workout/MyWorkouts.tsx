@@ -3,7 +3,6 @@ import { WorkoutService } from "@/services/workout.service"
 import { Workout } from "@/types"
 import { Link } from "react-router-dom"
 import Button from "@/components/ui/Button"
-import Popup from "@/components/Popup"
 
 export default function MyWorkouts() {
   const workout = new WorkoutService()
@@ -20,9 +19,7 @@ export default function MyWorkouts() {
         setLoading(false)
       } catch (error) {
         console.log("Error fetching workouts:", error)
-      } finally {
-        setLoading(false)
-      }
+      } 
     }
 
     fetchWorkouts()
@@ -46,14 +43,11 @@ export default function MyWorkouts() {
         ))
       )}
 
-      
-
     </div>
   )
 }
 
-// TYPE!
-function WorkoutCard({ workout }: any) {
+function WorkoutCard({workout} : {workout: Workout}) {
 
   return (
     <div className="flex flex-col p-2 transition-all border border-gray-200 rounded-lg dark:hover:border-yellow-500 hover:border-yellow-500 dark:border-gray-800">

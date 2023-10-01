@@ -23,5 +23,5 @@ export function useFetchExercises() {
     fetchExercises()
   }, [])
 
-  return { exercises, loading, fetchExercises }
+  return { exercises, loading, fetchExercises, setExercises }
 }

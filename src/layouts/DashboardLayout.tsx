@@ -1,21 +1,26 @@
-interface DashboardLayoutProps {
-  children: React.ReactNode
-  links: React.ReactNode
-}
- 
-export default function DashboardLayout({ children, links }: DashboardLayoutProps) {
+import Dashboard from "@/sections/dashboard/Dashboard"
+import { RefObject, useRef } from "react"
+import { Outlet } from "react-router-dom"
+
+export default function DashboardLayout() {
+
+  const outletRef: RefObject<HTMLDivElement> = useRef(null)
 
   return (
-    <div className={`relative flex flex-col gap-10`}>
-    
-      {children}
-
-      <div className="flex flex-col gap-2 sm:flex-row md:flex-col justify-evenly">
-     
-        {links}
-
-      </div>    
-    
-    </div>
+    <div className="grid md:grid-cols-[25%_1fr] gap-2">
+      
+      <section 
+        className="p-4 md:h-auto"
+      >
+        <Dashboard outletRef={outletRef} />
+      </section>
+              
+      <section 
+        ref={outletRef}
+        className="flex flex-col items-center min-h-screen p-4"
+      >
+        <Outlet />
+      </section>
+  </div>
   )
 }

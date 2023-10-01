@@ -1,4 +1,3 @@
-import DashboardLayout from "@/layouts/DashboardLayout"
 import HeroIcon from "@/components/ui/HeroIcon"
 import Button from "@/components/ui/Button"
 import useScrollToRef from "@/hooks/useScrollToRef"
@@ -25,30 +24,11 @@ export default function MainNavigation({
   }
 
   return (
-    <DashboardLayout
 
-      links={
-        <>
-          <Button
-            className="w-full"
-            onClick={() => handleLinkClick('progress')}
-          >
-            Progress
-          </Button>
-
-          <Button
-            className="w-full"
-            onClick={() => handleLinkClick('workout')}
-          >
-            Workouts
-          </Button>
-        
-        </>
-      }
-    >
-
+    <div className="relative flex flex-col gap-10">
+    
       <div className="flex flex-row flex-wrap justify-between gap-2">
-            
+              
         <Button
           className="text-sm"
           onClick={() => setShowSettings(!showSettings)}
@@ -63,11 +43,30 @@ export default function MainNavigation({
             onClose={() => setShowSettings(false)}
           />
         )}
-            
+              
       </div>  
-      
-      <HeroIcon/> 
 
-    </DashboardLayout>
+      <HeroIcon/>  
+
+      <div className="flex flex-col gap-2 sm:flex-row md:flex-col justify-evenly">
+      
+        <Button
+          className="w-full"
+          onClick={() => handleLinkClick('progress')}
+        >
+          Progress
+        </Button>
+
+        <Button
+          className="w-full"
+          onClick={() => handleLinkClick('workout')}
+        >
+          Workouts
+        </Button>
+
+      </div>   
+
+    </div>
+
   )
 }

@@ -64,7 +64,7 @@ export default function Login() {
 
         <Button 
           type="submit" 
-          className="border-yellow-500 hover:border-yellow-600"
+          cta
         >
           Login
         </Button>   

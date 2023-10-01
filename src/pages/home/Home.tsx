@@ -1,18 +1,13 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
 
-interface HomeProps {
-
-}
-
-export default function Home({}: HomeProps) {
+export default function Home() {
 
   const [showAbout, setShowAbout] =  useState(false)
   const navigate = useNavigate()
 
-
   const handleDownloadClick = () => {
-    navigate('/register')
+    navigate('/download')
   }
 
   return (
@@ -37,7 +32,7 @@ export default function Home({}: HomeProps) {
         )}
 
         <div className={`grid ${!showAbout && 'sm:grid-cols-2 gap-2'}`}>
-          {/* Need to refactor job component, TWmerge */}
+          
           {!showAbout && (
             <button
               onClick={(e) => {

@@ -5,14 +5,17 @@ import './scss/app.scss'
 import { BrowserRouter } from 'react-router-dom'
 import StylesContext from './contexts/StyleContext.tsx'
 import AuthContext from './contexts/AuthContext.tsx'
+import { NotificationProvider } from './contexts/NotificationContext.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <React.StrictMode>
       <StylesContext>
-        <AuthContext>
-          <App />
-        </AuthContext>
+        <NotificationProvider>
+          <AuthContext>
+            <App />
+          </AuthContext>
+        </NotificationProvider>
       </StylesContext>
     </React.StrictMode>
   </BrowserRouter>

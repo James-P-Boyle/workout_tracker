@@ -1,6 +1,7 @@
 import BackButton from "@/components/BackButton"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/forms/Input"
+import { useNotification } from "@/contexts/NotificationContext"
 import { WorkoutService } from "@/services/workout.service"
 import { Exercise, FullWorkout } from "@/types"
 import { useEffect, useState } from "react"
@@ -14,7 +15,8 @@ export default function ShowWorkout() {
 
   const workoutService = new WorkoutService()
   const navigate = useNavigate()
-  const { id } = useParams()                  
+  const { id } = useParams()   
+  const { showNotification } = useNotification()               
   const [ workout, setWorkout ] = useState<FullWorkout | null>(null)
   const [ showRenameForm, setShowRenameForm ] = useState(false)
   const [ newWorkoutName, setNewWorkoutName ] = useState(workout?.workoutName)
@@ -22,6 +24,7 @@ export default function ShowWorkout() {
   const handleDelete = async () => {
     try {
       await workoutService.deleteWorkout(id!)
+      showNotification('Deleted', 'success')
       navigate('/dashboard/workout')
     } catch (error) {
       console.log('Error deleting workout', error)

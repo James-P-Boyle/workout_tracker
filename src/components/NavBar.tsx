@@ -39,7 +39,7 @@ export default function NavBar() {
 
         {isAuth ? (
           <>
-            <NavItem to="dashboard/progress" fontSize="md" className="px-2">
+            <NavItem to="dashboard/progress" className="px-2">
               Dashboard
             </NavItem>
 
@@ -49,7 +49,6 @@ export default function NavBar() {
           <>
             <NavItem
               to={"/"} 
-              fontSize="md" 
               className="px-2"
             >
               Home
@@ -57,7 +56,6 @@ export default function NavBar() {
 
             <NavItem 
               to={"login"} 
-              fontSize="md" 
               className="px-2"
             >
               Login
@@ -65,7 +63,6 @@ export default function NavBar() {
 
             <NavItem 
               to={"register"} 
-              fontSize="md" 
               className="px-2"
             >
               Register
@@ -91,7 +88,7 @@ export default function NavBar() {
             <>
               <NavItem 
                 to={"dashboard/progress"} 
-                fontSize="md" 
+
                 className="px-2"
                 onClick={() => setDropdownOpen(false)}
               >
@@ -108,7 +105,7 @@ export default function NavBar() {
             <>
               <NavItem 
                 to={"/"} 
-                fontSize="md" 
+
                 className="px-2"
                 onClick={() => setDropdownOpen(false)}
               >
@@ -117,7 +114,7 @@ export default function NavBar() {
 
               <NavItem 
                 to={"login"} 
-                fontSize="md" 
+
                 className="px-2"
                 onClick={() => setDropdownOpen(false)}
               >
@@ -126,7 +123,7 @@ export default function NavBar() {
 
               <NavItem 
                 to={"register"} 
-                fontSize="md" 
+
                 className="px-2"
                 onClick={() => setDropdownOpen(false)}
               >

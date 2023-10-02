@@ -1,0 +1,13 @@
+.notification {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transform: translateX(-150%);
+  opacity: 0;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+}
+
+.slide-in {
+  transform: translateX(0);
+  opacity: 1;
+}

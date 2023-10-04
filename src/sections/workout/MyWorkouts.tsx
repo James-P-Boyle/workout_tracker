@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { WorkoutService } from "@/services/workout.service"
 import { Workout } from "@/types"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Button from "@/components/ui/Button"
 
 export default function MyWorkouts() {
   const workout = new WorkoutService()
+  const navigate = useNavigate()
 
   const [workouts, setWorkouts] = useState<Workout[]>([])
   const [loading, setLoading] = useState(true)
@@ -28,8 +29,11 @@ export default function MyWorkouts() {
   return (
 
     <div className="grid w-full grid-cols-2 gap-2">  
-      <Button className="col-span-2 mb-4">
-        <Link to="create">Create Workout</Link>
+      <Button 
+        onClick={() => navigate(`create`)}
+        className="col-span-2 mb-4"
+      >
+        Create Workout
       </Button>
 
             {loading ? (

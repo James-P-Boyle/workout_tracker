@@ -32,15 +32,17 @@ export default function MyWorkouts() {
         <Link to="create">Create Workout</Link>
       </Button>
 
-      {loading ? (
-        <h1>loading icon</h1>
+            {loading ? (
+        <h1>Loading icon</h1>
       ) : (
-        workouts.map((workout) => (
-          <WorkoutCard 
-            key={`${workout.id}`}
-            workout={workout}
-          />
-        ))
+        workouts ? (
+          workouts.map((workout) => (
+            <WorkoutCard 
+              key={`${workout.id}`}
+              workout={workout}
+            />
+          ))
+        ) : <span>You have no workouts</span>
       )}
 
     </div>

@@ -1,11 +1,11 @@
 import BackButton from "@/components/BackButton"
 import Button from "@/components/ui/Button"
-import Input from "@/components/ui/forms/Input"
 import { useNotification } from "@/contexts/NotificationContext"
 import { WorkoutService } from "@/services/workout.service"
 import { Exercise, FullWorkout } from "@/types"
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import RenameWorkout from "./RenameWorkout"
 
 interface ExerciseCardProps {
   exercise: Exercise
@@ -18,8 +18,6 @@ export default function ShowWorkout() {
   const { id } = useParams()   
   const { showNotification } = useNotification()               
   const [ workout, setWorkout ] = useState<FullWorkout | null>(null)
-  const [ showRenameForm, setShowRenameForm ] = useState(false)
-  const [ newWorkoutName, setNewWorkoutName ] = useState(workout?.workoutName)
 
   const handleDelete = async () => {
     try {
@@ -32,15 +30,11 @@ export default function ShowWorkout() {
   }
 
   const handleNameChange = async (newName: string) => {
-
     try {
       await workoutService.renameWorkout(id!, newName)
-      setShowRenameForm(false)
-
     } catch (error) {
       console.log('Error deleting workout', error)
     }
-
   }
 
   useEffect(() => {
@@ -84,34 +78,10 @@ export default function ShowWorkout() {
       {workout ? (
         <div className="grid gap-2 p-2">
 
-          <div>
-            {!showRenameForm ? (
-              <h1 
-                onClick={() => setShowRenameForm(true)}
-                className="font-black hover:cursor-pointer hover:underline"
-                title="Click to update workout name"
-              >
-                {workout.workoutName}
-              </h1>
-            ) : (
-              <div className="flex gap-2">
-                <Input
-                  type="text"
-                  value={newWorkoutName}
-                  onChange={(e) => {
-                    setNewWorkoutName(e.target.value)
-                  }}
-                />
-                <Button
-                  onClick={() => handleNameChange(newWorkoutName!)}
-                >
-                  Save
-                </Button>
-              </div>
-  
-            )}
-       
-          </div>
+          <RenameWorkout 
+            workout={workout}
+            handleRename={handleNameChange}
+          />
 
           <h2 className="font-bold">Exercises</h2>
 

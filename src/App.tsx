@@ -16,6 +16,7 @@ import ProgressMain from "@/sections/progress/ProgressMain"
 import MainLayout from "@/layouts/MainLayout"
 import GuestLayout from "@/layouts/GuestLayout"
 import DashboardLayout from "@/layouts/DashboardLayout"
+import StartWorkout from "./sections/workout/StartWorkout"
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
             <Route path="workout/create" element={<CreateWorkout />} />
             <Route path="workout/:id" element={<ShowWorkout />} />
             <Route path="workout/edit/:id" element={<EditWorkout />} />
+            <Route path="workout/start/:id" element={<StartWorkout />} />
           </Route>
           <Route path="profile" element={<Profile />} />
         </>

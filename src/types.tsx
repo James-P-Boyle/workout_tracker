@@ -19,7 +19,6 @@ export interface Exercise {
 
 export interface WorkoutExercise {
   id: string
-  order: number
   exercise: Exercise[]
 }
 

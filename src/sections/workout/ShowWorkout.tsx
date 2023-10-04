@@ -2,14 +2,11 @@ import BackButton from "@/components/BackButton"
 import Button from "@/components/ui/Button"
 import { useNotification } from "@/contexts/NotificationContext"
 import { WorkoutService } from "@/services/workout.service"
-import { Exercise, FullWorkout } from "@/types"
+import { FullWorkout } from "@/types"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import RenameWorkout from "./RenameWorkout"
-
-interface ExerciseCardProps {
-  exercise: Exercise
-}
+import ExerciseCard from "./ExerciseCard"
 
 export default function ShowWorkout() {
 
@@ -86,9 +83,10 @@ export default function ShowWorkout() {
           <h2 className="font-bold">Exercises</h2>
 
           <div className="grid gap-2">
-            {/* Fix exercise data structure */}
+          {/* TYPE */}
             {workout.workoutExercises.map(({exercise}: any) => (
               <ExerciseCard 
+                key={exercise.id}
                 exercise={exercise}
               />
             ))}
@@ -98,58 +96,6 @@ export default function ShowWorkout() {
       ) : (
         <span>Loading...</span>
       )}
-    </div>
-  )
-}
-
-function ExerciseCard({exercise}: ExerciseCardProps) {
-
-  const [showDetails, setShowDetails] = useState(false)
-  //Needs major refactoring
-  return (
-    <div
-      className="relative flex flex-col p-2 border rounded-lg dark:border-gray-800"
-      key={exercise.id}
-    > 
-      {showDetails ? (
-        <div className="grid gap-2">
-
-          <div className="flex items-center justify-between">
-            <span className="font-bold">{exercise.exerciseName}</span>
-            <span 
-              onClick={() => setShowDetails(false)}
-              className="px-3 py-1 font-black transition-transform border rounded-full dark:border-gray-800 hover:cursor-pointer"
-            >
-              x
-            </span>
-          </div>
-
-          <p>{exercise.instruction}</p>
-        {/* Make into component */}
-          <div className="grid gap-2 md:grid-cols-3">
-            <span className="p-1 border rounded-lg dark:border-gray-800">
-              {exercise.action}
-            </span>
-            <span className="p-1 border rounded-lg dark:border-gray-800">
-              {exercise.bodySplit}
-            </span>
-            <span className="p-1 border rounded-lg dark:border-gray-800">
-              {exercise.equipment}
-            </span>
-          </div>
-        </div>
-      ) : (
-        <div className="flex justify-between">
-          <span className="font-bold">{exercise.exerciseName}</span>
-          <span 
-            onClick={() => setShowDetails(true)}
-            className="px-3 py-1 font-black transition-transform border rounded-full dark:border-gray-800 hover:cursor-pointer"
-          >
-            ?
-          </span>
-        </div>
-      )}
-  
     </div>
   )
 }

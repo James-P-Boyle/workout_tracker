@@ -5,7 +5,7 @@ import { useNotification } from "@/contexts/NotificationContext"
 import { WorkoutService } from "@/services/workout.service"
 import { Exercise, FullWorkout } from "@/types"
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 interface ExerciseCardProps {
   exercise: Exercise
@@ -75,6 +75,7 @@ export default function ShowWorkout() {
         <Button  
           cta
           className="w-full"
+          onClick={() => navigate(`/dashboard/workout/start/${workout?.id}`)}
         >
           Start
         </Button>

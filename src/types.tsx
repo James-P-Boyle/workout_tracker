@@ -9,17 +9,12 @@ export interface Profile {
 }
 
 export interface Exercise {
-  bodySplit: BodySplitType
-  action: ActionType
-  equipment: EquipmentType
-  exerciseName: string
-  instruction: string
+  bodySplit?: BodySplitType
+  action?: ActionType
+  equipment?: EquipmentType
+  exerciseName?: string
+  instruction?: string
   id?: string
-}
-
-export interface WorkoutExercise {
-  id: string
-  exercise: Exercise[]
 }
 
 export interface FullWorkout {

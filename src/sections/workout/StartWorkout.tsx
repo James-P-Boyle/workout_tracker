@@ -30,6 +30,7 @@ export default function StartWorkout() {
         <ExerciseCard 
           key={exercise.id}
           exercise={exercise}
+          showTrackingForm
         />
       ))}
     </div>

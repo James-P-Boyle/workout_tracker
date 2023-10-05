@@ -1,74 +1,118 @@
+import Button from "@/components/ui/Button"
 import Input from "@/components/ui/forms/Input"
 import { Exercise } from "@/types"
 import { useState } from "react"
 
 interface ExerciseCardProps {
   exercise: Exercise
+  showTrackingForm?: boolean
 }
 
-export default function ExerciseCard({exercise}: ExerciseCardProps) {
+export default function ExerciseCard({
+  exercise,
+  showTrackingForm = false
+}: ExerciseCardProps) {
 
   const [showDetails, setShowDetails] = useState(false)
   
-  //Needs major refactoring
   return (
-    <div
-      className="relative flex flex-col gap-2 p-2 border rounded-lg dark:border-gray-800"
-      key={exercise.id}
-    > 
+    <div className="relative flex flex-col justify-center w-full max-w-lg gap-2 p-2 mx-auto border rounded-lg dark:border-gray-800"> 
 
       {showDetails ? (
         <div className="grid gap-2">
 
           <div className="flex items-center justify-between">
-            <span className="font-bold">{exercise.exerciseName}</span>
-            <span 
+            <span className="font-bold">
+              {exercise.exerciseName}
+            </span>
+            <Button
               onClick={() => setShowDetails(false)}
-              className="px-3 py-1 font-black transition-transform border rounded-full dark:border-gray-800 hover:cursor-pointer"
             >
               x
-            </span>
+            </Button>
           </div>
 
-          <p>{exercise.instruction}</p>
-          {/* Make into component */}
-          <div className="grid gap-2 md:grid-cols-3">
-            <span className="p-1 border rounded-lg dark:border-gray-800">
-              {exercise.action}
-            </span>
-            <span className="p-1 border rounded-lg dark:border-gray-800">
-              {exercise.bodySplit}
-            </span>
-            <span className="p-1 border rounded-lg dark:border-gray-800">
-              {exercise.equipment}
-            </span>
-          </div>
+          <ExerciseDetail 
+            exercise={exercise}
+          />
+          
         </div>
       ) : (
         <div className="flex justify-between">
-          <span className="font-bold">{exercise.exerciseName}</span>
-          <span 
+          <span className="font-bold">
+            {exercise.exerciseName}
+          </span>
+          <Button
             onClick={() => setShowDetails(true)}
-            className="px-3 py-1 font-black transition-transform border rounded-full dark:border-gray-800 hover:cursor-pointer"
           >
             ?
-          </span>
+          </Button>
         </div>
-      )}
+      )}  
 
-      <div className="flex flex-row gap-2">
-        <div>
-          <Input placeholder="Enter Reps"></Input>
-        </div>
-   
-        <span
-          className="flex items-center justify-center p-1 transition-transform border rounded-lg dark:border-gray-800 hover:cursor-pointer"
-        >
-          Add set
-        </span>
-      </div>
+      {showTrackingForm ? (
+        <TrackingForm />
+      ) : (
+        null
+      )}
+    </div>
+  )
+}
+
+function ExerciseDetail({ 
+  exercise
+}: {exercise: Exercise}) {
+  // STYLE
+  return (
+    <>
+      <p>{exercise.instruction}</p>
       
-  
+      <div className="grid gap-2 md:grid-cols-3">
+        <span className="p-1 border rounded-lg dark:border-gray-800">
+          {exercise.action}
+        </span>
+        <span className="p-1 border rounded-lg dark:border-gray-800">
+          {exercise.bodySplit}
+        </span>
+        <span className="p-1 border rounded-lg dark:border-gray-800">
+          {exercise.equipment}
+        </span>
+      </div> 
+    </>
+  )
+}
+
+function TrackingForm() {
+  const [repsInputs, setRepsInputs] = useState<string[]>([''])
+  const [inputCount, setInputCount] = useState<number>(1)
+
+  const handleAddSet = () => {
+    setInputCount(inputCount + 1)
+    setRepsInputs([...repsInputs, ''])
+  }
+
+  const handleInputChange = (index: number, value: string) => {
+    const updatedInputs = [...repsInputs]
+    updatedInputs[index] = value
+    setRepsInputs(updatedInputs)
+  }
+
+  return (
+    <div className="flex">
+      <div className="flex flex-col gap-2 p-2 border rounded-lg md:text-md dark:border-gray-800">
+        {repsInputs.map((value, index) => (
+          <div key={index} className="flex flex-row items-center gap-2">
+            <Input
+              placeholder="Enter Reps"
+              value={value}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+            />
+            <span className="font-bold text-gray-400">{index + 1}</span>
+          </div>
+        ))}
+
+        <Button onClick={handleAddSet}>Add set</Button>
+      </div>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { Workout } from "@/types"
 import { Link, useNavigate } from "react-router-dom"
 import Button from "@/components/ui/Button"
 
-export default function MyWorkouts() {
+export default function ShowAllWorkouts() {
   const workout = new WorkoutService()
   const navigate = useNavigate()
 

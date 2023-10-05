@@ -5,9 +5,13 @@ import { useState } from "react"
 
 interface ExerciseCardProps {
   exercise: Exercise
+  showTrackingForm?: boolean
 }
 
-export default function ExerciseCard({exercise}: ExerciseCardProps) {
+export default function ExerciseCard({
+  exercise,
+  showTrackingForm = false
+}: ExerciseCardProps) {
 
   const [showDetails, setShowDetails] = useState(false)
   
@@ -44,19 +48,29 @@ export default function ExerciseCard({exercise}: ExerciseCardProps) {
             ?
           </Button>
         </div>
+      )}  
+
+      {showTrackingForm ? (
+
+        <div className="flex flex-row gap-2">
+          <div>
+            <Input placeholder="Enter Reps"></Input>
+          </div>
+
+          <span
+            className="flex items-center justify-center p-1 transition-transform border rounded-lg dark:border-gray-800 hover:cursor-pointer"
+          >
+            Add set
+          </span>
+        </div>
+
+      ) : (
+
+        null
+        
       )}
 
-      <div className="flex flex-row gap-2">
-        <div>
-          <Input placeholder="Enter Reps"></Input>
-        </div>
-   
-        <span
-          className="flex items-center justify-center p-1 transition-transform border rounded-lg dark:border-gray-800 hover:cursor-pointer"
-        >
-          Add set
-        </span>
-      </div>
+     
       
   
     </div>

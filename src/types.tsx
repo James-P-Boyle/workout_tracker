@@ -17,11 +17,6 @@ export interface Exercise {
   id?: string
 }
 
-export interface WorkoutExercise {
-  id: string
-  exercise: Exercise[]
-}
-
 export interface FullWorkout {
   id: string
   workoutName: string

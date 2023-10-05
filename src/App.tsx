@@ -9,14 +9,14 @@ import NotFound from "@/pages/errors/NotFound"
 
 import CreateWorkout from "@/sections/workout/CreateWorkout"
 import Profile from "@/sections/profile/Profile"
-import MyWorkouts from "@/sections/workout/MyWorkouts"
+import ShowAllWorkouts from "@/sections/workout/ShowAllWorkouts"
 import ShowWorkout from "@/sections/workout/ShowWorkout"
 import EditWorkout from "@/sections/workout/EditWorkout"
 import ProgressMain from "@/sections/progress/ProgressMain"
 import MainLayout from "@/layouts/MainLayout"
 import GuestLayout from "@/layouts/GuestLayout"
 import DashboardLayout from "@/layouts/DashboardLayout"
-import StartWorkout from "./sections/workout/StartWorkout"
+import StartWorkout from "@/sections/workout/StartWorkout"
 
 function App() {
 
@@ -39,7 +39,7 @@ function App() {
           <Route path="dashboard" element={<DashboardLayout />}>
             <Route index element={<div>Some widgets and info</div>} />
             <Route path="progress" element={<ProgressMain />} />
-            <Route path="workout" element={<MyWorkouts />} />
+            <Route path="workout" element={<ShowAllWorkouts />} />
             <Route path="workout/create" element={<CreateWorkout />} />
             <Route path="workout/:id" element={<ShowWorkout />} />
             <Route path="workout/edit/:id" element={<EditWorkout />} />

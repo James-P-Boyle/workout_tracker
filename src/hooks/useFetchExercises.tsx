@@ -23,5 +23,6 @@ export function useFetchExercises() {
     fetchExercises()
   }, [])
 
+  console.log('exer!!',exercises)
   return { exercises, loading, fetchExercises, setExercises }
 }

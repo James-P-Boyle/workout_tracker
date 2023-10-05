@@ -26,7 +26,7 @@ export default function StartWorkout() {
 
   return (
     <div className="flex flex-col w-full gap-2">
-      {workout && workout.workoutExercises.map(exercise => (
+      {workout && workout.workoutExercises.map(({exercise}: any) => (
         <ExerciseCard 
           key={exercise.id}
           exercise={exercise}

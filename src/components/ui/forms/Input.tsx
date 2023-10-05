@@ -20,7 +20,7 @@ export default function Input({
 
     return (
         <input
-            className={`p-2 border text-gray-800 rounded-lg w-full outline-black bg-transparent hover:border-black dark:border-gray-700 hover:dark:border-gray-600 dark:text-white transition-colors ${className}`}
+            className={`p-2 border text-gray-800 rounded-lg bg-transparent hover:border-gray-300 dark:border-gray-700 hover:dark:border-gray-600 dark:text-white transition-colors outline-none focus:border-yellow-600 ${className}`}
             name={name}
             type={type}
             value={value}

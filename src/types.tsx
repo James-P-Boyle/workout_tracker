@@ -9,11 +9,11 @@ export interface Profile {
 }
 
 export interface Exercise {
-  bodySplit: BodySplitType
-  action: ActionType
-  equipment: EquipmentType
-  exerciseName: string
-  instruction: string
+  bodySplit?: BodySplitType
+  action?: ActionType
+  equipment?: EquipmentType
+  exerciseName?: string
+  instruction?: string
   id?: string
 }
 

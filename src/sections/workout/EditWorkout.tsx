@@ -29,7 +29,7 @@ export default function Editorkout() {
           <div className="flex flex-col">
             <h3 className="font-bold">Exercises</h3>
 
-            {workout.workoutExercises.map((exercise) => (
+            {workout.workoutExercises.map(({exercise}: any) => (
               <div
                 className="flex gap-2"
                 key={exercise.id}

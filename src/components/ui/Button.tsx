@@ -16,7 +16,7 @@ export default function Button({
     danger = false
 }: ButtonProps) {
     const baseClass = `
-        px-2 py-1 rounded-lg font-bold border border-gray-200 dark:border-gray-800 hover:border-black dark:hover:border-gray-700 hover:shadow-lg dark:text-white transition-colors
+        px-2 py-1 rounded-lg font-bold border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:shadow-sm dark:text-white transition-colors
     `
 
     const ctaClass = cta ? `

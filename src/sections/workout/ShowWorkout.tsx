@@ -83,14 +83,14 @@ export default function ShowWorkout() {
           <h2 className="font-bold">Exercises</h2>
 
           <div className="grid gap-2">
-            {workout.workoutExercises.map(exercise => (
+            {workout.workoutExercises.map(({exercise}: any)=> (
               <ExerciseCard 
                 key={exercise.id}
                 exercise={exercise}
               />
             ))}
           </div>
-   
+
         </div>
       ) : (
         <span>Loading...</span>

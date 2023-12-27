@@ -8,22 +8,21 @@ import { useNavigate } from "react-router-dom"
 import { useAuth } from "@/contexts/AuthContext"
 
 
-const defaultFormData = {
-  email: "",
-  password: "",
+interface LoginFormData {
+  email: string,
+  password: string,
 }
 
 export default function Login() {
 
-  const [ formData, setFormData ] = useState(defaultFormData)
-  const { email, password } = formData
-  const { login } = useAuth()
+  const [ formData, setFormData ] = useState<LoginFormData>({ email: '', password: '' })
 
+  const { login } = useAuth()
   const navigate = useNavigate()
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevState) => ({
-      ...prevState,
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
     }))
   }
@@ -32,9 +31,9 @@ export default function Login() {
     event.preventDefault()
   
     try {
-      await login(email, password)
-      navigate('/dashboard')
-      setFormData(defaultFormData)
+      await login(formData.email, formData?.password);
+      console.log(formData?.email, formData?.password);
+      setFormData({ email: '', password: '' })
     } catch (error) {
       console.log('Error on login:', error)
     }
@@ -49,7 +48,7 @@ export default function Login() {
         <Input 
           name="email"
           type="email"
-          value={email}
+          value={formData.email}
           placeholder="Email"
           onChange={onChange}
         />
@@ -57,7 +56,7 @@ export default function Login() {
         <Input 
           name="password"
           type="password"
-          value={password}
+          value={formData.password}
           placeholder="Password"
           onChange={onChange}
         />

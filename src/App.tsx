@@ -35,18 +35,20 @@ function App() {
 
         </Route>
         {/* Need auth check */}
-        <>
-          <Route path="dashboard" element={<DashboardLayout />}>
-            <Route index element={<div>Some widgets and info</div>} />
-            <Route path="progress" element={<ProgressMain />} />
-            <Route path="workout" element={<ShowAllWorkouts />} />
-            <Route path="workout/create" element={<CreateWorkout />} />
-            <Route path="workout/:id" element={<ShowWorkout />} />
-            <Route path="workout/edit/:id" element={<EditWorkout />} />
-            <Route path="workout/start/:id" element={<StartWorkout />} />
-          </Route>
-          <Route path="profile" element={<Profile />} />
-        </>
+        {isAuth && (
+          <>
+            <Route path="dashboard" element={<DashboardLayout />}>
+              <Route index element={<div>Some widgets and info</div>} />
+              <Route path="progress" element={<ProgressMain />} />
+              <Route path="workout" element={<ShowAllWorkouts />} />
+              <Route path="workout/create" element={<CreateWorkout />} />
+              <Route path="workout/:id" element={<ShowWorkout />} />
+              <Route path="workout/edit/:id" element={<EditWorkout />} />
+              <Route path="workout/start/:id" element={<StartWorkout />} />
+            </Route>
+            <Route path="profile" element={<Profile />} />
+          </>
+        )}
         
         <Route path="*" element={<NotFound />} />
 

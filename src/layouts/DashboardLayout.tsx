@@ -10,7 +10,7 @@ export default function DashboardLayout() {
     <div className="grid md:grid-cols-[25%_1fr] gap-2">
       
       <section 
-        className="p-4 md:h-auto"
+        className="min-h-screen p-4"
       >
         <Dashboard outletRef={outletRef} />
       </section>
@@ -22,5 +22,5 @@ export default function DashboardLayout() {
         <Outlet />
       </section>
   </div>
-  )
+  )  
 }

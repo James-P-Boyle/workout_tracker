@@ -41,7 +41,7 @@ export default function RenameWorkout({
               setShowRenameForm(false)
             }}
           >
-            Save
+            Update Workout Name
           </Button>
         </div>
 

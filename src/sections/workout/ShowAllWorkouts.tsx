@@ -39,7 +39,7 @@ export default function ShowAllWorkouts() {
             {loading ? (
         <h1>Loading icon</h1>
       ) : (
-        workouts ? (
+        workouts.length > 0 ? (
           workouts.map((workout) => (
             <WorkoutCard 
               key={`${workout.id}`}

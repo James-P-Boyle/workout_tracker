@@ -25,7 +25,7 @@ export default function MainNavigation({
 
   return (
 
-    <div className="relative flex flex-col gap-10">
+    <div className="relative flex flex-col justify-between h-full gap-10">
     
       <div className="flex flex-row flex-wrap justify-between gap-2">
               
@@ -48,7 +48,7 @@ export default function MainNavigation({
 
       <HeroIcon/>  
 
-      <div className="flex flex-col gap-2 sm:flex-row md:flex-col justify-evenly">
+      <div className="flex flex-col gap-2 py-4 sm:flex-row md:flex-col justify-evenly sm:py-10 md:py-0">
       
         <Button
           className="w-full"

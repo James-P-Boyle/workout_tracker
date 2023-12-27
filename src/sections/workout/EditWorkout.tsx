@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { WorkoutService } from "@/services/workout.service"
 import { FullWorkout } from "@/types"
 import Button from "@/components/ui/Button"
+import ExerciseCard from "./ExerciseCard"
+import RenameWorkout from "./RenameWorkout"
 
 export default function Editorkout() {
 
@@ -12,38 +14,69 @@ export default function Editorkout() {
   const [loading, setLoading] = useState(false)                    
   const [workout, setWorkout] = useState<FullWorkout | null>(null)
 
+  const handleNameChange = async (newName: string) => {
+    try {
+      await workoutService.renameWorkout(id!, newName)
+    } catch (error) {
+      console.log('Error deleting workout', error)
+    }
+  }
+
+  useEffect(() => {
+    const fetchWorkout = async () => {
+      try {
+        const response = await workoutService.getWorkout(id!)
+        setWorkout(response?.data[0])
+      } catch (error) {
+        console.log("Error fetching workout:", error)
+      } 
+    }
+
+    fetchWorkout()
+  }, [])
+
   return (
-    <div className="mx-auto">
-      <Button
-        onClick={() => navigate(-1)}
-      >
-        Go Back
-      </Button>
-
+    <div className="w-full">
+      <div className="flex justify-between gap-2"> 
+        <Button
+          onClick={() => navigate(-1)}
+        >
+          Go Back
+        </Button>
+        <div className="flex gap-2"> 
+          <Button
+            onClick={() => navigate(-1)}
+          >
+            Add More Exercises
+          </Button>
+          <Button
+            className="bg-red-500"
+            onClick={() => alert('not coded yet')}
+          >
+            SAVE
+          </Button>
+        </div>
+      </div> 
+        
       {workout ? (
-        <div className="border">
-          <h2 className="font-bold">Edit Workout</h2>
-          <p>ID: {workout.id}</p>
-          <p>Name: {workout.workoutName}</p>
+        <div className="grid gap-2 p-2">
 
-          <div className="flex flex-col">
-            <h3 className="font-bold">Exercises</h3>
+          <RenameWorkout 
+            workout={workout}
+            handleRename={handleNameChange}
+          />
+      
+          <h2 className="font-bold">Exercises</h2>
 
-            {workout.workoutExercises.map(({exercise}: any) => (
-              <div
-                className="flex gap-2"
+          <div className="grid gap-2">
+            {workout.workoutExercises.map(({exercise}: any)=> (
+              <ExerciseCard 
                 key={exercise.id}
-              >
-                <span>
-                  {exercise.exerciseName}
-                </span>
-                <span>
-                  {exercise.action}
-                </span>
-              </div>
+                exercise={exercise}
+              />
             ))}
           </div>
-   
+
         </div>
       ) : (
         <span>Loading...</span>

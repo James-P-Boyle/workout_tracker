@@ -41,6 +41,7 @@ export default function createWorkout() {
   }
   
   const handleWorkoutExercises = async () => {
+    console.log('handleworkoutexercises called')
 
     const workoutExerciseData = addedExercises.map((exercise) => ({
       workoutId: workoutData?.id, 

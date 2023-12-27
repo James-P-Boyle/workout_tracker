@@ -26,14 +26,6 @@ export default function ShowWorkout() {
     }
   }
 
-  const handleNameChange = async (newName: string) => {
-    try {
-      await workoutService.renameWorkout(id!, newName)
-    } catch (error) {
-      console.log('Error deleting workout', error)
-    }
-  }
-
   useEffect(() => {
     const fetchWorkout = async () => {
       try {
@@ -45,7 +37,7 @@ export default function ShowWorkout() {
     }
 
     fetchWorkout()
-  }, [handleNameChange])
+  }, [])
 
   return (
     <div className="grid w-full gap-2">
@@ -53,7 +45,12 @@ export default function ShowWorkout() {
       <BackButton />
       
       <div className="flex gap-2">
-        <Button className="w-full">Edit</Button>
+        <Button 
+           onClick={() => navigate(`/dashboard/workout/edit/${workout?.id}`)}
+          className="w-full"
+        >
+          Edit
+        </Button>
         <Button 
           className="w-full"
           onClick={handleDelete}
@@ -75,21 +72,20 @@ export default function ShowWorkout() {
       {workout ? (
         <div className="grid gap-2 p-2">
 
-          <RenameWorkout 
-            workout={workout}
-            handleRename={handleNameChange}
-          />
+          <h1 className="font-black">
+            {workout.workoutName}
+          </h1>
 
-          <h2 className="font-bold">Exercises</h2>
+            <h2 className="font-bold">Exercises</h2>
 
-          <div className="grid gap-2">
-            {workout.workoutExercises.map(({exercise}: any)=> (
-              <ExerciseCard 
-                key={exercise.id}
-                exercise={exercise}
-              />
-            ))}
-          </div>
+            <div className="grid gap-2">
+              {workout.workoutExercises.map(({exercise}: any)=> (
+                <ExerciseCard 
+                  key={exercise.id}
+                  exercise={exercise}
+                />
+              ))}
+            </div>
 
         </div>
       ) : (

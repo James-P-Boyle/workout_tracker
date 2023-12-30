@@ -5,7 +5,6 @@ import { WorkoutService } from "@/services/workout.service"
 import { FullWorkout } from "@/types"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import RenameWorkout from "./RenameWorkout"
 import ExerciseCard from "./ExerciseCard"
 
 export default function ShowWorkout() {
@@ -15,12 +14,16 @@ export default function ShowWorkout() {
   const { id } = useParams()   
   const { showNotification } = useNotification()               
   const [ workout, setWorkout ] = useState<FullWorkout | null>(null)
+  const [deleteClicked, setDeleteClicked] = useState(false)
 
   const handleDelete = async () => {
+    setDeleteClicked(!deleteClicked)
     try {
-      await workoutService.deleteWorkout(id!)
-      showNotification('Deleted', 'success')
-      navigate('/dashboard/workout')
+      if(deleteClicked){
+        await workoutService.deleteWorkout(id!)
+        showNotification('Deleted', 'success')
+        navigate('/dashboard/workout')
+      }
     } catch (error) {
       console.log('Error deleting workout', error)
     }
@@ -52,10 +55,10 @@ export default function ShowWorkout() {
           Edit
         </Button>
         <Button 
-          className="w-full"
+          className={`${deleteClicked && 'border-red-500 border'} w-full`}
           onClick={handleDelete}
         >
-          Delete
+          {deleteClicked ? 'Sure ?' : 'Delete'}
         </Button>
   
         <Button className="w-full">Progress</Button>

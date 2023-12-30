@@ -61,8 +61,10 @@ export default function ExerciseCard({
 
 function ExerciseDetail({ 
   exercise
-}: {exercise: Exercise}) {
-  // STYLE
+}: {
+  exercise: Exercise
+}) {
+
   return (
     <>
       <p>{exercise.instruction}</p>
@@ -81,7 +83,7 @@ function ExerciseDetail({
     </>
   )
 }
-
+/* REFACTOR THIS MESS */
 function TrackingForm() {
   const [repsInputs, setRepsInputs] = useState<string[]>([''])
   const [inputCount, setInputCount] = useState<number>(1)
@@ -92,6 +94,7 @@ function TrackingForm() {
   }
 
   const handleInputChange = (index: number, value: string) => {
+    
     const updatedInputs = [...repsInputs]
     updatedInputs[index] = value
     setRepsInputs(updatedInputs)
@@ -99,20 +102,29 @@ function TrackingForm() {
 
   return (
     <div className="flex">
-      <div className="flex flex-col gap-2 p-2 border rounded-lg md:text-md dark:border-gray-800">
+      <div className="flex flex-col w-full gap-2 p-2 border rounded-lg md:text-md dark:border-gray-800">
         {repsInputs.map((value, index) => (
-          <div key={index} className="flex flex-row items-center gap-2">
+          <div key={index} className="flex flex-row items-center flex-1 gap-2">
+            <span className="font-bold text-gray-400">{index + 1}</span>
             <Input
               placeholder="Enter Reps"
+              className="flex-1"
+              type="number"
               value={value}
+              required
               onChange={(e) => handleInputChange(index, e.target.value)}
             />
-            <span className="font-bold text-gray-400">{index + 1}</span>
+            <Button 
+              className="h-full"
+              onClick={handleAddSet}
+            >
+              Add set
+            </Button>
           </div>
         ))}
 
-        <Button onClick={handleAddSet}>Add set</Button>
       </div>
+ 
     </div>
   )
 }

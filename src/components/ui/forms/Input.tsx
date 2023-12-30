@@ -6,6 +6,7 @@ interface InputProps {
   placeholder?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   className?: string // Optional property
+  required?: boolean
 }
 
 export default function Input({
@@ -16,6 +17,7 @@ export default function Input({
     placeholder,
     onChange,
     className = "", 
+    required = false
 }: InputProps) {
 
     return (
@@ -23,6 +25,7 @@ export default function Input({
             className={`p-2 border text-gray-800 rounded-lg bg-transparent hover:border-gray-300 dark:border-gray-700 hover:dark:border-gray-600 dark:text-white transition-colors outline-none focus:border-yellow-600 ${className}`}
             name={name}
             type={type}
+            required={required}
             value={value}
             placeholder={placeholder}
             onChange={onChange}

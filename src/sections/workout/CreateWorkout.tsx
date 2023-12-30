@@ -8,6 +8,7 @@ import Form from "@/components/ui/forms/Form"
 import Input from "@/components/ui/forms/Input"
 import ExerciseFilter from "./ExerciseFilter"
 import AddCustomExercise from "./AddCustomExercise"
+import { useNotification } from "@/contexts/NotificationContext"
 
 interface AddExercisesToWorkoutProps {
   workoutId: string
@@ -28,6 +29,8 @@ export default function createWorkout() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWorkoutName(event.target.value)
   }
+
+  const {showNotification} = useNotification()
 
   const handleNameWorkout = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -51,6 +54,7 @@ export default function createWorkout() {
 
     try {
       const {data} = await workout.createWorkoutExercises(workoutExerciseData)
+      showNotification('Created', 'success')
       navigate(`/dashboard/workout/${workoutData?.id}`)
       return data
     } catch (error) {
@@ -90,7 +94,7 @@ export default function createWorkout() {
   )
 }
 
-function AddExercisesToWorkout({
+export function AddExercisesToWorkout({
   workoutId,
   setAddedExercises,
   addedExercises,

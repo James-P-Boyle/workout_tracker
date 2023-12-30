@@ -53,9 +53,7 @@ export default function Notification({
 
   return (
     <div
-      className={`${typeClasses} ${
-        visible ? 'fixed' : 'hidden'
-      } py-1 px-2 rounded-lg shadow-lg text-center font-bold text-sm min-w-[100px] dark:bg-[#141414] z-[100] dark:text-white border-2 bg-white border-black text-black dark:border-white top-2 right-2 cursor-pointer`}
+      className={`${typeClasses} ${visible ? 'fixed' : 'hidden'} py-1 px-2 rounded-lg shadow-lg text-center font-bold text-sm min-w-[100px] dark:bg-[#141414] z-[100] dark:text-white border-2 bg-white border-black text-black dark:border-white top-2 right-2 cursor-pointer`}
       onClick={handleNotificationClick}
     >
       {message}
